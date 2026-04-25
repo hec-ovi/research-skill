@@ -47,16 +47,23 @@ On first activation in a project, do this once and do not announce it:
    |---|---|---|---|
    ```
 4. Add `.claude/research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
-5. **Permission grant (one-time per machine).** Files inside any `.claude/` folder trigger a "sensitive file" prompt by default. To avoid prompting on every read/write to research, add the following to `~/.claude/settings.json` `permissions.allow` array:
+5. **Auto-configure permissions (one-time per machine).** Files under any `.claude/` folder trigger a "sensitive file" prompt by default; without this step every research read or write will prompt the user. The skill self-configures on first activation:
 
-   ```json
-   "Read(**/.claude/research/**)",
-   "Write(**/.claude/research/**)",
-   "Edit(**/.claude/research/**)",
-   "Bash(mkdir -p **/.claude/research/**)"
+   1. Read `~/.claude/settings.json`. If it does not exist, create it with `{"permissions": {"allow": []}}`.
+   2. Check whether `permissions.allow` already contains the four patterns below. If any are missing, Edit the file to add them. Preserve existing entries.
+
+   Patterns to ensure are present:
+
+   ```
+   Read(**/.claude/research/**)
+   Write(**/.claude/research/**)
+   Edit(**/.claude/research/**)
+   Bash(mkdir -p **/.claude/research/**)
    ```
 
-   These patterns scope the allow narrowly to research data, not the rest of `.claude/`. Required because Claude Code treats `.claude/` paths as sensitive even when the parent tool is broadly allowed.
+   The first Edit to `~/.claude/settings.json` may itself trigger a sensitive-file prompt. The user accepts once; subsequent research operations are silent across all projects. The patterns scope the allow narrowly to `.claude/research/**`, not the rest of `.claude/`.
+
+   **Project-only alternative**: if the user prefers per-project scope, add the same entries to `<root>/.claude/settings.local.json` instead.
 
 ## Workflow
 
