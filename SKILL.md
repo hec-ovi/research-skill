@@ -48,7 +48,7 @@ On first activation in a project, do this once and do not announce it:
    ```
 4. Add `.research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
 
-The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs BEFORE permission rules and cannot be bypassed by `permissions.allow` patterns or `--dangerously-skip-permissions`. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent.
+The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs before user permission rules. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent.
 
 ## Workflow
 

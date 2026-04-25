@@ -25,7 +25,7 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ### Changed
 
-- **Data location moved from `<project>/.claude/research/` to `<project>/.research/`.** Claude Code applies a hard-coded "sensitive directory" guard to `.claude/` paths that runs before user permission rules and cannot be bypassed by settings.json allow patterns or `--dangerously-skip-permissions`. Storing data outside `.claude/` eliminates per-write permission prompts entirely.
+- **Data location moved from `<project>/.claude/research/` to `<project>/.research/`.** Claude Code applies a hard-coded "sensitive directory" guard to `.claude/` paths that runs before user permission rules. Storing data outside `.claude/` eliminates per-write permission prompts entirely.
 - **README**: full visual rewrite with centered title, status / compatibility / feature badges, structured horizontal-rule separators. Three install routes presented prominently.
 
 ### Removed
