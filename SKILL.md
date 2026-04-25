@@ -37,8 +37,8 @@ If a single WebSearch + 1-2 sentences answers the question, you don't need this 
 On first activation in a project, do this once and do not announce it:
 
 1. Resolve project root: `git rev-parse --show-toplevel 2>/dev/null || pwd`
-2. Create `<root>/.claude/research/` if missing
-3. Create `<root>/.claude/research/INDEX.md` with this exact content:
+2. Create `<root>/.research/` if missing
+3. Create `<root>/.research/INDEX.md` with this exact content:
 
    ```markdown
    # Research index
@@ -46,24 +46,9 @@ On first activation in a project, do this once and do not announce it:
    | Topic | Path | Last verified | One-liner |
    |---|---|---|---|
    ```
-4. Add `.claude/research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
-5. **Auto-configure permissions (one-time per machine).** Files under any `.claude/` folder trigger a "sensitive file" prompt by default; without this step every research read or write will prompt the user. The skill self-configures on first activation:
+4. Add `.research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
 
-   1. Read `~/.claude/settings.json`. If it does not exist, create it with `{"permissions": {"allow": []}}`.
-   2. Check whether `permissions.allow` already contains the four patterns below. If any are missing, Edit the file to add them. Preserve existing entries.
-
-   Patterns to ensure are present:
-
-   ```
-   Read(**/.claude/research/**)
-   Write(**/.claude/research/**)
-   Edit(**/.claude/research/**)
-   Bash(mkdir -p **/.claude/research/**)
-   ```
-
-   The first Edit to `~/.claude/settings.json` may itself trigger a sensitive-file prompt. The user accepts once; subsequent research operations are silent across all projects. The patterns scope the allow narrowly to `.claude/research/**`, not the rest of `.claude/`.
-
-   **Project-only alternative**: if the user prefers per-project scope, add the same entries to `<root>/.claude/settings.local.json` instead.
+The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs BEFORE permission rules and cannot be bypassed by `permissions.allow` patterns or `--dangerously-skip-permissions`. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent. See the entry on `claude-code-permission-prompts` for source links.
 
 ## Workflow
 
@@ -92,13 +77,13 @@ The whole point of this system is **progressive disclosure**: don't load what yo
 
 3. **Read only the matched entry's `## Summary`** (tier 2):
    ```bash
-   sed -n '/^## Summary/,/^## /p' <root>/.claude/research/<slug>/FINDINGS.md
+   sed -n '/^## Summary/,/^## /p' <root>/.research/<slug>/FINDINGS.md
    ```
    Usually enough.
 
 4. **Escalate one tier only when needed:**
    - Question needs claims-level detail beyond the Summary → load the full `FINDINGS.md` body (tier 3).
-   - Question is "have we tried X before / what was discarded?" → `sed` just that section: `sed -n '/^## Discarded approaches/,/^## /p' <root>/.claude/research/<slug>/FINDINGS.md`. Don't load the rest.
+   - Question is "have we tried X before / what was discarded?" → `sed` just that section: `sed -n '/^## Discarded approaches/,/^## /p' <root>/.research/<slug>/FINDINGS.md`. Don't load the rest.
    - Question references a paste-cited claim → open that specific file under `raw/` (tier 4).
    - Question spans topics covered by separate entries → follow `related:`, repeat tiers 2-3 on each.
 
@@ -197,7 +182,7 @@ After Investigation returns its synthesis (or the user pastes findings), you (ma
 
 **New entry path:**
 
-1. Create `<root>/.claude/research/<topic-slug>/`.
+1. Create `<root>/.research/<topic-slug>/`.
 2. Write `FINDINGS.md` using the schema in File schemas. Frontmatter: `created` and `last_verified` = today; `status: active`; `sources` from the subagent return; `raw:` omitted (no raw yet); `related: []` unless cross-links apply.
 3. Read `INDEX.md`, append a row: topic, path, today's date, a specific one-liner.
 
@@ -217,7 +202,7 @@ Use kebab-case slugs that match how the user is likely to ask again - e.g. `tail
 If the user pastes a long document and asks you to save it:
 
 1. **Decide path first.** Read `INDEX.md`. Does this paste extend an existing topic (merge mode), or is it a new topic (new entry mode)? Same decision as Retrieval phase 5.
-2. Save the raw document verbatim to `<root>/.claude/research/<topic-slug>/raw/<YYYY-MM-DD>-paste.<ext>` (preserve the original extension - `.md`, `.pdf`, `.txt`, `.html`, etc.). If the user pasted text directly with no original file, default to `.md`.
+2. Save the raw document verbatim to `<root>/.research/<topic-slug>/raw/<YYYY-MM-DD>-paste.<ext>` (preserve the original extension - `.md`, `.pdf`, `.txt`, `.html`, etc.). If the user pasted text directly with no original file, default to `.md`.
 3. Synthesize the content into the same shape the subagent would return (Summary / Findings / Sources). Citations to the raw file: `[Source: raw/<filename>]`.
 4. **Apply Storage** (new entry path or merge path from Section 3) using the synthesized content. When writing the entry, include this raw in the `raw:` frontmatter list (path, note, added date).
 5. **Offer** to delete the original file: "Save this as research and remove the original at `<path>`?". Always ask. Never auto-delete.

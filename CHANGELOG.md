@@ -7,12 +7,19 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+### Changed
+
+- **Data location moved from `<project>/.claude/research/` to `<project>/.research/`.** Claude Code applies a hard-coded "sensitive directory" guard to `.claude/` paths that runs before user permission rules and cannot be bypassed by settings.json allow patterns or `--dangerously-skip-permissions` (confirmed via Anthropic docs and open issues #37029, #37253, #43001, #43406). Storing data outside `.claude/` eliminates per-write permission prompts entirely.
+
+### Removed
+
+- Setup step 5 (auto-configure `~/.claude/settings.json` allow patterns). The pre-allow approach was based on a false premise; pre-allow patterns do not bypass the sensitive-path guard. With the data location moved to `.research/`, the step is no longer needed.
+
 ### Added
 
 - Influences and citations section in `README.md`: explicit credit and source links for Anthropic Agent Skills spec, xAI Grok multi-agent / DeepSearch pattern, and GBrain RESOLVER.md dispatcher pattern.
 - Async-by-default Investigation: subagents are now spawned with `run_in_background: true` so the conversation stays interactive while research runs. Storage applies on completion notification.
 - Naming convention for spawned subagents: `description: "Research investigation: <topic>"` for harness-UI identifiability.
-- Setup step for one-time permission grant: `~/.claude/settings.json` allow patterns to skip the "sensitive file" prompt for `.claude/research/` paths.
 
 ## [0.1.0] - 2026-04-25
 

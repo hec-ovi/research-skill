@@ -2,7 +2,7 @@
 
 A Claude Code skill that gives you a persistent, project-scoped store for deep research findings.
 
-Stop re-researching the same topics across sessions. Stop polluting conversation context with raw web search dumps. The skill maintains a structured local knowledge base under `.claude/research/`, looks it up before fetching the web, and uses progressive disclosure to load only what's needed.
+Stop re-researching the same topics across sessions. Stop polluting conversation context with raw web search dumps. The skill maintains a structured local knowledge base under `.research/`, looks it up before fetching the web, and uses progressive disclosure to load only what's needed.
 
 ## What's distinctive
 
@@ -62,7 +62,7 @@ Examples:
 The skill writes to your project (not your home dir):
 
 ```
-<project>/.claude/research/
+<project>/.research/
 ├── INDEX.md                  # dispatcher - topic table, scanned first
 └── <topic-slug>/
     ├── FINDINGS.md           # entry: frontmatter + summary + findings + history
