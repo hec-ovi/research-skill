@@ -10,6 +10,7 @@ Stop re-researching the same topics across sessions. Stop polluting conversation
 - **Progressive disclosure.** Index → summary → full body, in that order. Most lookups never load the full entry.
 - **Conflict-handling history.** When findings change, old claims move to `## Discarded approaches` with reasons - never silently overwritten. Prevents re-trying refuted approaches.
 - **Subagent-isolated investigation.** Heavy WebSearch / WebFetch work happens in a separate agent (Opus 4.7 by default). Your main context stays clean.
+- **Async, non-blocking.** The investigation subagent runs in background mode (`run_in_background: true`); your conversation stays interactive while research happens. The Claude Code UI shows the agent as a running task; findings are saved and announced when the completion notification arrives. No frozen CLI.
 - **Cognitive phases.** Decompose → Gather → Validate → Contrarian → Synthesize. The contrarian pass actively searches for "why this is wrong" - not just confirmation bias.
 
 ## Influences and citations
