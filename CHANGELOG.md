@@ -7,6 +7,19 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-04-25
+
+### Changed
+
+- **SKILL.md**: explicit no-`[n]` citation discipline added to the subagent output format. Subagents trained on academic-style writing default to `[1]`, `[2]` markers; the brief now bans them in plain language and shows the prose-with-inline-source-naming style instead. Sources still collected in a single `## Sources` block (URL + fetched date) which the main agent lifts to FINDINGS.md frontmatter.
+- **SKILL.md**: FINDINGS.md schema and Investigation brief checklist updated to match the new no-inline-citation rule. Frontmatter `sources:` is now the only bibliography. When a claim's interpretation depends on which source said it, the body uses prose ("per the README", "according to <site>") instead of brackets.
+
+### Added
+
+- **SKILL.md**: new "Review before storing" block at the top of the Storage section. Four-point checklist (relevance, source quality, contrarian pass evidence, citation cleanup) that gates Storage on substance, not just format. Closes a real failure mode: the subagent's structured output looks finished, but the main agent still has to validate it before writing the data layer.
+- **README**: new "How findings reach your conversation" section explaining that the subagent return is injected directly into main-agent context as a task notification. Frames the architectural choice positively: no raw web-search dump pollution, deterministic storage, conversation stays interactive in background mode.
+- **README**: new "Recommended setup" section with guidance on pinning subagents to Opus, via either a `PreToolUse` hook on the Agent tool or a CLAUDE.md convention. The skill always passes `model: "opus"` itself; the recommendation is for the calling environment to default this systematically.
+
 ## [0.2.1] - 2026-04-25
 
 ### Fixed

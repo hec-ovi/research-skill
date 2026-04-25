@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
-  <img src="https://img.shields.io/badge/Version-0.2.1-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.2.2-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
 </p>
@@ -60,6 +60,18 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Subagent-isolated investigation.** Heavy WebSearch / WebFetch traffic runs in a separate `general-purpose` subagent (Opus 4.7 by default). Your main context stays clean.
 - **Async, non-blocking.** The investigation subagent runs in background mode (`run_in_background: true`); your conversation with Claude Code stays interactive while research happens. Findings save and announce themselves on the completion notification. No frozen CLI.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming. It earns its keep.
+
+---
+
+## How findings reach your conversation
+
+When the Investigation subagent finishes, its full structured return (Summary, Findings, contrarian objection, sources) is injected into the main agent's context as a task-notification message. No file round-trip, no tail-the-log polling. The main agent parses the return directly and writes the data layer.
+
+Why this matters:
+
+- **No raw web-search dump pollution.** The main agent only sees the agent's clean synthesized output, never the raw web search results or fetch responses. Those live in a separate transcript file the main agent is forbidden to read.
+- **Storage is deterministic.** The required output format maps 1:1 to the FINDINGS.md schema. Parsing is mechanical, not interpretive.
+- **Conversation stays interactive.** The subagent runs in background mode (`run_in_background: true`), so you keep working while it researches; the structured output arrives as a notification when the agent completes.
 
 ---
 
@@ -172,6 +184,21 @@ Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `las
 
 - A code CLI that implements the [SKILL.md format](https://agentskills.io/specification) (Claude Code, or any other compatible client)
 - For the Investigation phase: an Opus-class model accessible to the spawning agent (the skill defaults to spawning subagents at `model: "opus"`)
+
+---
+
+## Recommended setup
+
+### Pin subagents to Opus
+
+The Investigation phase needs reasoning depth. The skill spawns subagents with `model: "opus"`, but the calling agent has to actually pass that parameter on every spawn. To make it systematic across all your Claude Code sessions, configure your environment to default subagents to Opus.
+
+Two practical approaches:
+
+- **Hook (strongest)**: add a `PreToolUse` hook on the `Agent` tool in `~/.claude/settings.json` that blocks any spawn whose `model` field is not `opus`. The hook runs before the tool dispatches, so a non-opus spawn never reaches the API.
+- **Convention (lightest)**: add a one-line note to your `~/.claude/CLAUDE.md`: *"Every Agent tool call MUST pass `model: \"opus\"`."* Claude reads CLAUDE.md every session.
+
+Smaller models work fine for the main conversation. The contrarian pass and synthesis steps in Investigation specifically depend on Opus-class reasoning depth; smaller models tend to skip the contrarian phase or produce shallow syntheses.
 
 ---
 

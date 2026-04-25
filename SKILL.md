@@ -129,10 +129,10 @@ Every Investigation brief MUST include:
 - "You have zero prior context" preamble
 - Today's actual date (run `date +%Y-%m-%d` first; pass the literal string)
 - Year-pinning rule for WebSearch queries (don't trust the subagent's model prior on what year it is)
-- ≥2 independent sources per claim
+- At least 2 independent sources per non-trivial claim. Sources are gathered into a single `## Sources` block at the end of the return; do NOT cite inline.
 - The cognitive phases below as explicit numbered steps
 - The subagent's required output format (below)
-- Citation requirements (URL + fetched date per source)
+- The strict no-`[n]` / no-inline-URL rule for the Findings body (see Required output format)
 - **Merge mode only**: the existing entry content the subagent should verify / supersede
 
 #### Cognitive phases (include verbatim in the subagent brief)
@@ -147,17 +147,29 @@ The subagent walks these as discrete phases. Phase 4 is load-bearing:
 
 #### Required subagent output format
 
-Instruct the subagent to return text in exactly this shape (you parse it and write the file in Storage):
+The brief MUST include explicit citation rules. Subagents trained on academic-style writing default to `[1]`, `[2]` inline citations; without explicit instructions they will produce noisy output. State the rules in plain language. Recommended verbatim block to paste into the brief:
+
+> **Citation rules. Read carefully and follow exactly:**
+>
+> - Do NOT use `[n]` numbered citations. No `[1]`, `[2]`, or any bracketed numbers in the Findings body.
+> - Do NOT put URLs in the Findings body.
+> - Do NOT add inline footnote markers, anchors, or any per-claim citation tags of any kind.
+> - Write Findings as plain prose paragraphs.
+> - When a claim's interpretation depends on which source said it, name the source as prose, no brackets ("per the README", "according to littlemight.com", "the HN-simulator commenter argues..."). No URL, no `[n]`.
+> - Put ALL sources in a single `## Sources` block at the END of the return, one bullet per source: `- url - fetched YYYY-MM-DD`. The main agent lifts this block to FINDINGS.md frontmatter.
+> - Source-count discipline is preserved: at least 2 independent sources per non-trivial claim. The discipline lives in source count, not in inline tagging.
+
+Required output shape (what the subagent returns):
 
 ```
 ## Summary
-3-6 lines TL;DR.
+3 to 6 lines TL;DR.
 
 ## Findings
-Claims with [n] citations to the Sources list below.
+Plain prose. No `[n]` markers. No inline URLs. Inline source-naming as prose only when load-bearing for interpretation.
 
 ## Strongest objection (from contrarian pass)
-1-2 sentences, or "none found".
+1 to 2 sentences, or "none found".
 
 ## Sources
 - url - fetched YYYY-MM-DD
@@ -178,7 +190,20 @@ If the subagent's return has gaps:
 
 ### 3. Storage (the write side - main agent owns ALL file writes)
 
-After Investigation returns its synthesis (or the user pastes findings), you (main agent - never the subagent) finalize the data layer. Two paths, picked based on the mode chosen in Retrieval phase 5:
+#### Review before storing
+
+The subagent's structured format does not validate substance. The format only signals "I followed the template"; it does not confirm the content is correct, well-sourced, or relevant to what was asked. Before applying Storage, run this 4-point check:
+
+1. **Relevance**: does the Summary actually answer what was asked? If the agent disambiguated an ambiguous topic (picked one interpretation of several), confirm it matches the user's intent. If wrong, re-spawn with a tighter brief; do not store.
+2. **Source quality**: count primary URLs vs aggregated WebSearch snippets in the `## Sources` block. If most sources are search-result summaries without specific fetched URLs, the entry is weaker than it looks. Either fill primaries yourself with focused WebFetch, or store but flag the weakness explicitly in `## Open questions`.
+3. **Contrarian pass evidence**: "none found" is rare on any non-trivial topic. If you got "none found", be skeptical: either the topic is genuinely uncontroversial (rare), or the subagent skipped phase 4 (common). If skipped, fill in yourself with focused contrarian searches, or re-spawn.
+4. **Citation cleanup**: if the return contains `[n]` markers in the Findings body despite the brief's no-`[n]` rule, strip them before writing FINDINGS.md. This is a known failure mode (subagents fall back to academic citation habits). Do not push the noise downstream. Same for inline URLs in the Findings body: strip them. Sources belong in frontmatter.
+
+If the review surfaces fixable gaps, fill them yourself with a focused WebSearch / WebFetch (cheaper than re-spawn). If gaps are systemic, re-spawn with a refined brief; do not write a half-formed entry.
+
+#### Apply Storage
+
+After Investigation returns its synthesis (or the user pastes findings), you (main agent, never the subagent) finalize the data layer. Two paths, picked based on the mode chosen in Retrieval phase 5:
 
 **New entry path:**
 
@@ -297,7 +322,7 @@ raw:                           # omit if no raws were saved
 
 ## Findings
 
-Claims with inline `[1]`/`[2]` citations mapping to `sources` frontmatter. When citing a raw, use `[Source: raw/<filename>]`.
+Plain prose. No `[n]` markers. No inline URLs. When a claim's interpretation depends on which source said it, name the source as prose ("per the README", "according to littlemight.com", "the HN-simulator commenter notes"). For raw documents, refer descriptively ("the pasted whitepaper"); the `raw:` frontmatter has the file path. Frontmatter `sources:` is the bibliography.
 
 ## Discarded approaches
 
