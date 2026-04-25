@@ -7,6 +7,8 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-25
+
 ### Changed
 
 - **Data location moved from `<project>/.claude/research/` to `<project>/.research/`.** Claude Code applies a hard-coded "sensitive directory" guard to `.claude/` paths that runs before user permission rules and cannot be bypassed by settings.json allow patterns or `--dangerously-skip-permissions` (confirmed via Anthropic docs and open issues #37029, #37253, #43001, #43406). Storing data outside `.claude/` eliminates per-write permission prompts entirely.
