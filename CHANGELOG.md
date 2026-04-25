@@ -7,7 +7,7 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
-## [0.1.0] — 2026-04-25
+## [0.1.0] - 2026-04-25
 
 ### Added
 
@@ -19,7 +19,7 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Subagent-isolated Investigation phase with mode-specific briefs (new entry vs merge).
 - Cognitive phases: Decompose → Gather → Validate → Contrarian → Synthesize.
 - Subagent returns structured text only; main agent owns all file writes.
-- Conflict-handling history via `## Discarded approaches` table — supersession is explicit, never silent.
+- Conflict-handling history via `## Discarded approaches` table - supersession is explicit, never silent.
 - Raw document support with extension preservation (`.md`, `.pdf`, `.txt`, `.html`, etc.).
 - Cross-entry linking via `related:` frontmatter.
 - Pasted-content workflow with optional original-file deletion offer (always asks, never auto-deletes).
