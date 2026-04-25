@@ -7,6 +7,13 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+### Added
+
+- Influences and citations section in `README.md`: explicit credit and source links for Anthropic Agent Skills spec, xAI Grok multi-agent / DeepSearch pattern, and GBrain RESOLVER.md dispatcher pattern.
+- Async-by-default Investigation: subagents are now spawned with `run_in_background: true` so the conversation stays interactive while research runs. Storage applies on completion notification.
+- Naming convention for spawned subagents: `description: "Research investigation: <topic>"` for harness-UI identifiability.
+- Setup step for one-time permission grant: `~/.claude/settings.json` allow patterns to skip the "sensitive file" prompt for `.claude/research/` paths.
+
 ## [0.1.0] - 2026-04-25
 
 ### Added

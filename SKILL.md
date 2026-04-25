@@ -46,7 +46,17 @@ On first activation in a project, do this once and do not announce it:
    | Topic | Path | Last verified | One-liner |
    |---|---|---|---|
    ```
-4. Add `.claude/research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights - default private.
+4. Add `.claude/research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
+5. **Permission grant (one-time per machine).** Files inside any `.claude/` folder trigger a "sensitive file" prompt by default. To avoid prompting on every read/write to research, add the following to `~/.claude/settings.json` `permissions.allow` array:
+
+   ```json
+   "Read(**/.claude/research/**)",
+   "Write(**/.claude/research/**)",
+   "Edit(**/.claude/research/**)",
+   "Bash(mkdir -p **/.claude/research/**)"
+   ```
+
+   These patterns scope the allow narrowly to research data, not the rest of `.claude/`. Required because Claude Code treats `.claude/` paths as sensitive even when the parent tool is broadly allowed.
 
 ## Workflow
 
@@ -105,7 +115,13 @@ Keep `INDEX.md` tight: under ~100 rows. If it grows beyond that, prune or archiv
 
 ### 2. Investigation (when fresh research is needed)
 
-Spawn a `general-purpose` subagent with `model: "opus"` (hook-enforced). **The subagent does research and returns its synthesis as structured text - it does NOT write any files.** You (main agent) handle all file writes in Storage. This split keeps responsibility clean: the subagent has zero context and doesn't need to know your schema or `INDEX.md` layout.
+Spawn a `general-purpose` subagent with `model: "opus"` (hook-enforced) and **`run_in_background: true`**. Background mode keeps the conversation interactive: the user can keep working while research runs. Storage runs asynchronously when the agent's completion notification arrives. Investigation typically takes 60 to 120 seconds; do not block the conversation waiting for it.
+
+**The subagent does research and returns its synthesis as structured text. It does NOT write any files.** You (main agent) handle all file writes in Storage. This split keeps responsibility clean: the subagent has zero context and doesn't need to know your schema or `INDEX.md` layout.
+
+**Naming convention.** Set the Agent tool's `description` parameter to `Research investigation: <topic>` (3 to 5 words). This makes research-skill spawns identifiable in the harness UI.
+
+**On completion notification:** parse the agent's return, apply Storage immediately, surface a brief notice to the user (e.g. *"research on `<topic>` saved to `<path>`"*). Do not dump the full findings into chat unless asked.
 
 **Subagents have zero prior context.** They don't see this skill, CLAUDE.md, or our conversation. Brief them completely. **There is no continuation in this harness** - the `SendMessage` tool to resume an agent is not available. One-shot only. If gaps remain, re-spawn with a refined brief.
 
