@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
-  <img src="https://img.shields.io/badge/Version-0.2.0-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.2.1-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
 </p>
@@ -34,6 +34,24 @@ Stop re-researching the same topics across sessions. Stop polluting conversation
 
 ---
 
+## Built for compaction and large-research recall
+
+Long Claude Code sessions run out of context. `/compact` summarizes older turns and drops the rest, so findings from a deep research thread evaporate and the next question re-triggers the same web searches.
+
+This skill makes the data layer outlive the chat. Research written today survives `/compact`, `/clear`, IDE restarts, and machine moves. The next session reads `INDEX.md` first (a tiny dispatcher), matches the topic, and pulls only the matched entry's `## Summary` section into context. The full body stays on disk until you actually need it.
+
+Loading tiers, cheapest first:
+
+| Tier | Loads | Approx tokens | When |
+|---|---|---|---|
+| 1 | `INDEX.md` | 100 to 500 | Every retrieval |
+| 2 | Entry's `## Summary` only | 50 to 200 | When INDEX shows a match |
+| 3 | Full `FINDINGS.md` body | 500 to 3000 | When the summary doesn't cover it |
+
+Heavy research artifacts become cheap to recall: you only pay for the tier you need.
+
+---
+
 ## What's distinctive
 
 - **Project-scoped, not global.** Each repo has its own research store, kept private (gitignored by default).
@@ -49,18 +67,20 @@ Stop re-researching the same topics across sessions. Stop polluting conversation
 
 Three install routes, all global. No registration, approval, or login required.
 
-### 1. Anthropic plugin marketplace (recommended for Claude Code users)
+### 1. `npx skills add` (cross-tool, any code CLI that implements the open SKILL.md format)
+
+```bash
+npx skills add hec-ovi/research-skill
+```
+
+### 2. Claude Code plugin marketplace
 
 ```
 /plugin marketplace add hec-ovi/research-skill
 /plugin install research@research-skill
 ```
 
-### 2. `npx skills add` (cross-tool: any code CLI that implements the open SKILL.md format)
-
-```bash
-npx skills add hec-ovi/research-skill
-```
+This uses Claude Code's built-in marketplace mechanism to install the plugin from the maintainer's GitHub repo. It is not Anthropic's first-party catalog.
 
 ### 3. Direct git clone (simplest, works anywhere)
 

@@ -48,7 +48,7 @@ On first activation in a project, do this once and do not announce it:
    ```
 4. Add `.research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
 
-The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs BEFORE permission rules and cannot be bypassed by `permissions.allow` patterns or `--dangerously-skip-permissions`. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent. See the entry on `claude-code-permission-prompts` for source links.
+The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs BEFORE permission rules and cannot be bypassed by `permissions.allow` patterns or `--dangerously-skip-permissions`. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent.
 
 ## Workflow
 
@@ -107,7 +107,7 @@ Keep `INDEX.md` tight: under ~100 rows. If it grows beyond that, prune or archiv
 
 ### 2. Investigation (when fresh research is needed)
 
-Spawn a `general-purpose` subagent with `model: "opus"` (hook-enforced) and **`run_in_background: true`**. Background mode keeps the conversation interactive: the user can keep working while research runs. Storage runs asynchronously when the agent's completion notification arrives. Investigation typically takes 60 to 120 seconds; do not block the conversation waiting for it.
+Spawn a `general-purpose` subagent with `model: "opus"` and **`run_in_background: true`**. The Investigation phase needs a strong model: the contrarian pass and synthesis steps depend on reasoning depth that smaller models won't deliver. Background mode keeps the conversation interactive: the user can keep working while research runs. Storage runs asynchronously when the agent's completion notification arrives.
 
 **The subagent does research and returns its synthesis as structured text. It does NOT write any files.** You (main agent) handle all file writes in Storage. This split keeps responsibility clean: the subagent has zero context and doesn't need to know your schema or `INDEX.md` layout.
 
