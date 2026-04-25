@@ -1,0 +1,25 @@
+{
+  "name": "research-skill",
+  "owner": {
+    "name": "Hector Oviedo"
+  },
+  "metadata": {
+    "description": "Persistent project-scoped store for deep research findings",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "research",
+      "source": ".",
+      "description": "Project-scoped knowledge base for Claude Code with progressive disclosure (INDEX.md dispatcher, sed-extracted summaries) and contrarian-pass investigation via background Opus subagents. Conflict-handling history prevents re-trying refuted approaches across sessions.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Hector Oviedo"
+      },
+      "homepage": "https://github.com/hec-ovi/research-skill",
+      "repository": "https://github.com/hec-ovi/research-skill",
+      "license": "MIT",
+      "keywords": ["research", "knowledge-base", "memory", "progressive-disclosure", "agent-skills", "deep-research", "contrarian", "subagent"]
+    }
+  ]
+}
