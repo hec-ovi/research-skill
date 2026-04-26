@@ -7,6 +7,22 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-04-26
+
+### Changed
+
+- **All three SKILL.md files are now real files**, not symlinks. Previously the canonical SKILL.md lived at `plugins/research/skills/research/SKILL.md` and the other two paths (root `SKILL.md` for `npx skills add` and direct clone, `skills/research/SKILL.md` for the npx-skills subdir form) were symlinks pointing into the plugin. The symlink layout worked but introduced one mental indirection too many. Going redundant: three identical real files, all 20925 bytes.
+
+### Maintainer note
+
+There is no automatic enforcement that the three files stay in sync. When editing SKILL.md for a future release, update all three:
+
+- `SKILL.md` (root)
+- `skills/research/SKILL.md`
+- `plugins/research/skills/research/SKILL.md`
+
+A pre-commit hook or CI check could be added later if drift becomes a problem. For now the tradeoff is accepted: one less indirection, one more thing to remember.
+
 ## [0.2.6] - 2026-04-26
 
 ### Fixed
