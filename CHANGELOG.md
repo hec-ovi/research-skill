@@ -7,6 +7,20 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-04-26
+
+### Fixed
+
+- **Plugin install registered the plugin but zero skills.** v0.2.4 placed `SKILL.md` at the plugin root (`plugins/research/SKILL.md`), but Claude Code's plugin loader expects skills at `<plugin>/skills/<skill-name>/SKILL.md`. After `/plugin install` and `/reload-plugins`, the install summary read "1 plugin · 0 skills" and `/research` returned `Unknown command`. The plugin manifest was loaded but no skill was registered.
+
+### Changed
+
+- **`SKILL.md` moved into `plugins/research/skills/research/`** to match the canonical layout used by every skill-providing plugin in `claude-plugins-official` (e.g. `playground/skills/playground/SKILL.md`, `frontend-design/skills/frontend-design/SKILL.md`). It remains a symlink to the root `SKILL.md`, preserving the single source of truth.
+
+### Notes
+
+This is a structural fix only. SKILL.md content and runtime behavior are unchanged. The `npx skills add` and direct `git clone` install routes continue to read the root `SKILL.md` and were never affected.
+
 ## [0.2.4] - 2026-04-26
 
 ### Fixed
