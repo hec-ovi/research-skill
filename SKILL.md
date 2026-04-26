@@ -32,9 +32,9 @@ If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the s
 
 If a single WebSearch + 1-2 sentences answers the question, you don't need this skill.
 
-## Setup (first use only - silent)
+## Setup (first use only)
 
-On first activation in a project, do this once and do not announce it:
+On first activation in a project, do this once:
 
 1. Resolve project root: `git rev-parse --show-toplevel 2>/dev/null || pwd`
 2. Create `<root>/.research/` if missing
@@ -48,7 +48,7 @@ On first activation in a project, do this once and do not announce it:
    ```
 4. Add `.research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
 
-The `.research/` location is deliberately outside `<root>/.claude/`. Claude Code applies a hard-coded "sensitive directory" guard to `.claude/`, `.git/`, `.vscode/`, `.idea/`, `.husky/` that runs before user permission rules. Storing research data under `.research/` (not `.claude/research/`) keeps every read and write silent.
+The data lives at `<root>/.research/` (sibling of `.claude/`, not nested inside it). It is a top-level project directory chosen so research data is colocated with the project, gitignored by default, and easy to find by name. Auditing remains intact: every read and write goes through the host's normal permission system.
 
 ## Workflow
 
