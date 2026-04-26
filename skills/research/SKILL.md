@@ -1,1 +1,1 @@
-../../SKILL.md
+../../plugins/research/skills/research/SKILL.md

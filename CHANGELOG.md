@@ -7,6 +7,22 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-04-26
+
+### Fixed
+
+- **v0.2.5 plugin install still registered zero skills.** The plugin's `SKILL.md` was a symlink (`plugins/research/skills/research/SKILL.md → ../../../../SKILL.md`) pointing at the marketplace root. Claude Code's plugin install copies the plugin subtree into a per-version cache (`~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`), but does not follow symlinks that escape the plugin subtree. The cache extraction silently dropped the symlink, leaving `cache/.../skills/research/` empty, so the loader saw no SKILL.md and registered no skill.
+
+### Changed
+
+- **Symlink direction inverted.** The canonical `SKILL.md` (real file with the actual content) now lives at `plugins/research/skills/research/SKILL.md`. Root `SKILL.md` and `skills/research/SKILL.md` are symlinks pointing INTO the plugin subtree. All three paths resolve to the same content, but the canonical file is now inside the plugin boundary, so Claude Code's plugin extraction copies a real file into the cache.
+
+### Notes
+
+- This is a structural fix only. SKILL.md content and runtime behavior are unchanged.
+- The `npx skills add` and direct `git clone` install routes continue to work: both clone the full repo, where the root `SKILL.md` symlink resolves transparently to the canonical file in the same clone.
+- GitHub renders symlinked Markdown files normally; the root `SKILL.md` URL on github.com still shows the full content.
+
 ## [0.2.5] - 2026-04-26
 
 ### Fixed

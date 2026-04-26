@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
-  <img src="https://img.shields.io/badge/Version-0.2.5-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.2.6-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
 </p>
@@ -206,7 +206,7 @@ Smaller models work fine for the main conversation. The contrarian pass and synt
 
 ### Current activation footprint: ~5,500 tokens, on the heavier side
 
-When the skill activates, the full `SKILL.md` body loads into the main agent's context. As of v0.2.5 the activation cost is approximately 4,500 to 5,500 tokens (depending on tokenizer). The skill registration metadata (frontmatter only, always loaded) is a separate ~130 tokens.
+When the skill activates, the full `SKILL.md` body loads into the main agent's context. As of v0.2.6 the activation cost is approximately 4,500 to 5,500 tokens (depending on tokenizer). The skill registration metadata (frontmatter only, always loaded) is a separate ~130 tokens.
 
 Comparison points:
 
