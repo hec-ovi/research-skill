@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Persistent project-scoped store for deep research findings",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "plugins": [
     {
       "name": "research",
-      "source": ".",
+      "source": "./plugins/research",
       "description": "Project-scoped knowledge base for Claude Code with progressive disclosure (INDEX.md dispatcher, sed-extracted summaries) and contrarian-pass investigation via background Opus subagents. Conflict-handling history prevents re-trying refuted approaches across sessions.",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "author": {
         "name": "Hector Oviedo"
       },

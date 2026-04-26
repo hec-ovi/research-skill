@@ -7,6 +7,20 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-04-26
+
+### Fixed
+
+- **Plugin marketplace install was broken in v0.2.0 through v0.2.3.** `marketplace.json` declared `"source": "."` for the `research` plugin, which the Claude Code marketplace schema rejects with `plugins.0.source: Invalid input`. The valid string form is `"./<subdir>"` pointing at a directory containing `.claude-plugin/plugin.json`. Anyone who tried `/plugin marketplace add hec-ovi/research-skill` got a parse error and could not install via this route. The `npx skills add` and direct `git clone` install routes were unaffected.
+
+### Changed
+
+- **Repo restructured to canonical Claude Code plugin layout.** The plugin manifest now lives at `plugins/research/.claude-plugin/plugin.json` (moved from the root `.claude-plugin/` directory), and `plugins/research/SKILL.md` is a symlink to the root `SKILL.md` so there is still a single source of truth for the skill content. The root `.claude-plugin/marketplace.json` now points `source` at `./plugins/research`, matching the pattern used by every plugin in `claude-plugins-official`.
+
+### Notes
+
+This is a structural fix only. SKILL.md content, behavior, and on-disk layout for installed users are unchanged. The `npx skills add` install route continues to read the root `SKILL.md` and is unaffected by the restructure.
+
 ## [0.2.3] - 2026-04-26
 
 ### Changed
