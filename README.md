@@ -90,6 +90,7 @@ npx skills add hec-ovi/research-skill
 ```
 /plugin marketplace add hec-ovi/research-skill
 /plugin install research@research-skill
+/reload-plugins
 ```
 
 This uses Claude Code's built-in marketplace mechanism to install the plugin from the maintainer's GitHub repo. It is not Anthropic's first-party catalog.
