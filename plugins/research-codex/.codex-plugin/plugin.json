@@ -1,0 +1,38 @@
+{
+  "name": "research-codex",
+  "version": "0.2.7",
+  "description": "Persistent project-scoped store for deep research findings with progressive disclosure and contrarian-pass investigation.",
+  "author": {
+    "name": "Hector Oviedo",
+    "url": "https://github.com/hec-ovi"
+  },
+  "homepage": "https://github.com/hec-ovi/research-skill",
+  "repository": "https://github.com/hec-ovi/research-skill",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "knowledge-base",
+    "memory",
+    "agent-skills",
+    "deep-research"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research",
+    "shortDescription": "Project-scoped persistent research memory for Codex",
+    "longDescription": "Stores deep research findings under .research/, recalls them through an INDEX.md dispatcher, and refreshes stale topics with sourced investigation.",
+    "developerName": "Hector Oviedo",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/hec-ovi/research-skill",
+    "defaultPrompt": [
+      "Use /research <topic> to recall or refresh project research."
+    ],
+    "screenshots": [],
+    "brandColor": "#7B3FA0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "research-skill",
+  "interface": {
+    "displayName": "Research Skill"
+  },
+  "plugins": [
+    {
+      "name": "research-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/research-codex"
+      },
+      "policy": {
+        "installation": "INSTALLED_BY_DEFAULT",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

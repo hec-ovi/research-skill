@@ -13,6 +13,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude_Code-Native-D97757?logo=anthropic&logoColor=white" alt="Claude Code" />
+  <img src="https://img.shields.io/badge/Codex-Plugin_Native-2496ED" alt="Codex plugin native" />
   <img src="https://img.shields.io/badge/SKILL.md_format-Compatible-7B3FA0" alt="SKILL.md compatible" />
   <img src="https://img.shields.io/badge/Code_CLIs-Cross--tool-2496ED" alt="Cross-tool" />
 </p>
@@ -28,7 +29,7 @@
 
 ## What this is
 
-A Claude Code skill that gives you a persistent, project-scoped store for deep research findings.
+A Claude Code and Codex skill that gives you a persistent, project-scoped store for deep research findings.
 
 Stop re-researching the same topics across sessions. Stop polluting conversation context with raw web search dumps. The skill maintains a structured local knowledge base under `<project>/.research/`, looks it up before fetching the web, and uses progressive disclosure to load only what's actually needed.
 
@@ -57,27 +58,27 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Project-scoped, not global.** Each repo has its own research store, kept private (gitignored by default).
 - **Progressive disclosure.** Index, then summary, then full body, in that order. Most lookups never load the full entry.
 - **Conflict-handling history.** When findings change, old claims move to a `## Discarded approaches` table with reasons; never silently overwritten. Prevents re-trying refuted approaches.
-- **Subagent-isolated investigation.** Heavy WebSearch / WebFetch traffic runs in a separate `general-purpose` subagent (Opus 4.7 by default). Your main context stays clean.
-- **Async, non-blocking.** The investigation subagent runs in background mode (`run_in_background: true`); your conversation with Claude Code stays interactive while research happens. Findings save and announce themselves on the completion notification. No frozen CLI.
+- **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: Opus 4.7 in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean.
+- **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming. It earns its keep.
 
 ---
 
 ## How findings reach your conversation
 
-When the Investigation subagent finishes, its full structured return (Summary, Findings, contrarian objection, sources) is injected into the main agent's context as a task-notification message. No file round-trip, no tail-the-log polling. The main agent parses the return directly and writes the data layer.
+When a Claude Code Investigation subagent finishes, its full structured return (Summary, Findings, contrarian objection, sources) is injected into the main agent's context as a task-notification message. No file round-trip, no tail-the-log polling. The main agent parses the return directly and writes the data layer. In Codex, the same structured shape is used, either from an explicitly authorized subagent or from inline investigation.
 
 Why this matters:
 
 - **No raw web-search dump pollution.** The main agent only sees the agent's clean synthesized output, never the raw web search results or fetch responses. Those live in a separate transcript file the main agent is forbidden to read.
 - **Storage is deterministic.** The required output format maps 1:1 to the FINDINGS.md schema. Parsing is mechanical, not interpretive.
-- **Conversation stays interactive.** The subagent runs in background mode (`run_in_background: true`), so you keep working while it researches; the structured output arrives as a notification when the agent completes.
+- **Conversation stays interactive.** Claude Code uses background mode (`run_in_background: true`) for subagent investigation. Codex defaults to inline investigation unless the user explicitly asks for subagents.
 
 ---
 
 ## Install
 
-Three install routes, all global. No registration, approval, or login required.
+Four install routes, all global. No registration, approval, or login required.
 
 ### 1. `npx skills add` (cross-tool, any code CLI that implements the open SKILL.md format)
 
@@ -95,7 +96,21 @@ npx skills add hec-ovi/research-skill
 
 This uses Claude Code's built-in marketplace mechanism to install the plugin from the maintainer's GitHub repo. It is not Anthropic's first-party catalog.
 
-### 3. Direct git clone (simplest, works anywhere)
+### 3. Codex install guide
+
+```bash
+codex plugin marketplace add hec-ovi/research-skill
+```
+
+This uses the Codex plugin metadata at `.agents/plugins/marketplace.json` and `plugins/research-codex/.codex-plugin/plugin.json`. The Codex plugin lives in its own `plugins/research-codex/` root with its own skill copy at `plugins/research-codex/skills/research/SKILL.md`, so the existing `npx skills add` and Claude Code plugin paths stay untouched.
+
+Restart Codex after adding the marketplace if the current session does not pick up `/research` immediately. Then invoke it inside Codex:
+
+```text
+/research compare durable local memory patterns for code agents
+```
+
+### 4. Direct git clone (simplest Claude Code route, works anywhere)
 
 ```bash
 # Personal (across all your projects)
@@ -105,13 +120,13 @@ git clone https://github.com/hec-ovi/research-skill ~/.claude/skills/research
 git clone https://github.com/hec-ovi/research-skill <your-project>/.claude/skills/research
 ```
 
-Claude Code picks up new skills live, no restart needed.
+Claude Code picks up direct-cloned skills live, no restart needed.
 
 ---
 
 ## Usage
 
-The skill auto-activates when you ask a research-style question. You can also invoke it explicitly:
+The skill auto-activates when you ask a research-style question. In Claude Code and the Codex plugin route, you can also invoke it explicitly:
 
 ```
 /research <topic>
@@ -183,14 +198,16 @@ Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `las
 
 ## Requirements
 
-- A code CLI that implements the [SKILL.md format](https://agentskills.io/specification) (Claude Code, or any other compatible client)
-- For the Investigation phase: an Opus-class model accessible to the spawning agent (the skill defaults to spawning subagents at `model: "opus"`)
+- A code CLI that implements the [SKILL.md format](https://agentskills.io/specification) (Claude Code, Codex, or any other compatible client)
+- For Codex plugin installation: Codex CLI with `codex plugin marketplace add`
+- For Claude Code Investigation: an Opus-class model accessible to the spawning agent
+- For Codex Investigation with subagents: GPT-5.5 with `reasoning_effort: "xhigh"`
 
 ---
 
 ## Recommended setup
 
-### Pin subagents to Opus
+### Claude Code: pin subagents to Opus
 
 The Investigation phase needs reasoning depth. The skill spawns subagents with `model: "opus"`, but the calling agent has to actually pass that parameter on every spawn. To make it systematic across all your Claude Code sessions, configure your environment to default subagents to Opus.
 
@@ -200,6 +217,10 @@ Two practical approaches:
 - **Convention (lightest)**: add a one-line note to your `~/.claude/CLAUDE.md`: *"Every Agent tool call MUST pass `model: \"opus\"`."* Claude reads CLAUDE.md every session.
 
 Smaller models work fine for the main conversation. The contrarian pass and synthesis steps in Investigation specifically depend on Opus-class reasoning depth; smaller models tend to skip the contrarian phase or produce shallow syntheses.
+
+### Codex: use GPT-5.5 xhigh
+
+The Codex plugin uses a separate Codex-specific skill file at `plugins/research-codex/skills/research/SKILL.md`. That copy tells Codex to use `model: "gpt-5.5"` with `reasoning_effort: "xhigh"` when the user explicitly authorizes subagents. If subagents are not authorized, the Codex skill runs the same investigation phases inline.
 
 ---
 
@@ -251,7 +272,7 @@ A typical Retrieval-only call would pay ~2,500 to 3,200 tokens (SKILL.md + retri
 
 ### Why not yet
 
-The skill is working, the size is heavy but not blocking, and there has been no demand from users yet. The repo just launched on 2026-04-25; the only confirmed user is the maintainer, and the maintainer has not hit context-budget pressure on this skill in real workflows. The refactor is a real restructure: probably half a day of careful editing, plus end-to-end testing on every phase (Retrieval new entry, Retrieval merge, Investigation new entry mode, Investigation merge mode, Storage paste path), plus updating the install routes (the symlink at `skills/research/SKILL.md` would need to extend to the procedures folder; the marketplace.json plugin descriptor would need to confirm subdirectory loading is honored), plus rewriting CHANGELOG and bumping to a minor version (likely `v0.3.0`).
+The skill is working, the size is heavy but not blocking, and there has been no demand from users yet. The repo just launched on 2026-04-25; the only confirmed user is the maintainer, and the maintainer has not hit context-budget pressure on this skill in real workflows. The refactor is a real restructure: probably half a day of careful editing, plus end-to-end testing on every phase (Retrieval new entry, Retrieval merge, Investigation new entry mode, Investigation merge mode, Storage paste path), plus updating the duplicated skill paths and plugin descriptors so subdirectory loading is honored, plus rewriting CHANGELOG and bumping to a minor version (likely `v0.3.0`).
 
 The refactor will be triggered when any of these signals lands:
 

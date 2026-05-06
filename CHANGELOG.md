@@ -7,6 +7,16 @@ and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+### Added
+
+- **Codex plugin support.** Added `.agents/plugins/marketplace.json` and `plugins/research-codex/.codex-plugin/plugin.json` so Codex can install the repo with `codex plugin marketplace add hec-ovi/research-skill`.
+- **Codex-specific skill copy.** Added `plugins/research-codex/skills/research/SKILL.md`, leaving the existing root, npx, and Claude plugin `SKILL.md` files untouched. The Codex copy translates the investigation workflow to Codex conventions and uses `model: "gpt-5.5"` with `reasoning_effort: "xhigh"` when subagents are explicitly authorized.
+- **Codex `/research` command.** Added `plugins/research-codex/commands/research.md` to route `/research <topic>` through the Codex-specific skill.
+
+### Changed
+
+- **README**: documented the Codex plugin marketplace install route and clarified the platform split: Claude Code keeps the existing Opus-oriented skill files, while Codex loads the separate GPT-5.5 xhigh skill copy.
+
 ## [0.2.7] - 2026-04-26
 
 ### Changed
