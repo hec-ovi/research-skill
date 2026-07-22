@@ -149,9 +149,9 @@ Keep the brief's overhead low: everything beyond the objective, boundaries, and 
 
 The investigation walks these as discrete phases. Phases 1 and 5 are judgment calls; phases 2-4 and the output format are followed exactly. Phases 4 and 5 are load-bearing:
 
-1. **Decompose** - list sub-claims that would resolve the question; identify what evidence settles each. Err toward breadth: enumerate the facts a domain expert would expect the answer to cover, not just the headline question.
-2. **Gather** - for each sub-claim, find >=2 independent sources (year-pinned web search, then fetch/open the top relevant primary pages). Quote verbatim and keep exact figures: numbers, dates, version strings, benchmark scores, prices, trend direction. Synthesis comes later.
-3. **Validate** - re-derive numbers, benchmarks, version claims. Cite-check load-bearing claims: confirm a fetched source actually states each one; a claim that is only inferred gets labeled as inference or dropped. Flag anything that fails.
+1. **Decompose** - list sub-claims that would resolve the question; identify what evidence settles each. Err toward breadth: enumerate the facts a domain expert would expect the answer to cover, not just the headline question. If the question names or points at one obvious source (a single survey, report, or article), note it, then decompose so each sub-claim can be settled from independent evidence rather than that one source.
+2. **Gather** - for each sub-claim, find >=2 independent sources (year-pinned web search, then fetch/open the top relevant primary pages). Independent means different origins, not one document and its mirrors or reposts. Trace a claim to its own primary source (the trial, filing, dataset, or release note) rather than the review or article that aggregates it; the aggregator is a lead to follow, not the evidence. Quote verbatim and keep exact figures: numbers, dates, version strings, benchmark scores, prices, trend direction. Synthesis comes later.
+3. **Validate** - re-derive numbers, benchmarks, version claims. Cite-check load-bearing claims: confirm a fetched source actually states each one; a claim that is only inferred gets labeled as inference or dropped. A claim resting on a single source is weaker than the source count suggests: seek a second, independent confirmation or mark it single-sourced. Flag anything that fails.
 4. **Contrarian pass** - actively search for "why is this wrong / scam / criticized / deprecated / known-bad". State the strongest objection found. **Skipping this is the most common investigation failure mode.** Call it out explicitly in the brief.
 5. **Insight extraction** - go beyond restating gathered facts: state causal drivers ("X because Y"), direct comparisons across options, and historical context or trajectory. Every insight must trace back to gathered evidence. A return that only aggregates facts fails this phase.
 6. **Synthesize** - verdict + citations + residual disagreements listed explicitly. No silent picks. Depth beats polish: a tidy summary that drops half the gathered facts is a failure, not a win.
@@ -163,11 +163,12 @@ The brief or inline investigation notes MUST include explicit citation rules. Re
 > **Citation rules. Read carefully and follow exactly:**
 >
 > - Write Findings as plain prose paragraphs (plus markdown tables where the comparison-table rule applies).
+> - When the question specifies its own structure - named sections, a table with a given caption or given columns, a required ordering - reproduce that structure exactly inside `## Findings`, using the question's own wording for captions and headings. The question's structure wins over house style wherever the two disagree; the surrounding sections stay as listed below.
 > - Put ALL sources in a single `## Sources` block at the END of the return, one bullet per source: `- url - fetched YYYY-MM-DD`. The main agent lifts this block to FINDINGS.md frontmatter.
 > - When a claim's interpretation depends on which source said it, name the source as prose, no brackets ("per the README", "according to littlemight.com", "the HN-simulator commenter argues..."). No URL, no `[n]`.
 > - The return contains ONLY the sections listed in the required output shape, in that order, starting with `## Summary` as the first line. No phase-by-phase working notes, no preamble, no `---` separators, no extra sections. Work through the phases silently; only the final sections come back.
 > - Do NOT use `[n]` numbered citations. No `[1]`, `[2]`, or any bracketed numbers in the Findings body. Do NOT put URLs in the Findings body. Do NOT add inline footnote markers, anchors, or any per-claim citation tags of any kind.
-> - Source-count discipline is preserved: at least 2 independent sources per non-trivial claim. The discipline lives in source count, not in inline tagging.
+> - Source-count discipline is preserved: at least 2 independent sources per non-trivial claim, counted by origin. One paper reached through its publisher page, a mirror, a PDF host, and a figure file is one source, not four. The discipline lives in source count, not in inline tagging.
 
 Required output shape:
 
@@ -176,7 +177,7 @@ Required output shape:
 3 to 6 lines TL;DR.
 
 ## Findings
-Plain prose, plus markdown tables where 3+ options or a data series are compared. No `[n]` markers. No inline URLs. Inline source-naming as prose only when load-bearing for interpretation. Exact figures stay verbatim.
+Plain prose, plus markdown tables where 3+ options or a data series are compared. When the question specified sections, captions, or columns, this section reproduces them exactly. No `[n]` markers. No inline URLs. Inline source-naming as prose only when load-bearing for interpretation. Exact figures stay verbatim.
 
 ## Insights
 Bulleted list. Causal, comparative, or trajectory claims that go beyond any single gathered fact. No new facts here - every insight traces back to Findings.
@@ -210,7 +211,7 @@ If the investigation return has gaps:
 The structured format does not validate substance. The format only signals "I followed the template"; it does not confirm the content is correct, well-sourced, or relevant to what was asked. Before applying Storage, run this 5-point check and echo it as a pass/fail list in your working notes before writing any file:
 
 1. **Relevance**: does the Summary actually answer what was asked? If the investigation disambiguated an ambiguous topic (picked one interpretation of several), confirm it matches the user's intent. If wrong, re-run with a tighter brief; do not store.
-2. **Source quality**: count primary URLs vs aggregated search snippets in the `## Sources` block. If most sources are search-result summaries without specific fetched URLs, the entry is weaker than it looks. Either fill primaries yourself with focused page fetches, or store but flag the weakness explicitly in `## Open questions`.
+2. **Source quality and independence**: count primary URLs vs aggregated search snippets in the `## Sources` block, then count distinct origins. Several URLs pointing at one document (publisher page, mirror, PDF host, figure file) collapse to one source, and a Findings body whose substance all traces to a single document is single-sourced no matter how long the list looks. If most sources are search-result summaries without specific fetched URLs, or one document carries the entry, either fill independent primaries yourself with focused page fetches, or store but flag the weakness explicitly in `## Open questions`.
 3. **Contrarian pass evidence**: "none found" is rare on any non-trivial topic. If you got "none found", be skeptical: either the topic is genuinely uncontroversial (rare), or the investigation skipped phase 4 (common). If skipped, fill in yourself with focused contrarian searches, or re-run the investigation.
 4. **Citation cleanup**: if the return contains `[n]` markers in the Findings body despite the no-`[n]` rule, strip them before writing FINDINGS.md. This is a known failure mode. Do not push the noise downstream. Same for inline URLs in the Findings body, and for any working-notes preamble before `## Summary`: strip both. Sources belong in frontmatter; the entry starts at `## Summary`.
 5. **Insights present**: an `## Insights` section that is missing, empty, or merely restates facts means the insight-extraction phase was skipped. Derive the causal/comparative claims yourself from the Findings, or re-run if the gathered facts are too thin to support any.

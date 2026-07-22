@@ -5,6 +5,13 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-07-22
+
+### Changed
+
+- **Source independence.** Gathering now counts sources by origin: one document reached through its publisher page, a mirror, a PDF host, and a figure file is one source, not four. Claims trace to their own primary source (the trial, filing, dataset, or release note); an article that aggregates them is a lead to follow, not the evidence. Decompose plans around any single obvious source; Validate marks claims that rest on one origin; the storage review checks distinct origins before writing.
+- **Question-specified structure wins.** When the question dictates its own report shape (named sections, a table with a given caption or columns, a required ordering), `## Findings` reproduces that structure exactly, in the question's own wording. House style yields wherever the two disagree.
+
 ## [0.3.0] - 2026-07-22
 
 ### Added
