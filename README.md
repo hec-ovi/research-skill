@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
-  <img src="https://img.shields.io/badge/Version-0.2.7-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.3.0-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
 </p>
@@ -60,7 +60,8 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Conflict-handling history.** When findings change, old claims move to a `## Discarded approaches` table with reasons; never silently overwritten. Prevents re-trying refuted approaches.
 - **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: Opus 4.7 in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean.
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
-- **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming. It earns its keep.
+- **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
+- **Small-model tested.** The retrieval stop rule and the return-only output contract exist because Haiku-class agents actually broke without them (loaded the full entry after the summary already answered; leaked phase notes into the return).
 
 ---
 
@@ -180,7 +181,7 @@ Frontmatter and folder layout follow the open [Agent Skills specification](https
 
 ### Grok deep-research multi-agent pattern (xAI)
 
-The Investigation phase walks a 5-step cognitive workflow (Decompose, Gather, Validate, Contrarian pass, Synthesize) adapted from xAI's published [Multi-Agent architecture](https://docs.x.ai/developers/model-capabilities/text/multi-agent) and the [DeepSearch announcement](https://x.ai/news/grok-3). xAI ships 4 specialized agents (Captain, Harper, Benjamin, Lucas) on a shared backbone; this skill condenses those into cognitive phases a single subagent walks, since the Claude Code harness does not currently expose subagent continuation (`SendMessage` unavailable as of April 2026).
+The Investigation phase walks a 6-step cognitive workflow (Decompose, Gather, Validate, Contrarian pass, Insight extraction, Synthesize) adapted from xAI's published [Multi-Agent architecture](https://docs.x.ai/developers/model-capabilities/text/multi-agent) and the [DeepSearch announcement](https://x.ai/news/grok-3). xAI ships 4 specialized agents (Captain, Harper, Benjamin, Lucas) on a shared backbone; this skill condenses those into cognitive phases a single subagent walks from one self-contained brief.
 
 The Contrarian pass (phase 4) is the standout borrowed element: actively searching for "why this is wrong" rather than confirming. In an A/B test on a celebrity-fronted AI tool legitimacy question, the contrarian pass surfaced significant controversy that a minimal-brief baseline missed.
 
@@ -192,7 +193,15 @@ The Contrarian pass (phase 4) is the standout borrowed element: actively searchi
 
 ## Schema
 
-Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `last_verified`, `status`, `related`, `sources`, `raw`) and a body with `## Summary`, `## Findings`, `## Discarded approaches`, `## Open questions`, `## Timeline`. See [`SKILL.md`](SKILL.md) for the full schema and rules.
+Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `last_verified`, `status`, `related`, `sources`, `raw`) and a body with `## Summary`, `## Findings`, `## Insights`, `## Strongest objection`, `## Discarded approaches`, `## Open questions`, `## Timeline`. See [`SKILL.md`](SKILL.md) for the full schema and rules.
+
+## Tests
+
+```bash
+bash tests/check_skill.sh
+```
+
+Checks that the three Claude skill copies are byte-identical, all four skill files keep the required sections and schema invariants, and the version is consistent across plugin manifests, README, and CHANGELOG.
 
 ---
 
@@ -228,7 +237,7 @@ The Codex plugin uses a separate Codex-specific skill file at `plugins/research-
 
 ### Current activation footprint: ~5,500 tokens, on the heavier side
 
-When the skill activates, the full `SKILL.md` body loads into the main agent's context. As of v0.2.7 the activation cost is approximately 4,500 to 5,500 tokens (depending on tokenizer). The skill registration metadata (frontmatter only, always loaded) is a separate ~130 tokens.
+When the skill activates, the full `SKILL.md` body loads into the main agent's context. As of v0.3.0 the activation cost is approximately 4,500 to 5,500 tokens (depending on tokenizer). The skill registration metadata (frontmatter only, always loaded) is a separate ~130 tokens.
 
 Comparison points:
 

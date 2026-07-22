@@ -5,17 +5,24 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.0] - 2026-07-22
 
 ### Added
 
-- **Codex plugin support.** Added `.agents/plugins/marketplace.json` and `plugins/research-codex/.codex-plugin/plugin.json` so Codex can install the repo with `codex plugin marketplace add hec-ovi/research-skill`.
-- **Codex-specific skill copy.** Added `plugins/research-codex/skills/research/SKILL.md`, leaving the existing root, npx, and Claude plugin `SKILL.md` files untouched. The Codex copy translates the investigation workflow to Codex conventions and uses `model: "gpt-5.5"` with `reasoning_effort: "xhigh"` when subagents are explicitly authorized.
-- **Codex `/research` command.** Added `plugins/research-codex/commands/research.md` to route `/research <topic>` through the Codex-specific skill.
+- **Insight extraction phase.** The investigation now has 6 cognitive phases: a new phase 5 forces causal, comparative, and trajectory claims that go beyond restating gathered facts. The return and the FINDINGS.md schema gain matching `## Insights` and `## Strongest objection` sections, so the contrarian result persists across sessions.
+- **Exact-figures and comparison-table rules.** Numbers, dates, versions, and benchmark scores stay verbatim in findings; comparisons of 3+ options or data series go in a markdown table.
+- **Effort scaling in the brief.** The investigation brief now states the expected search scale (roughly 3-10 for a narrow question, 10-15+ for comparisons).
+- **Retrieval stop rule.** After a matching `## Summary` answers the question, retrieval stops; small models were re-opening the full entry "to confirm".
+- **Return-only output contract.** The investigation return starts at `## Summary` with no phase-by-phase working notes; small models were leaking their phase narration into the return.
+- **Local tests.** `tests/check_skill.sh` verifies the three Claude skill copies stay byte-identical, required sections and schema invariants survive edits, and versions match across manifests, README, and CHANGELOG.
+- **Codex plugin support.** Added `.agents/plugins/marketplace.json` and `plugins/research-codex/.codex-plugin/plugin.json` so Codex can install the repo with `codex plugin marketplace add hec-ovi/research-skill`, plus a Codex-specific skill copy at `plugins/research-codex/skills/research/SKILL.md` (gpt-5.5 xhigh when subagents are authorized, inline otherwise) and a `/research` command routing through it.
 
 ### Changed
 
-- **README**: documented the Codex plugin marketplace install route and clarified the platform split: Claude Code keeps the existing Opus-oriented skill files, while Codex loads the separate GPT-5.5 xhigh skill copy.
+- **Positive-imperative pass.** Prohibition lists rewritten as positive rules ("What NEVER to do" is now "Loading discipline"); the three core rules are stated at the top of the file and restated at the end; the brief checklist consolidates format rules into the two verbatim blocks; the storage review is now a 5-point check echoed as pass/fail before writing.
+- **Frontmatter description** rewritten in third person with concrete trigger terms; exclusions moved to `when_to_use`.
+- **New-entry storage** now maps the return sections 1:1 onto the schema, including empty sections.
+- **README**: documented the Codex install route, the 6-phase workflow, the extended schema, and the test runner.
 
 ## [0.2.7] - 2026-04-26
 
