@@ -1,7 +1,7 @@
 ---
 name: research
-description: Persistent project-scoped store for deep research on large topics. Use for substantive questions - comparing libraries, evaluating tools, surveying solutions to hard problems. Not for plan notes, not for small facts, not for code-level decisions, not for ideas.
-when_to_use: User asks a research question that warrants investigation across multiple sources ("what's the latest npm for X", "which 2D engines clone fastest", "compare ORMs for 2026"). Skip for quick lookups, plan-stage notes, or anything that fits in conversation.
+description: Maintains a persistent project-scoped research store (.research/ with an INDEX.md dispatcher and per-topic FINDINGS.md entries). Recalls saved findings before searching the web, then runs sourced multi-phase investigations for substantive questions - library and framework comparisons, tool evaluations, version and release surveys, "how does X work" deep dives.
+when_to_use: User asks a research question that warrants investigation across multiple sources ("what's the latest npm for X", "which 2D engines clone fastest", "compare ORMs for 2026"). Skip for quick lookups, plan-stage notes, small facts, code-level decisions, personal ideas, or anything that fits in conversation.
 user-invocable: true
 argument-hint: "<topic>"
 ---
@@ -11,6 +11,12 @@ argument-hint: "<topic>"
 Persistent project-scoped store for deep research findings. You activated this skill because the user asked a substantive research question, or invoked it explicitly with `/research <topic>`.
 
 If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the seed for Retrieval - start by looking up that topic in `INDEX.md`. Don't research blindly; the lookup may answer immediately.
+
+**Three rules carry this skill.** They are stated here first because they matter most, and restated at the end:
+
+1. **Investigation subagents have zero context.** Everything they need goes in one self-contained brief.
+2. **The contrarian pass is mandatory.** An investigation without it is incomplete; re-run or fill it yourself.
+3. **The main agent owns all file writes.** Subagents return text; only you touch `.research/`.
 
 ## When to use
 
@@ -54,7 +60,7 @@ The data lives at `<root>/.research/` (sibling of `.claude/`, not nested inside 
 
 ### 1. Retrieval (the read side - this is how the skill saves your context)
 
-The whole point of this system is **progressive disclosure**: don't load what you don't need. `INDEX.md` is your dispatcher - it lets you decide which entries to load *without paying to load them*. Walk the hierarchy from cheapest to most expensive; only escalate when the previous tier doesn't answer the question.
+The whole point of this system is **progressive disclosure**: load only what the question needs. `INDEX.md` is your dispatcher - it lets you decide which entries to load *without paying to load them*. Walk the hierarchy from cheapest to most expensive; only escalate when the previous tier doesn't answer the question.
 
 #### Loading hierarchy (cheapest → most expensive)
 
@@ -79,7 +85,7 @@ The whole point of this system is **progressive disclosure**: don't load what yo
    ```bash
    sed -n '/^## Summary/,/^## /p' <root>/.research/<slug>/FINDINGS.md
    ```
-   Usually enough.
+   **Stop rule: if the Summary answers the question, answer from it and stop.** Do not open the full FINDINGS.md "to confirm" or "for completeness" - that is the exact waste this skill exists to prevent.
 
 4. **Escalate one tier only when needed:**
    - Question needs claims-level detail beyond the Summary → load the full `FINDINGS.md` body (tier 3).
@@ -92,12 +98,12 @@ The whole point of this system is **progressive disclosure**: don't load what yo
    - **Existing entry doesn't actually resolve the question** (problem still unsolved) → Investigation in **merge mode** (pass existing entry content to the subagent).
    - **Existing entry is stale** on a fast-moving topic → Investigation in **merge mode** (refresh, don't quote).
 
-#### What NEVER to do
+#### Loading discipline
 
-- **Don't load everything.** The schema exists so you can be selective.
-- **Don't load the full body when Summary suffices.** If 3 lines answer it, don't pull 300.
-- **Don't load raw documents speculatively.** They're heavy; most questions don't need them.
-- **Don't re-read an entry you already loaded this session** - unless it was updated since.
+- **Load exactly what the current tier needs.** The schema exists so you can be selective; escalate one tier only after the current one fails to answer.
+- **Answer from the Summary when it suffices.** If 3 lines answer it, those 3 lines are the whole read. Re-opening the full body "to double-check" after the Summary already answered is the failure this skill exists to prevent.
+- **Open a raw document only when a finding cites it** and the specific claim needs verification. Raws are heavy; most questions never touch them.
+- **Reuse what you loaded earlier this session.** Re-read an entry only if it was updated since.
 
 #### `INDEX.md` as dispatcher
 
@@ -115,7 +121,7 @@ Spawn a `general-purpose` subagent with `model: "opus"` and **`run_in_background
 
 **On completion notification:** parse the agent's return, apply Storage immediately, surface a brief notice to the user (e.g. *"research on `<topic>` saved to `<path>`"*). Do not dump the full findings into chat unless asked.
 
-**Subagents have zero prior context.** They don't see this skill, CLAUDE.md, or our conversation. Brief them completely. **There is no continuation in this harness** - the `SendMessage` tool to resume an agent is not available. One-shot only. If gaps remain, re-spawn with a refined brief.
+**Subagents have zero prior context.** They don't see this skill, CLAUDE.md, or our conversation. Brief them completely and treat them as one-shot workers: if gaps remain, re-spawn with a refined brief.
 
 The mode (new entry vs merge) was decided in Retrieval phase 5. Brief the subagent accordingly:
 
@@ -129,21 +135,24 @@ Every Investigation brief MUST include:
 - "You have zero prior context" preamble
 - Today's actual date (run `date +%Y-%m-%d` first; pass the literal string)
 - Year-pinning rule for WebSearch queries (don't trust the subagent's model prior on what year it is)
-- At least 2 independent sources per non-trivial claim. Sources are gathered into a single `## Sources` block at the end of the return; do NOT cite inline.
+- Effort scaling: state the expected scale in the brief - a narrow single-fact question needs ~3-10 searches; a multi-option comparison 10-15+ spread across the options; without this, subagents under- or over-invest
+- At least 2 independent sources per non-trivial claim
 - The cognitive phases below as explicit numbered steps
-- The subagent's required output format (below)
-- The strict no-`[n]` / no-inline-URL rule for the Findings body (see Required output format)
+- The required output format and citation rules (below), pasted verbatim - together they carry the exact-figures, comparison-table, and no-`[n]` rules, so they need no separate bullets in the brief
 - **Merge mode only**: the existing entry content the subagent should verify / supersede
+
+Keep the brief's overhead low: everything beyond the objective, boundaries, and these blocks is noise that steals attention from the research itself.
 
 #### Cognitive phases (include verbatim in the subagent brief)
 
-The subagent walks these as discrete phases. Phase 4 is load-bearing:
+The subagent walks these as discrete phases. Phases 1 and 5 are judgment calls; phases 2-4 and the output format are followed exactly. Phases 4 and 5 are load-bearing:
 
-1. **Decompose** - list sub-claims that would resolve the question; identify what evidence settles each.
-2. **Gather** - for each sub-claim, find ≥2 independent sources (year-pinned WebSearch → WebFetch on top results). Quote verbatim. Don't synthesize yet.
-3. **Validate** - re-derive numbers, benchmarks, version claims. Flag anything that fails.
+1. **Decompose** - list sub-claims that would resolve the question; identify what evidence settles each. Err toward breadth: enumerate the facts a domain expert would expect the answer to cover, not just the headline question.
+2. **Gather** - for each sub-claim, find ≥2 independent sources (year-pinned WebSearch → WebFetch on top results). Quote verbatim and keep exact figures: numbers, dates, version strings, benchmark scores, prices, trend direction. Synthesis comes later.
+3. **Validate** - re-derive numbers, benchmarks, version claims. Cite-check load-bearing claims: confirm a fetched source actually states each one; a claim that is only inferred gets labeled as inference or dropped. Flag anything that fails.
 4. **Contrarian pass** - actively search for "why is this wrong / scam / criticized / deprecated / known-bad". State the strongest objection found. **Skipping this is the most common subagent failure mode.** Call it out explicitly in the brief.
-5. **Synthesize** - verdict + citations + residual disagreements listed explicitly. No silent picks.
+5. **Insight extraction** - go beyond restating gathered facts: state causal drivers ("X because Y"), direct comparisons across options, and historical context or trajectory. Every insight must trace back to gathered evidence. A return that only aggregates facts fails this phase.
+6. **Synthesize** - verdict + citations + residual disagreements listed explicitly. No silent picks. Depth beats polish: a tidy summary that drops half the gathered facts is a failure, not a win.
 
 #### Required subagent output format
 
@@ -151,12 +160,11 @@ The brief MUST include explicit citation rules. Subagents trained on academic-st
 
 > **Citation rules. Read carefully and follow exactly:**
 >
-> - Do NOT use `[n]` numbered citations. No `[1]`, `[2]`, or any bracketed numbers in the Findings body.
-> - Do NOT put URLs in the Findings body.
-> - Do NOT add inline footnote markers, anchors, or any per-claim citation tags of any kind.
-> - Write Findings as plain prose paragraphs.
-> - When a claim's interpretation depends on which source said it, name the source as prose, no brackets ("per the README", "according to littlemight.com", "the HN-simulator commenter argues..."). No URL, no `[n]`.
+> - Write Findings as plain prose paragraphs (plus markdown tables where the comparison-table rule applies).
 > - Put ALL sources in a single `## Sources` block at the END of the return, one bullet per source: `- url - fetched YYYY-MM-DD`. The main agent lifts this block to FINDINGS.md frontmatter.
+> - When a claim's interpretation depends on which source said it, name the source as prose, no brackets ("per the README", "according to littlemight.com", "the HN-simulator commenter argues..."). No URL, no `[n]`.
+> - The return contains ONLY the sections listed in the required output shape, in that order, starting with `## Summary` as the first line. No phase-by-phase working notes, no preamble, no `---` separators, no extra sections. Work through the phases silently; only the final sections come back.
+> - Do NOT use `[n]` numbered citations. No `[1]`, `[2]`, or any bracketed numbers in the Findings body. Do NOT put URLs in the Findings body. Do NOT add inline footnote markers, anchors, or any per-claim citation tags of any kind.
 > - Source-count discipline is preserved: at least 2 independent sources per non-trivial claim. The discipline lives in source count, not in inline tagging.
 
 Required output shape (what the subagent returns):
@@ -166,10 +174,13 @@ Required output shape (what the subagent returns):
 3 to 6 lines TL;DR.
 
 ## Findings
-Plain prose. No `[n]` markers. No inline URLs. Inline source-naming as prose only when load-bearing for interpretation.
+Plain prose, plus markdown tables where 3+ options or a data series are compared. No `[n]` markers. No inline URLs. Inline source-naming as prose only when load-bearing for interpretation. Exact figures stay verbatim.
 
-## Strongest objection (from contrarian pass)
-1 to 2 sentences, or "none found".
+## Insights
+Bulleted list. Causal, comparative, or trajectory claims that go beyond any single gathered fact. No new facts here - every insight traces back to Findings.
+
+## Strongest objection
+1 to 2 sentences: the contrarian-pass result, or "none found".
 
 ## Sources
 - url - fetched YYYY-MM-DD
@@ -192,23 +203,24 @@ If the subagent's return has gaps:
 
 #### Review before storing
 
-The subagent's structured format does not validate substance. The format only signals "I followed the template"; it does not confirm the content is correct, well-sourced, or relevant to what was asked. Before applying Storage, run this 4-point check:
+The subagent's structured format does not validate substance. The format only signals "I followed the template"; it does not confirm the content is correct, well-sourced, or relevant to what was asked. Before applying Storage, run this 5-point check and echo it as a pass/fail list in your working notes before writing any file:
 
 1. **Relevance**: does the Summary actually answer what was asked? If the agent disambiguated an ambiguous topic (picked one interpretation of several), confirm it matches the user's intent. If wrong, re-spawn with a tighter brief; do not store.
 2. **Source quality**: count primary URLs vs aggregated WebSearch snippets in the `## Sources` block. If most sources are search-result summaries without specific fetched URLs, the entry is weaker than it looks. Either fill primaries yourself with focused WebFetch, or store but flag the weakness explicitly in `## Open questions`.
 3. **Contrarian pass evidence**: "none found" is rare on any non-trivial topic. If you got "none found", be skeptical: either the topic is genuinely uncontroversial (rare), or the subagent skipped phase 4 (common). If skipped, fill in yourself with focused contrarian searches, or re-spawn.
 4. **Citation cleanup**: if the return contains `[n]` markers in the Findings body despite the brief's no-`[n]` rule, strip them before writing FINDINGS.md. This is a known failure mode (subagents fall back to academic citation habits). Do not push the noise downstream. Same for inline URLs in the Findings body: strip them. Sources belong in frontmatter.
+5. **Insights present**: an `## Insights` section that is missing, empty, or merely restates facts means the insight-extraction phase was skipped. Derive the causal/comparative claims yourself from the Findings, or re-spawn if the gathered facts are too thin to support any.
 
 If the review surfaces fixable gaps, fill them yourself with a focused WebSearch / WebFetch (cheaper than re-spawn). If gaps are systemic, re-spawn with a refined brief; do not write a half-formed entry.
 
 #### Apply Storage
 
-After Investigation returns its synthesis (or the user pastes findings), you (main agent, never the subagent) finalize the data layer. Two paths, picked based on the mode chosen in Retrieval phase 5:
+After Investigation returns its synthesis (or the user pastes findings), you (main agent, never the subagent) finalize the data layer. This part is low-freedom: follow the steps exactly. Two paths, picked based on the mode chosen in Retrieval phase 5:
 
 **New entry path:**
 
 1. Create `<root>/.research/<topic-slug>/`.
-2. Write `FINDINGS.md` using the schema in File schemas. Frontmatter: `created` and `last_verified` = today; `status: active`; `sources` from the subagent return; `raw:` omitted (no raw yet); `related: []` unless cross-links apply.
+2. Write `FINDINGS.md` using the schema in File schemas. The return maps 1:1: `## Summary`, `## Findings`, `## Insights`, `## Strongest objection` copy over; `## Discarded approaches` starts as the empty table; `## Open questions` gets any gaps flagged during review; `## Timeline` gets the initial-entry line. Include every schema section even when empty. Frontmatter: `created` and `last_verified` = today; `status: active`; `sources` from the subagent return; `raw:` omitted (no raw yet); `related: []` unless cross-links apply.
 3. Read `INDEX.md`, append a row: topic, path, today's date, a specific one-liner.
 
 **Merge path:**
@@ -220,7 +232,7 @@ After Investigation returns its synthesis (or the user pastes findings), you (ma
 5. Append a `## Timeline` entry summarizing the change.
 6. Read `INDEX.md`, update the row's `Last verified` column. Update the one-liner if the picture has changed.
 
-Use kebab-case slugs that match how the user is likely to ask again - e.g. `tailwind-v5`, `2d-engines-clonable`, `orm-comparison-2026`. The slug should disambiguate.
+Use kebab-case slugs that match how the user is likely to ask again - e.g. `tailwind-v5`, `2d-engines-clonable`, `orm-comparison`. The slug should disambiguate.
 
 ### 4. Pasted content from the user
 
@@ -270,9 +282,14 @@ Always record `fetched: YYYY-MM-DD` next to each source URL.
 
 ### Citation discipline
 
-- Every concrete claim has a `[n]` citation tied to a source URL in `sources` frontmatter
+- Every concrete claim is backed by a source URL in `sources` frontmatter. Do not use `[n]` markers in `## Findings`.
 - If you don't have a source, write "no source - open question" and add it to `## Open questions`. Never invent a URL or quote.
 - When sources disagree, cite both and note the disagreement explicitly. Don't silently pick one.
+
+### Depth over polish
+
+- Spend the effort budget on retrieval breadth and exact figures, not on formatting. The template already handles presentation; the common failure is a well-structured entry that is missing half the facts.
+- Whenever 3+ options or a data series appear, put the comparison in a small markdown table inside `## Findings`. Prose carries the interpretation; the table carries the data.
 
 ### Conflict handling
 
@@ -294,7 +311,10 @@ When new evidence contradicts an existing entry:
 | <topic-slug> | <topic-slug>/FINDINGS.md | YYYY-MM-DD | <one-line summary that disambiguates> |
 ```
 
-The one-liner is what future-you scans to decide whether to load the entry. Make it specific.
+The one-liner is what future-you scans to decide whether to load the entry. Make it specific:
+
+- Weak: `Notes about Tailwind`
+- Strong: `Tailwind v5.2 stable; Oxide engine default; config moved to CSS-first @theme blocks`
 
 ### `FINDINGS.md`
 
@@ -322,7 +342,15 @@ raw:                           # omit if no raws were saved
 
 ## Findings
 
-Plain prose. No `[n]` markers. No inline URLs. When a claim's interpretation depends on which source said it, name the source as prose ("per the README", "according to littlemight.com", "the HN-simulator commenter notes"). For raw documents, refer descriptively ("the pasted whitepaper"); the `raw:` frontmatter has the file path. Frontmatter `sources:` is the bibliography.
+Plain prose, plus markdown tables where 3+ options or a data series are compared. Exact figures verbatim. No `[n]` markers. No inline URLs. When a claim's interpretation depends on which source said it, name the source as prose ("per the README", "according to littlemight.com", "the HN-simulator commenter notes"). For raw documents, refer descriptively ("the pasted whitepaper"); the `raw:` frontmatter has the file path. Frontmatter `sources:` is the bibliography.
+
+## Insights
+
+- Causal, comparative, or trajectory takeaways that go beyond any single fact. Each traces back to Findings.
+
+## Strongest objection
+
+The contrarian-pass result: the best argument against the entry's conclusion, or "none found". Persisting it stops future sessions from re-discovering the same objection.
 
 ## Discarded approaches
 
@@ -339,9 +367,9 @@ Plain prose. No `[n]` markers. No inline URLs. When a claim's interpretation dep
 ```
 
 Notes on the schema:
-- `raw:` is a list - one entry can accumulate multiple raw documents over time (e.g., user pastes a whitepaper, then later a different report on the same topic). Add new items, don't overwrite.
-- Omit the `raw:` key entirely when there are no raw documents - don't leave an empty list.
-- `related:` cross-links to other entry slugs. Use this when entries touch overlapping projects but answer different questions (e.g., `knowledge-graphs-comparison` and `mempalace-legitimacy` both mention mempalace but have different scopes - link them, don't merge them).
+- `raw:` is a list - one entry can accumulate multiple raw documents over time (e.g., user pastes a whitepaper, then later a different report on the same topic). Add new items; existing ones stay.
+- Omit the `raw:` key entirely when there are no raw documents.
+- `related:` cross-links to other entry slugs. Use this when entries touch overlapping projects but answer different questions (e.g., `knowledge-graphs-comparison` and `mempalace-legitimacy` both mention mempalace but have different scopes - link them, keep them separate).
 
 ## Anti-patterns
 
@@ -350,3 +378,7 @@ Notes on the schema:
 - **Hallucinated sources**: never invent URLs or quotes. If WebFetch failed, say so.
 - **Auto-delete on paste handler**: always offer, never act.
 - **Silent supersede**: any change to a prior conclusion goes through `## Discarded approaches` + `## Timeline`. Never overwrite.
+
+## The three rules, restated
+
+Brief subagents completely (they have zero context). Keep the contrarian pass (fill it yourself if the return skipped it). Write all `.research/` files yourself (subagents return text only).
