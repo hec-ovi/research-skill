@@ -192,6 +192,8 @@ Bulleted list. Causal, comparative, or trajectory claims that go beyond any sing
 
 The subagent does not write any files. You parse this return and apply Storage rules.
 
+**End the brief with the return-only rule as its literal last line** - e.g. *"Your final message is the sections above and nothing else; anything before `## Summary` is discarded."* Models weight the final line heavily, and smaller models leak phase-by-phase working notes into the return when the brief ends on anything else.
+
 #### Gap handling
 
 If the subagent's return has gaps:
@@ -208,7 +210,7 @@ The subagent's structured format does not validate substance. The format only si
 1. **Relevance**: does the Summary actually answer what was asked? If the agent disambiguated an ambiguous topic (picked one interpretation of several), confirm it matches the user's intent. If wrong, re-spawn with a tighter brief; do not store.
 2. **Source quality**: count primary URLs vs aggregated WebSearch snippets in the `## Sources` block. If most sources are search-result summaries without specific fetched URLs, the entry is weaker than it looks. Either fill primaries yourself with focused WebFetch, or store but flag the weakness explicitly in `## Open questions`.
 3. **Contrarian pass evidence**: "none found" is rare on any non-trivial topic. If you got "none found", be skeptical: either the topic is genuinely uncontroversial (rare), or the subagent skipped phase 4 (common). If skipped, fill in yourself with focused contrarian searches, or re-spawn.
-4. **Citation cleanup**: if the return contains `[n]` markers in the Findings body despite the brief's no-`[n]` rule, strip them before writing FINDINGS.md. This is a known failure mode (subagents fall back to academic citation habits). Do not push the noise downstream. Same for inline URLs in the Findings body: strip them. Sources belong in frontmatter.
+4. **Citation cleanup**: if the return contains `[n]` markers in the Findings body despite the brief's no-`[n]` rule, strip them before writing FINDINGS.md. This is a known failure mode (subagents fall back to academic citation habits). Do not push the noise downstream. Same for inline URLs in the Findings body, and for any working-notes preamble before `## Summary`: strip both. Sources belong in frontmatter; the entry starts at `## Summary`.
 5. **Insights present**: an `## Insights` section that is missing, empty, or merely restates facts means the insight-extraction phase was skipped. Derive the causal/comparative claims yourself from the Findings, or re-spawn if the gathered facts are too thin to support any.
 
 If the review surfaces fixable gaps, fill them yourself with a focused WebSearch / WebFetch (cheaper than re-spawn). If gaps are systemic, re-spawn with a refined brief; do not write a half-formed entry.
@@ -233,6 +235,14 @@ After Investigation returns its synthesis (or the user pastes findings), you (ma
 6. Read `INDEX.md`, update the row's `Last verified` column. Update the one-liner if the picture has changed.
 
 Use kebab-case slugs that match how the user is likely to ask again - e.g. `tailwind-v5`, `2d-engines-clonable`, `orm-comparison`. The slug should disambiguate.
+
+**Verify the write.** Storage is complete only when the files exist on disk:
+
+```bash
+test -s <root>/.research/<slug>/FINDINGS.md && grep -q '<slug>' <root>/.research/INDEX.md && echo stored
+```
+
+If the check fails, the write did not happen (permission denial, sandbox, tool error). Redo it or surface the failure to the user - report the entry as saved only after this check passes.
 
 ### 4. Pasted content from the user
 
