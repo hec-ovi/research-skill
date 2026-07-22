@@ -5,6 +5,13 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.4] - 2026-07-22
+
+### Changed
+
+- **Enumerations are rebuilt from their items.** When an answer needs a list of things (every trial in a review, every jurisdiction in a market study, every release in a changelog), Gather now opens the enumerated items themselves instead of copying the aggregator's table. A table lifted whole out of one document counts as one source, not one per row.
+- **The answer opens on the finding, not on the document.** Sources are named at the point where their own contribution appears, so no single document gets introduced up front as the evidence base behind the whole answer. Per-claim attribution was already correct, but an opening framing sentence was re-crediting everything downstream to one source.
+
 ## [0.3.3] - 2026-07-22
 
 ### Changed
