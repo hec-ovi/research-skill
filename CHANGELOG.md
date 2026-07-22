@@ -5,6 +5,12 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3] - 2026-07-22
+
+### Changed
+
+- **Attribution follows origin, not discovery.** A fact is credited to the source it originates from rather than the one it was read in: a trial's result belongs to that trial, a spec's behavior to the spec, even when a review is where the fact was first seen collected. The aggregator is named for what is genuinely its own, its pooled analysis, selection, and argument. Reports were corroborating against primary sources and then still crediting the survey that tabulated them, which discarded the corroboration.
+
 ## [0.3.2] - 2026-07-22
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "research-codex",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Persistent project-scoped store for deep research findings with progressive disclosure and contrarian-pass investigation.",
   "author": {
     "name": "Hector Oviedo",
