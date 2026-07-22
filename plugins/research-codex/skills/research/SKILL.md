@@ -154,7 +154,7 @@ The investigation walks these as discrete phases. Phases 1 and 5 are judgment ca
 3. **Validate** - re-derive numbers, benchmarks, version claims. Cite-check load-bearing claims: confirm a fetched source actually states each one; a claim that is only inferred gets labeled as inference or dropped. A claim resting on a single source is weaker than the source count suggests: seek a second, independent confirmation or mark it single-sourced. Flag anything that fails.
 4. **Contrarian pass** - actively search for "why is this wrong / scam / criticized / deprecated / known-bad". State the strongest objection found. **Skipping this is the most common investigation failure mode.** Call it out explicitly in the brief.
 5. **Insight extraction** - go beyond restating gathered facts: state causal drivers ("X because Y"), direct comparisons across options, and historical context or trajectory. Every insight must trace back to gathered evidence. A return that only aggregates facts fails this phase.
-6. **Synthesize** - verdict + citations + residual disagreements listed explicitly. No silent picks. Depth beats polish: a tidy summary that drops half the gathered facts is a failure, not a win.
+6. **Synthesize** - verdict + citations + residual disagreements listed explicitly. No silent picks. Depth beats polish: a tidy summary that drops half the gathered facts is a failure, not a win. Finish with a completeness pass: re-read the question and confirm every named part, requested element, and asked-for conclusion has an explicit answer in the return, stated in words rather than left implied by the data.
 
 #### Required output format
 

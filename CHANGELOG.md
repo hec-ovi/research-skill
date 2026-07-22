@@ -5,6 +5,12 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2026-07-22
+
+### Added
+
+- **Completeness pass in Synthesize.** Before returning, the investigation re-reads the question and confirms every named part, requested element, and asked-for conclusion has an explicit answer, stated in words rather than left implied by the data. Multi-part questions were losing sub-parts whose answer existed in the gathered facts but never got said.
+
 ## [0.3.1] - 2026-07-22
 
 ### Changed
