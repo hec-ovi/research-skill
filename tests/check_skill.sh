@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# Local consistency checks for the skill files. Run: bash tests/check_skill.sh
+set -u
+cd "$(dirname "$0")/.."
+
+fail=0
+err() { echo "FAIL: $1"; fail=1; }
+ok() { echo "ok: $1"; }
+
+ROOT_SKILL=SKILL.md
+COPIES=(skills/research/SKILL.md plugins/research/skills/research/SKILL.md)
+CODEX=plugins/research-codex/skills/research/SKILL.md
+ALL=("$ROOT_SKILL" "${COPIES[@]}" "$CODEX")
+
+# 1. The three Claude copies are byte-identical
+for f in "${COPIES[@]}"; do
+  if cmp -s "$ROOT_SKILL" "$f"; then ok "$f identical to root SKILL.md"; else err "$f differs from root SKILL.md"; fi
+done
+
+# 2. Required sections present in all four skill files
+SECTIONS=(
+  "## Setup (first use only)"
+  "### 1. Retrieval"
+  "### 2. Investigation"
+  "### 3. Storage"
+  "#### Review before storing"
+  "## File schemas"
+  "## Anti-patterns"
+  "**Insight extraction**"
+  "## Insights"
+  "## Strongest objection"
+  "### Depth over polish"
+)
+for f in "${ALL[@]}"; do
+  for s in "${SECTIONS[@]}"; do
+    grep -qF "$s" "$f" || err "$f missing: $s"
+  done
+done
+ok "section scan done"
+
+# 3. Frontmatter sanity: name + description in every skill file
+for f in "${ALL[@]}"; do
+  head -8 "$f" | grep -q '^name: research$' || err "$f frontmatter missing 'name: research'"
+  head -8 "$f" | grep -q '^description: ' || err "$f frontmatter missing description"
+done
+ok "frontmatter scan done"
+
+# 4. No em/en dashes in docs
+for f in "${ALL[@]}" README.md CHANGELOG.md; do
+  if grep -qP '[\x{2013}\x{2014}]' "$f"; then err "$f contains em/en dash"; fi
+done
+ok "dash scan done"
+
+# 5. Version consistency: plugin.json files, marketplace.json, README badge, CHANGELOG latest release
+v_plugin=$(grep -o '"version": "[^"]*"' plugins/research/.claude-plugin/plugin.json | head -1 | cut -d'"' -f4)
+v_codex=$(grep -o '"version": "[^"]*"' plugins/research-codex/.codex-plugin/plugin.json | head -1 | cut -d'"' -f4)
+v_market=$(grep -o '"version": "[^"]*"' .claude-plugin/marketplace.json | head -1 | cut -d'"' -f4)
+v_readme=$(grep -o 'Version-[0-9.]*-blue' README.md | head -1 | sed 's/Version-//;s/-blue//')
+v_changelog=$(grep -o '^## \[[0-9.]*\]' CHANGELOG.md | head -1 | tr -d '#[] ')
+for pair in "codex-plugin:$v_codex" "marketplace:$v_market" "readme-badge:$v_readme" "changelog:$v_changelog"; do
+  name=${pair%%:*}; val=${pair#*:}
+  [ "$val" = "$v_plugin" ] || err "version mismatch: $name=$val vs plugin.json=$v_plugin"
+done
+ok "version scan done (all $v_plugin)"
+
+# 6. Claude copies keep WebSearch/WebFetch wording; Codex copy must not use them
+grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
+grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"
+
+# 7. Store schema invariants: INDEX dispatcher table + FINDINGS schema keys survive edits
+for f in "${ALL[@]}"; do
+  grep -qF '| Topic | Path | Last verified | One-liner |' "$f" || err "$f lost INDEX.md schema table"
+  for key in 'topic: <slug>' 'last_verified: YYYY-MM-DD' '## Discarded approaches' '## Timeline' '## Open questions' 'status: active' 'related: \[\]'; do
+    grep -q "$key" "$f" || err "$f lost FINDINGS schema element: $key"
+  done
+done
+ok "store schema scan done"
+
+if [ "$fail" = 0 ]; then echo "ALL CHECKS PASSED"; else echo "CHECKS FAILED"; exit 1; fi
