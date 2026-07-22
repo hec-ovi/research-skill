@@ -5,6 +5,12 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.5] - 2026-07-22
+
+### Changed
+
+- **The storage review names the two tells of a single-source entry.** The source-quality check now points at the spots that give it away fastest: a list or table whose rows all trace to one document that tabulated them, and an opening sentence that hands the whole answer to a single work before any finding is stated. Both were rules the investigation already had; the review is where a return that ignored them gets caught.
+
 ## [0.3.4] - 2026-07-22
 
 ### Changed
