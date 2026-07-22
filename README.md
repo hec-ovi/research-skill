@@ -62,6 +62,7 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
 - **Small-model tested.** The retrieval stop rule and the return-only output contract exist because Haiku-class agents actually broke without them (loaded the full entry after the summary already answered; leaked phase notes into the return).
+- **Source rules earned on a benchmark, not guessed.** The rules about tracing claims to primaries and rebuilding a required list from the items themselves came out of a 3-task run against [DeepResearch Bench II](bench/) rubrics, where copying an aggregator's table cost every point in that table. See `bench/README.md` for the numbers and the caveats (self-run, substitute judge, not leaderboard-comparable).
 
 ---
 
