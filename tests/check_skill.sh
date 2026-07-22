@@ -63,6 +63,16 @@ for pair in "codex-plugin:$v_codex" "marketplace:$v_market" "readme-badge:$v_rea
 done
 ok "version scan done (all $v_plugin)"
 
+# 5b. Source-independence rules survive edits in every copy (earned on the DRB2 pilot)
+for f in "${ALL[@]}"; do
+  grep -qF 'the aggregator is a lead to follow, not the evidence' "$f" || err "$f lost the trace-to-primary rule"
+  grep -qF 'is one source, not one per row' "$f" || err "$f lost the enumeration rule"
+  grep -qF 'Open on the finding, not on the document that carried it' "$f" || err "$f lost the opening rule"
+  grep -qF 'Credit the source the fact originates from' "$f" || err "$f lost the origin-attribution rule"
+  grep -qF 'a list or table whose rows all trace to one document' "$f" || err "$f lost the single-source review tell"
+done
+ok "source-independence scan done"
+
 # 6. Claude copies keep WebSearch/WebFetch wording; Codex copy must not use them
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"
