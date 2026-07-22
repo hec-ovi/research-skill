@@ -6,11 +6,12 @@ A 3-task pilot measuring this skill's investigation brief against a plain resear
 
 ## Method
 
-Tasks 62 (Health), 114 (Software), 80 (History), the three smallest English tasks by rubric count (39, 50, 37 rubrics). Three arms, all on Opus:
+Tasks 62 (Health), 114 (Software), 80 (History), the three smallest English tasks by rubric count (39, 50, 37 rubrics). Four arms, all on Opus:
 
 - `research-skill`: the SKILL.md investigation brief verbatim (six cognitive phases, effort scaling, citation rules, return-only end anchor).
 - `baseline`: the raw task prompt plus "research this and write the report".
 - `research-skill-v031`: the same brief after the source-independence rules landed (decompose away from a single named source, trace each claim to its own primary, reproduce the question's requested structure).
+- `research-skill-v034`: adds the enumeration rule (rebuild a required list from the items themselves rather than copying an aggregator's table) and the opening rule (state the finding first, name each source where its own contribution appears).
 
 Each report was graded against every rubric item with the benchmark's own three-way rule: 1 satisfied, 0 absent, -1 satisfied but attributed to the task's blocked source article.
 
@@ -23,10 +24,11 @@ The official judge is gemini-2.5-pro. Its free-tier quota is now 0, so grading u
 | research-skill | 34.5% | 17.4% | 70.0% | 33.9% | 75 |
 | baseline | 44.3% | 44.1% | 70.0% | 48.1% | 60 |
 | research-skill-v031 | 37.4% | 23.6% | 47.8% | 34.1% | 69 |
+| research-skill-v034 | 68.2% | 53.0% | 70.0% | 63.2% | 41 |
 
 Weighting is 0.5 / 0.35 / 0.15. The paper says content outweighs presentation but does not publish exact weights, so this split is ours.
 
-The skill scored worse, and the reason is not research quality. Counting blocked items as content-present, all three arms sit between 91% and 94% coverage. Every arm found the required facts. The difference is that the skill attributes them.
+The first two skill arms scored below baseline, and the reason is not research quality. Counting blocked items as content-present, all four arms sit between 91% and 94% coverage. Every arm found the required facts. The difference is what each one credits them to.
 
 Every DRB2 task is derived from one expert article, listed in a `blocked` field. Satisfying a rubric item while crediting that article scores -1 instead of +1. The skill's citation rules (name the source in prose, list every URL in a Sources block) make such use trivially detectable, so its reports absorbed more of the penalty. Reading the judges' reasons confirms it: on task 80 all 11 analysis items came back -1 with wording like "explicitly attributed to Budryte's framing rather than presented independently", and on task 62 all 23 recall items were -1 because "the table is explicitly introduced as coming from the blocked Tsai et al. meta-analysis". In each case the judge confirms the content is right before blocking it.
 
@@ -34,9 +36,13 @@ The per-task split is where the v0.3.1 arm earns its keep. On task 114 it is the
 
 Presentation is where v0.3.1 gave points back, dropping to 47.8%. These rubrics grade compliance with each task's own requested structure (a table with a specific caption, a specific number of sub-sections), and the arm that spent its effort on source independence let the requested shape slip.
 
+The v0.3.4 arm leads every dimension, and the mechanism is visible per cell rather than diffuse. Task 62 recall went from 0 of 23 (all 23 blocked, in both earlier skill arms) to 23 of 23 with nothing blocked: the characteristics table was rebuilt row by row from the individual trials, so the judge found each study's country, design, composition, control, baseline pressures and duration present and attributed to the trial rather than to the blocked meta-analysis. Task 114 analysis went to 8 of 8 clean, and task 80 presentation recovered to 3 of 3 from v0.3.1's 1 of 3.
+
+Two cells show the rules are followed unevenly, which is where the remaining headroom sits. On task 114 recall the arm fell to 21 of 37 with 16 blocked, below v0.3.1's 27 of 37, because that report copied the market-share table out of the blocked OECD study instead of rebuilding it from the five national authorities, the exact move the enumeration rule asks the investigation to avoid and which the v0.3.1 run had made correctly. On task 80 the report still opened by naming the blocked essay as the work that draws the three figures together, so the judge blocked every item worded as something that essay quotes or presents, while items traced to the underlying chapter, the subject's own autobiography and independent reviews scored. Coverage is flat across all four arms at 91-94%, so none of this is a change in what the research found; it is entirely a change in what the report credits.
+
 ## Caveats
 
-Three tasks, one judge, non-official model. The six judge runs applied the blocked rule at visibly different thresholds, and at n=3 one task's interpretation moves the mean. Treat the direction as a signal worth following up, not the magnitude.
+Three tasks, one judge, non-official model. The judge runs applied the blocked rule at visibly different thresholds, and at n=3 one task's interpretation moves the mean. Treat the direction as a signal worth following up, not the magnitude.
 
 ## Files
 
