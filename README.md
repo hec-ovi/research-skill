@@ -19,10 +19,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Investigation-Async_Opus_4.7-9A48A6" alt="Async investigation" />
+  <img src="https://img.shields.io/badge/Investigation-Async_Opus_subagents-9A48A6" alt="Async investigation" />
   <img src="https://img.shields.io/badge/Disclosure-Progressive-FF6B6B" alt="Progressive disclosure" />
   <img src="https://img.shields.io/badge/Inspired_by-Grok_+_GBrain-E63946" alt="Inspirations" />
-  <img src="https://img.shields.io/badge/Install-3_routes-2496ED" alt="Install routes" />
+  <img src="https://img.shields.io/badge/Install-4_routes-2496ED" alt="Install routes" />
 </p>
 
 ---
@@ -58,7 +58,7 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Project-scoped, not global.** Each repo has its own research store, kept private (gitignored by default).
 - **Progressive disclosure.** Index, then summary, then full body, in that order. Most lookups never load the full entry.
 - **Conflict-handling history.** When findings change, old claims move to a `## Discarded approaches` table with reasons; never silently overwritten. Prevents re-trying refuted approaches.
-- **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: Opus 4.7 in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean.
+- **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: an Opus-class model in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean. Hosts without subagents run the same phases inline; the skill states the fallback explicitly.
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
 - **Small-model tested.** The retrieval stop rule and the return-only output contract exist because Haiku-class agents actually broke without them (loaded the full entry after the summary already answered; leaked phase notes into the return).
@@ -178,7 +178,7 @@ Built explicitly on three open patterns; credit where due.
 
 ### Agent Skills specification
 
-Frontmatter and folder layout follow the open [Agent Skills specification](https://agentskills.io/specification) (Apache 2.0 / CC-BY-4.0). Portable across Claude Code and any other code CLI that implements the SKILL.md format.
+The folder layout and the `name` and `description` frontmatter fields follow the open [Agent Skills specification](https://agentskills.io/specification) (Apache 2.0 / CC-BY-4.0). The remaining frontmatter (`when_to_use`, `user-invocable`, `argument-hint`) is a Claude Code extension the spec does not define; hosts that only read the spec fields still get a valid skill. Portable across Claude Code and any other code CLI that implements the SKILL.md format.
 
 ### Grok deep-research multi-agent pattern (xAI)
 
@@ -236,64 +236,11 @@ The Codex plugin uses a separate Codex-specific skill file at `plugins/research-
 
 ## Roadmap
 
-### Current activation footprint: ~5,500 tokens, on the heavier side
+Activation loads the full `SKILL.md` body, roughly 5,000 to 6,000 tokens. That is heavy for a skill (typical reference skills run 500 to 3,000), and most of the weight is the Investigation procedure, which Retrieval-only calls never use.
 
-When the skill activates, the full `SKILL.md` body loads into the main agent's context. As of v0.3.0 the activation cost is approximately 4,500 to 5,500 tokens (depending on tokenizer). The skill registration metadata (frontmatter only, always loaded) is a separate ~130 tokens.
+The planned fix is a thin-dispatcher refactor: split `SKILL.md` into a small dispatcher plus `procedures/retrieval.md`, `procedures/investigation.md`, and `procedures/storage.md`, loaded only when their phase runs. Same "thin harness, fat skills" pattern GBrain applies with `RESOLVER.md`, and the same progressive disclosure this skill already applies to research data. A Retrieval-only call would drop to roughly half the current activation cost.
 
-Comparison points:
-
-- Most Vercel `skills.sh` reference skills sit at 500 to 2,000 tokens
-- Anthropic reference skills typically run 1,500 to 3,000 tokens
-- This skill is roughly double that
-
-The reason is that the Investigation phase is a substantive procedure (5 cognitive phases verbatim, brief checklist, citation rules, required output format, gap handling) and the Storage phase has its own validation rules. The didactic content is real; it earns its keep when Investigation actually runs. But on Retrieval-only calls (the most common path), the agent loads all of it just to get to the loading-hierarchy and lookup-procedure sections.
-
-### Planned: thin-dispatcher refactor (deferred)
-
-The clean architectural answer is to apply progressive disclosure recursively, the same pattern the skill already applies to research data. Specifically: split the single `SKILL.md` into a thin dispatcher plus phase-specific procedure files that load only when their phase is active.
-
-Target structure:
-
-```
-research/
-├── SKILL.md              # thin dispatcher: when, where, which procedure to load
-└── procedures/
-    ├── retrieval.md      # loading hierarchy, lookup procedure, INDEX patterns
-    ├── investigation.md  # cognitive phases, brief checklist, citation rules, output format
-    └── storage.md        # FINDINGS schema, Review-before-storing, conflict handling
-```
-
-How it would work mechanically:
-
-1. The agent activates the skill and reads `SKILL.md` (cheap, ~1,500 to 2,000 tokens).
-2. `SKILL.md` names which procedure file to load for each phase: *"For Retrieval, read `procedures/retrieval.md`. For Investigation, read `procedures/investigation.md` AFTER deciding mode in Retrieval phase 5. For Storage, read `procedures/storage.md` after Investigation returns."*
-3. The agent uses the `Read` tool to pull only the procedure file relevant to the current phase. A pure Retrieval call (read INDEX, sed Summary, answer) never touches `investigation.md` and never pays for it.
-
-This is the same *"thin harness, fat skills"* pattern GBrain uses (`RESOLVER.md` as the dispatcher, individual skill files loaded on demand). Applied here, it's a natural fit because the three phases (Retrieval, Investigation, Storage) are already cleanly separated in the workflow, and the heaviest procedure (Investigation) is also the least-frequent path. Most calls are Retrieval-only.
-
-Expected post-refactor footprint:
-
-- `SKILL.md` (always loaded on activation): ~1,500 to 2,000 tokens
-- `procedures/retrieval.md` (loaded on every research-style question): ~800 to 1,200 tokens
-- `procedures/investigation.md` (loaded only when fresh research is needed): ~1,500 to 2,000 tokens
-- `procedures/storage.md` (loaded only when actually writing): ~800 to 1,200 tokens
-
-A typical Retrieval-only call would pay ~2,500 to 3,200 tokens (SKILL.md + retrieval.md), down from the current ~5,000. An Investigation call would pay roughly the same as today (all phases involved), but at least the cost would be honest: you pay for what you use.
-
-### Why not yet
-
-The skill is working, the size is heavy but not blocking, and there has been no demand from users yet. The repo just launched on 2026-04-25; the only confirmed user is the maintainer, and the maintainer has not hit context-budget pressure on this skill in real workflows. The refactor is a real restructure: probably half a day of careful editing, plus end-to-end testing on every phase (Retrieval new entry, Retrieval merge, Investigation new entry mode, Investigation merge mode, Storage paste path), plus updating the duplicated skill paths and plugin descriptors so subdirectory loading is honored, plus rewriting CHANGELOG and bumping to a minor version (likely `v0.3.0`).
-
-The refactor will be triggered when any of these signals lands:
-
-- A user reports the activation cost as a real friction in their context budget
-- A new feature pushes `SKILL.md` past 6,000 tokens
-- The procedure content grows organically to the point where the dispatcher spine already feels redundant
-- Someone files an issue or PR proposing the split
-
-Until one of those triggers, the single-file structure is the right call: everything is in one place, the file is readable end-to-end, and the load-bearing optimization (progressive disclosure of the actual research data via INDEX, then Summary, then full body) already works as designed. Optimizing the SKILL.md itself before there is felt friction is premature engineering.
-
-If you want to discuss the refactor or volunteer feedback on activation cost in your own usage, open an issue at [github.com/hec-ovi/research-skill/issues](https://github.com/hec-ovi/research-skill/issues).
+Deferred until the cost shows up as real friction: a user reporting context pressure, `SKILL.md` growing past ~6,500 tokens, or an issue or PR proposing the split. Feedback welcome at [github.com/hec-ovi/research-skill/issues](https://github.com/hec-ovi/research-skill/issues).
 
 ---
 
