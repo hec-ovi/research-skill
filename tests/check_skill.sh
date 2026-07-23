@@ -87,7 +87,8 @@ ok "small-model rule scan done"
 for f in "${ALL[@]}"; do
   grep -qF '**Also pick the depth:**' "$f" || err "$f lost the depth triage"
   grep -qF 'This is a quick lookup: 3-6 searches' "$f" || err "$f lost the quick effort line"
-  grep -qF '(4) only then answer the user' "$f" || err "$f lost the quick write-before-answer order"
+  grep -qF 'only then answer the user' "$f" || err "$f lost the quick write-before-answer order"
+  grep -qF 'contrarian check, one search' "$f" || err "$f lost the quick contrarian step"
   grep -qF 'depth: quick' "$f" || err "$f lost the quick frontmatter marker"
   grep -qF 'depth: deep' "$f" || err "$f lost the depth schema key"
 done
