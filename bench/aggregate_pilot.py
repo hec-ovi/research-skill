@@ -1,92 +1,97 @@
 #!/usr/bin/env python3
-"""Aggregate the Sonnet-judged pilot scores into a per-arm comparison."""
-import json, os, sys
+"""Recompute the pilot comparison from the vendored per-rubric scores.
+
+Usage:
+    python3 bench/aggregate_pilot.py [scores-file ...]
+
+With no arguments, every JSON file under bench/scores/ is aggregated.
+Each file maps "<arm>/<task>" to per-dimension score arrays, where each
+item is 1 (rubric satisfied), 0 (absent), or -1 (satisfied but attributed
+to the task's blocked source). Array lengths are the rubric counts.
+"""
+import glob
+import json
+import os
+import sys
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DIMS = ['info_recall', 'analysis', 'presentation']
-TASKS = [62, 114, 80]
-ARMS = ['research-skill', 'baseline']
-# DRB2 weights content over presentation; the paper does not publish exact weights,
-# so this uses an explicit, stated weighting rather than an implied official one.
+# DRB2 weights content over presentation; the paper does not publish exact
+# weights, so this uses an explicit, stated weighting rather than an implied
+# official one.
 WEIGHTS = {'info_recall': 0.5, 'analysis': 0.35, 'presentation': 0.15}
 
 
-def load(arm, idx):
-    p = os.path.join(BASE, 'judge', arm, f'scored-{idx}.json')
-    if not os.path.exists(p):
-        return None
-    return json.load(open(p))
+def aggregate(path):
+    with open(path) as f:
+        data = json.load(f)
 
+    cells = {}   # (arm, task) -> {dim: {n, hit, miss, blocked, rate}}
+    arms = []
+    tasks = []
+    for key, dims in data.items():
+        arm, task = key.rsplit('/', 1)
+        if arm not in arms:
+            arms.append(arm)
+        if task not in tasks:
+            tasks.append(task)
+        per = {}
+        for d in DIMS:
+            scores = dims.get(d, [])
+            n = len(scores)
+            per[d] = dict(
+                n=n,
+                hit=sum(1 for s in scores if s == 1),
+                miss=sum(1 for s in scores if s == 0),
+                blocked=sum(1 for s in scores if s == -1),
+            )
+            per[d]['rate'] = 100.0 * per[d]['hit'] / n if n else 0.0
+        cells[(arm, task)] = per
 
-def rubric_counts(idx):
-    tasks = {json.loads(l)['idx']: json.loads(l)
-             for l in open(os.path.join(BASE, 'tasks_and_rubrics.jsonl'))}
-    r = tasks[idx]['content']['rubric']
-    return {d: len(r[d]) for d in DIMS}
+    print(f'== {os.path.relpath(path, BASE)}')
+    print(f"{'arm':24}{'task':>5} | " + " | ".join(f"{d:>20}" for d in DIMS))
+    for task in tasks:
+        for arm in arms:
+            per = cells.get((arm, task))
+            if not per:
+                continue
+            row = []
+            for d in DIMS:
+                p = per[d]
+                row.append(f"{p['hit']:>2}/{p['n']:<2} {p['rate']:5.1f}% blk={p['blocked']:<2}")
+            print(f"{arm:24}{task:>5} | " + " | ".join(f"{c:>20}" for c in row))
+        print()
+
+    summary = {}
+    print('Per-arm means across tasks:')
+    for arm in arms:
+        got = [cells[(arm, t)] for t in tasks if (arm, t) in cells]
+        means = {d: sum(per[d]['rate'] for per in got) / len(got) for d in DIMS}
+        blocked = sum(per[d]['blocked'] for per in got for d in DIMS)
+        weighted = sum(means[d] * WEIGHTS[d] for d in DIMS)
+        summary[arm] = dict(
+            info_recall=round(means['info_recall'], 1),
+            analysis=round(means['analysis'], 1),
+            presentation=round(means['presentation'], 1),
+            weighted=round(weighted, 1),
+            blocked=blocked,
+        )
+        print(f"  {arm:22} n_tasks={len(got)}  recall {means['info_recall']:5.1f}%  "
+              f"analysis {means['analysis']:5.1f}%  presentation {means['presentation']:5.1f}%  "
+              f"| weighted {weighted:5.1f}%  blocked {blocked}")
+    print()
+    return summary
 
 
 def main():
-    rows = {}
-    missing = []
-    for arm in ARMS:
-        for idx in TASKS:
-            data = load(arm, idx)
-            if data is None:
-                missing.append(f'{arm}/{idx}')
-                continue
-            expect = rubric_counts(idx)
-            per = {}
-            for d in DIMS:
-                items = data.get(d, [])
-                scores = [it['score'] for it in items]
-                n = expect[d]
-                per[d] = dict(
-                    n=n,
-                    graded=len(scores),
-                    hit=sum(1 for s in scores if s == 1),
-                    miss=sum(1 for s in scores if s == 0),
-                    blocked=sum(1 for s in scores if s == -1),
-                )
-                per[d]['rate'] = 100.0 * per[d]['hit'] / n if n else 0.0
-            rows[(arm, idx)] = per
-
-    if missing:
-        print('missing scored files:', ', '.join(missing))
-    if not rows:
+    paths = sys.argv[1:] or sorted(glob.glob(os.path.join(BASE, 'scores', '*.json')))
+    if not paths:
+        print('no score files found', file=sys.stderr)
         sys.exit(1)
-
-    print(f"{'arm':16}{'task':>5} | " + " | ".join(f"{d:>24}" for d in DIMS))
-    for idx in TASKS:
-        for arm in ARMS:
-            per = rows.get((arm, idx))
-            if not per:
-                continue
-            cells = []
-            for d in DIMS:
-                p = per[d]
-                flag = '' if p['graded'] == p['n'] else f"!{p['graded']}"
-                cells.append(f"{p['hit']:>2}/{p['n']:<2} {p['rate']:5.1f}% blk={p['blocked']:<2}{flag}")
-            print(f"{arm:16}{idx:>5} | " + " | ".join(f"{c:>24}" for c in cells))
-        print()
-
-    print('Per-arm means across graded tasks:')
-    for arm in ARMS:
-        got = [(i, rows[(arm, i)]) for i in TASKS if (arm, i) in rows]
-        if not got:
-            continue
-        means = {}
-        tot_hit = tot_n = tot_blk = 0
-        for _, per in got:
-            for d in DIMS:
-                means.setdefault(d, []).append(per[d]['rate'])
-                tot_hit += per[d]['hit']
-                tot_n += per[d]['n']
-                tot_blk += per[d]['blocked']
-        m = {d: sum(v) / len(v) for d, v in means.items()}
-        weighted = sum(m[d] * WEIGHTS[d] for d in DIMS)
-        print(f"  {arm:15} n_tasks={len(got)}  recall {m['info_recall']:5.1f}%  "
-              f"analysis {m['analysis']:5.1f}%  presentation {m['presentation']:5.1f}%  "
-              f"| weighted {weighted:5.1f}%  all-rubric {100.0*tot_hit/tot_n:5.1f}%  blocked {tot_blk}")
+    out = {}
+    for p in paths:
+        out[os.path.basename(p)] = aggregate(p)
+    return out
 
 
 if __name__ == '__main__':

@@ -77,7 +77,41 @@ ok "source-independence scan done"
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"
 
-# 7. Store schema invariants: INDEX dispatcher table + FINDINGS schema keys survive edits
+# 7. Bench table matches the vendored scores: every arm in a scores JSON must have
+# a README table row whose five numbers equal the recomputed values
+python3 - <<'EOF' || err "bench README table drifted from vendored scores (see output above)"
+import glob, json, re, sys
+
+DIMS = ['info_recall', 'analysis', 'presentation']
+WEIGHTS = {'info_recall': 0.5, 'analysis': 0.35, 'presentation': 0.15}
+
+readme = open('bench/README.md').read()
+rows = {}  # arm -> list of (recall, analysis, presentation, weighted, blocked)
+for m in re.finditer(r'^\| ([\w.-]+) \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|', readme, re.M):
+    arm = m.group(1)
+    rows.setdefault(arm, []).append(tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
+
+fail = False
+for path in sorted(glob.glob('bench/scores/*.json')):
+    data = json.load(open(path))
+    arms = {}
+    for key, dims in data.items():
+        arm, task = key.rsplit('/', 1)
+        arms.setdefault(arm, []).append(dims)
+    for arm, tasks in arms.items():
+        means = {d: sum(100.0 * sum(1 for s in t.get(d, []) if s == 1) / len(t[d]) for t in tasks) / len(tasks) for d in DIMS}
+        blocked = sum(1 for t in tasks for d in DIMS for s in t.get(d, []) if s == -1)
+        weighted = sum(means[d] * WEIGHTS[d] for d in DIMS)
+        want = (round(means['info_recall'], 1), round(means['analysis'], 1),
+                round(means['presentation'], 1), round(weighted, 1), blocked)
+        if want not in rows.get(arm, []):
+            print(f'{path}: arm {arm} recomputes to {want}, README rows: {rows.get(arm)}')
+            fail = True
+sys.exit(1 if fail else 0)
+EOF
+ok "bench table matches vendored scores"
+
+# 8. Store schema invariants: INDEX dispatcher table + FINDINGS schema keys survive edits
 for f in "${ALL[@]}"; do
   grep -qF '| Topic | Path | Last verified | One-liner |' "$f" || err "$f lost INDEX.md schema table"
   for key in 'topic: <slug>' 'last_verified: YYYY-MM-DD' '## Discarded approaches' '## Timeline' '## Open questions' 'status: active' 'related: \[\]'; do
