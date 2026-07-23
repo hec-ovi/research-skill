@@ -25,8 +25,8 @@ Verified externally where the claim is external; recomputed locally where the cl
 - [x] S5. Haiku end-to-end dummy test, run B (warm store): re-ask a stored question with a fresh agent to check the retrieval stop rule (must answer from Summary without reopening the full entry). Run C: second cold prompt "whats the best coding language for 3d games today".
 - [x] S6. SKILL.md fixes from whatever A and B break (expected: inline-investigation fallback when no subagent tool is available). All three Claude copies plus Codex copy, plus test assertions for the new lines.
 - [x] S7. Bench re-verification with own subagents: fetch DRB2 tasks 62 / 114 / 80 and rubrics, regenerate reports for the current brief and baseline arms, judge every rubric item with Haiku subagents using the benchmark's blocked-source rule, vendor reports and scores, update `bench/README.md` with the new run labeled with its judge model.
-- [ ] S8. README overhaul: route count, Roadmap prune, spec-conformance wording, version-neutral model wording, reflect the Haiku test results.
-- [ ] S9. Version bump + CHANGELOG. Re-check repo description and topics. Full test run and final read-through.
+- [x] S8. README overhaul: route count, Roadmap prune, spec-conformance wording, version-neutral model wording, reflect the Haiku test results.
+- [x] S9. Version bump + CHANGELOG. Re-check repo description and topics. Full test run and final read-through.
 
 ## Progress log
 
@@ -37,3 +37,5 @@ Verified externally where the claim is external; recomputed locally where the cl
 - 2026-07-23: S6 done. Ambiguous-question rule, no-subagent inline fallback, and a fourth core rule (Investigation always ends in Storage) added to all four skill copies; `check_skill.sh` asserts the new lines. Re-run A2 on the patched skill passed the whole pipeline cold, including a populated contrarian section.
 - 2026-07-23: S5 done. Warm-store run B answered from the stored Summary in 5 tool calls with zero web searches and never opened the full entry. Cold run C on the second dummy prompt in flight.
 - 2026-07-23: S7 done. Fresh 2-arm run on DRB2 tasks 62/114/80: Haiku writers with live web research, Haiku judges on all 126 rubric items with the blocked-source rule, judge reasoning spot-checked across four cells. Skill brief beats baseline on weighted score (44.3% vs 36.2%); the gap is concentrated in analysis attribution (task 114: baseline 6 of 8 blocked, skill 1). Task 62 recall collapsed for both arms, which the Opus-written run had solved, giving the Opus-class recommendation a measured basis. Reports and scores vendored under `bench/`; drift test covers both tables.
+- 2026-07-23: S8 done. README: 4-route count everywhere, roadmap cut from 56 lines to 5, spec section names the extension fields, model wording version-neutral, small-model and bench bullets point at `tests/e2e/` and the vendored run. Run C logged (second cold topic appended cleanly; one cosmetic wrong-path line in the chat answer while disk state was correct).
+- 2026-07-23: S9 done. v0.3.6 released: CHANGELOG entry, all three manifests and the README badge bumped, full test suite passing, GitHub description updated to name the small-model end-to-end testing. Plan complete.
