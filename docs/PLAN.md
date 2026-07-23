@@ -39,3 +39,15 @@ Verified externally where the claim is external; recomputed locally where the cl
 - 2026-07-23: S7 done. Fresh 2-arm run on DRB2 tasks 62/114/80: Haiku writers with live web research, Haiku judges on all 126 rubric items with the blocked-source rule, judge reasoning spot-checked across four cells. Skill brief beats baseline on weighted score (44.3% vs 36.2%); the gap is concentrated in analysis attribution (task 114: baseline 6 of 8 blocked, skill 1). Task 62 recall collapsed for both arms, which the Opus-written run had solved, giving the Opus-class recommendation a measured basis. Reports and scores vendored under `bench/`; drift test covers both tables.
 - 2026-07-23: S8 done. README: 4-route count everywhere, roadmap cut from 56 lines to 5, spec section names the extension fields, model wording version-neutral, small-model and bench bullets point at `tests/e2e/` and the vendored run. Run C logged (second cold topic appended cleanly; one cosmetic wrong-path line in the chat answer while disk state was correct).
 - 2026-07-23: S9 done. v0.3.6 released: CHANGELOG entry, all three manifests and the README badge bumped, full test suite passing, GitHub description updated to name the small-model end-to-end testing. Plan complete.
+
+## Phase 2: local-host benchmark under noob-cli (2026-07-23)
+
+Goal: run the skill end to end under noob-cli 0.5.0 with its bundled websearch-skill 0.2.3, against a local llama.cpp endpoint (llama-vulkan-strix stack, Qwen3.6-35B-A3B Q4_K_M), with real web searches, and record the measurements in this repo. The host matrix then covers three tiers: Fable-class (development), Haiku-class (bench run 2), and a local 35B MoE through a third-party CLI.
+
+- [x] P1. Verify the stack: noob-cli 0.5.0 (Cargo.toml, binary), websearch-skill 0.2.3 (dist-info inside the runtime image), llama.cpp build b10103 serving Qwen3.6-35B-A3B Q4_K_M with 5 slots of 131,072 ctx (llama-vulkan-strix compose).
+- [ ] P2. Benchmark suite in a sandbox workspace with the skill installed at `.claude/skills/research/` (noob discovers that root natively): run 1 cold store, run 2 warm store (stop rule), run 3 second cold topic. Headless `noob exec -p ... --json --yolo`, wall-clock timed, transcript-graded (tool calls, real websearch invocations), disk-graded (same checks as the e2e harness).
+- [ ] P3. Write results into `tests/e2e/README.md` as a host-matrix section naming the exact versions; commit.
+
+Progress:
+- 2026-07-23: P1 done. Versions verified from the artifacts, not the docs. Side task landed in the llama-vulkan-strix repo (its own commits): the stack is single-service again, laguna default, qwen the documented swap.
+- 2026-07-23: P2 run 1 in flight on Qwen3.6-35B-A3B.
