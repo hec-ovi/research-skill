@@ -1,0 +1,34 @@
+{
+    "results": [
+        {
+            "rubric_item": "The answer must be divided into two main sections: 'Part One: Market Structure and Competitive Dynamics' and 'Part Two: Main Competition Issues and Anti-Competitive Practices'.",
+            "score": 1,
+            "reason": "The article contains both section headings verbatim, dividing the Findings into the two required parts.",
+            "evidence": "### Part One: Market Structure and Competitive Dynamics [...] ### Part Two: Main Competition Issues and Anti-Competitive Practices"
+        },
+        {
+            "rubric_item": "Part One must include a table titled 'Market Share of Hyperscale Providers by Jurisdiction' with column headers 'Jurisdiction (Year)', 'Amazon Web Services', 'Microsoft Azure', 'Google Cloud', and 'Other'.",
+            "score": 1,
+            "reason": "Part One includes a market-share table with exactly the required column headers 'Jurisdiction (Year)', 'Amazon Web Services', 'Microsoft Azure', 'Google Cloud', and 'Other'. The table's heading text differs from the exact wording in the rubric but the required table with the specified columns is present in Part One.",
+            "evidence": "**Market share of top providers in France (2021), the Netherlands (2020), the United Kingdom (2022), South Korea (2021), and Japan (2020)** | Jurisdiction (Year) | Amazon Web Services | Microsoft Azure | Google Cloud | Other |"
+        },
+        {
+            "rubric_item": "The table must contain exactly five rows for the specified jurisdictions and years: France (2021), Netherlands (2020), United Kingdom (2022), South Korea (2021), and Japan (2020).",
+            "score": 1,
+            "reason": "The table contains exactly five data rows covering France (2021), Netherlands (2020), United Kingdom (2022), South Korea (2021), and Japan (2020), as required.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | ~29% ... | | Netherlands (2020) | 30-35% | 40-45% | 5-10% | ... | | United Kingdom (2022) | ... | South Korea (2021) | 62.1% | 12.0% | ... | Japan (2020, FY ending March 2021) | ... |"
+        },
+        {
+            "rubric_item": "Part Two must be organized into three specific sub-sections, titled: 'Switching Barriers', 'Pricing Issues', and 'Exclusive Licensing and Bundling'.",
+            "score": 1,
+            "reason": "Part Two is organized into the three required sub-sections with the exact titles Switching Barriers, Pricing Issues, and Exclusive Licensing and Bundling.",
+            "evidence": "**1. Switching Barriers** [...] **2. Pricing Issues** [...] **3. Exclusive Licensing and Bundling**"
+        },
+        {
+            "rubric_item": "The language must be clear, objective, and analytical, avoiding informal tone or unsubstantiated claims.",
+            "score": 1,
+            "reason": "The article maintains a clear, objective, analytical tone throughout, attributing claims to named authorities and studies (Autorite, ACM, Ofcom, KFTC, JFTC, CMA, EU Commission) with quoted figures rather than informal or unsubstantiated assertions.",
+            "evidence": "The French Autorite de la concurrence's opinion 23-A-08 states plainly that \"the two leading providers, Amazon and Microsoft, will have captured 46% and 17% respectively of revenues from IaaS and PaaS services in 2021,\" [...] The table reflects what each national study actually published rather than a uniform breakdown, and the gaps are themselves informative."
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "results": [
+        {
+            "rubric_item": "Conclude that salt substitutes significantly reduce systolic and diastolic blood pressure.",
+            "score": 1,
+            "reason": "The article concludes salt substitutes significantly lower both SBP and DBP, supported by non-blocked sources (Yin et al. and the Cochrane review) independent of the blocked Tsai paper.",
+            "evidence": "Yin and colleagues reported -4.61 mmHg (95% CI -6.07 to -3.14) systolic and -1.61 mmHg (95% CI -2.42 to -0.79) diastolic across 19 blood-pressure trials. The Cochrane review reported -4.76 mmHg systolic and -2.43 mmHg diastolic, both graded moderate-certainty evidence."
+        },
+        {
+            "rubric_item": "Conclude that salt substitutes significantly reduce all-cause mortality by approximately 12%.",
+            "score": 1,
+            "reason": "The article concludes an approximately 11-12% all-cause mortality reduction, supported by non-blocked sources: the SSaSS/Neal trial (death rate ratio 0.88, a 12% reduction) and Yin's pooled analysis (11%), independent of the blocked Tsai paper.",
+            "evidence": "Yin's pooled analysis found total mortality risk ratio 0.89 (95% CI 0.85-0.94, an 11% reduction) ... death fell from 44.61 to 39.28 per 1,000 person-years (rate ratio 0.88, 95% CI 0.82-0.95, a 12% reduction)"
+        },
+        {
+            "rubric_item": "Conclude that salt substitutes lead to a significant reduction in 24-hour urinary sodium excretion and a significant increase in 24-hour urinary potassium excretion.",
+            "score": 0,
+            "reason": "The article discusses serum potassium but never mentions 24-hour urinary sodium or potassium excretion at all.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Point out that although there was a trend towards reduced cardiovascular mortality with salt substitutes, the results were not statistically significant (P=0.05).",
+            "score": -1,
+            "reason": "The article makes exactly this point (HR 0.72, P=0.05, sitting at the significance threshold), but the supporting sentence attributes it to Tsai's pooled analysis, which is the blocked reference (PMC9532913). Yin's non-blocked analysis instead found a significant CV mortality reduction, so this specific non-significant P=0.05 finding is uniquely from the blocked source.",
+            "evidence": "On mortality, Tsai's pooled analysis of five outcome trials found all-cause mortality reduced by a hazard ratio of 0.88 ... while cardiovascular death showed a hazard ratio of 0.72 (95% CI 0.52-1.00, P=0.05) - directionally consistent but sitting exactly at the conventional significance threshold."
+        },
+        {
+            "rubric_item": "Note that the use of salt substitutes resulted in a small, non-statistically significant increase in serum potassium levels.",
+            "score": 1,
+            "reason": "The article notes a small, non-meaningful serum potassium increase, supported by the non-blocked Cochrane review (+0.12 mmol/L, 'little to no difference'), so the finding does not depend on the blocked Tsai paper.",
+            "evidence": "Serum potassium itself was not meaningfully elevated by salt substitution in the pooled data (Tsai: mean difference 0.10 mmol/L, 95% CI -0.02 to 0.23, P=0.10; Cochrane: mean difference +0.12 mmol/L, moderate certainty, hyperkalemia \"little to no difference\")."
+        },
+        {
+            "rubric_item": "Explain that the effect on SBP is more pronounced in the elderly population (age >= 60 years) than in younger populations.",
+            "score": -1,
+            "reason": "The article makes this exact point, but the supporting sentence attributes the age subgroup finding to Tsai and colleagues' pre-specified subgroups, which is the blocked reference; no non-blocked source in the article provides this subgroup analysis.",
+            "evidence": "By age, the systolic BP-lowering effect was significantly more pronounced among trials enrolling participants aged 60 years and older than in younger populations, and heterogeneity was lower within the older-age subgroup."
+        },
+        {
+            "rubric_item": "Explain that in studies with smaller sample sizes (<300 participants), the effect of lowering SBP is more significant than in studies with larger sample sizes.",
+            "score": -1,
+            "reason": "The article makes this exact point, but it is part of Tsai and colleagues' pre-specified subgroup analysis, i.e., the blocked reference; no non-blocked source in the article provides this sample-size subgroup finding.",
+            "evidence": "By sample size, trials with fewer than 300 participants showed a larger-magnitude systolic BP reduction than trials with 300 or more participants."
+        },
+        {
+            "rubric_item": "Explain that in short-term studies (<12 months), the blood pressure-lowering effect (SBP and DBP) is more pronounced than in long-term studies.",
+            "score": -1,
+            "reason": "The article addresses the duration subgroup (<12 vs >=12 months) drawing on Tsai's blocked analysis, but reports no significant effect modification by duration, contradicting rather than supporting the rubric claim; the discussion is tied to the blocked reference.",
+            "evidence": "By duration, the review explicitly reported no significant effect modification: trials under 12 months (ranging from 4 weeks to 9 months in this dataset) and trials of 12 months or longer (ranging up to 10 years, as in Sun and colleagues' follow-up) produced comparable blood-pressure effects, meaning the benefit neither faded nor grew with longer exposure in the pooled data."
+        },
+        {
+            "rubric_item": "Point out that a 5 mmHg reduction in SBP can reduce the risk of major cardiovascular events by approximately 10%.",
+            "score": 1,
+            "reason": "The article states this benchmark, attributed to the non-blocked BPLTTC 2021 Lancet meta-analysis, independent of the blocked Tsai paper.",
+            "evidence": "The Blood Pressure Lowering Treatment Trialists' Collaboration's 2021 Lancet individual-participant-data meta-analysis (48 trials, 344,716 participants) found that each 5 mmHg reduction, sustained over an average of four years, cuts major cardiovascular events by about 10%, stroke by about 13%, heart failure by about 13%, ischaemic heart disease by about 8%, and cardiovascular death by about 5%."
+        },
+        {
+            "rubric_item": "Based on the observed SBP reduction of 4.8 mmHg, estimate that salt substitutes can reduce cardiovascular risk by approximately 9.6%.",
+            "score": 0,
+            "reason": "The article derives a cardiovascular risk estimate from the observed SBP reduction but reports it as a 9-13% range rather than the specific ~9.6% value; the exact rubric value is not explicitly stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Analyze that the study findings strongly support the use of salt substitutes as a non-pharmacological intervention for blood pressure control and primary prevention of cardiovascular diseases.",
+            "score": 0,
+            "reason": "The article presents efficacy evidence but does not make the affirmative conclusion that the findings strongly support salt substitutes as a non-pharmacological intervention for primary prevention; instead it emphasizes caveats and states the case for population-wide rollout is 'considerably less settled.'",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Synthesize that a key benefit of salt substitutes is providing similar health benefits to salt reduction without significantly altering food taste, which may improve adherence.",
+            "score": 0,
+            "reason": "The article does not mention taste, palatability, or the idea that salt substitutes deliver benefits without altering food taste to improve adherence.",
+            "evidence": ""
+        }
+    ]
+}

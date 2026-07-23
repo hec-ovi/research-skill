@@ -1,0 +1,28 @@
+{
+    "results": [
+        {
+            "rubric_item": "The output must begin with a table titled 'Characteristics of Included Clinical Trials'.",
+            "score": -1,
+            "reason": "A table with exactly this title is present, but its content is explicitly attributed to the blocked Tsai et al. review (and the blocked URL PMC9532913 is cited as a source), so satisfaction of the table requirement rests on the blocked reference.",
+            "evidence": "**Characteristics of Included Clinical Trials** ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension, whose search of PubMed and the Cochrane Library ran through March 2022 — the review whose scope matches the cutoff specified for this report."
+        },
+        {
+            "rubric_item": "The table must sequentially include the following columns: Study (First Author and Year), Country, Design, Salt Substitute Composition, Control Group Salt Type, Baseline Systolic Blood Pressure (mmHg), Baseline Diastolic Blood Pressure (mmHg), and Follow-up Duration.",
+            "score": -1,
+            "reason": "The table contains all eight required columns in the specified order, but the table itself is the enumeration reported by the blocked Tsai et al. review, which the article cites directly (blocked URL PMC9532913).",
+            "evidence": "| Study (First Author and Year) | Country | Design | Salt Substitute Composition | Control Group Salt Type | Baseline Systolic Blood Pressure (mmHg) | Baseline Diastolic Blood Pressure (mmHg) | Follow-up Duration | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "The final section must present the analysis, including subgroup findings and the estimation of cardiovascular risk reduction.",
+            "score": -1,
+            "reason": "The analysis is present, covering subgroup findings and the estimated cardiovascular risk reduction, but the subgroup findings are explicitly sourced to the blocked Tsai et al. review, so the supporting sentences cite a blocked reference.",
+            "evidence": "**Subgroup analyses.** Tsai and colleagues' pre-specified subgroups map directly onto the three splits requested. By age, the systolic BP-lowering effect was significantly more pronounced among trials enrolling participants aged 60 years and older than in younger populations, and heterogeneity was lower within the older-age subgroup. By sample size, trials with fewer than 300 participants showed a larger-magnitude systolic BP reduction than trials with 300 or more participants."
+        },
+        {
+            "rubric_item": "The entire output must be well-structured, with clear headings for each section.",
+            "score": 1,
+            "reason": "The article is organized under clear top-level headings and bold subheadings, and this structural property does not depend on or cite the blocked reference.",
+            "evidence": "## Summary ... ## Findings ... **Overall significance for blood pressure control and mortality.** ... **Subgroup analyses.** ... **Estimated cardiovascular risk reduction from the observed SBP-lowering effect.** ... ## Insights ... ## Strongest objection ... ## Sources"
+        }
+    ]
+}

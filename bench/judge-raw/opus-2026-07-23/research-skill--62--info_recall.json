@@ -1,0 +1,142 @@
+{
+    "results": [
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Baek et al. (2015)', Country: Korea, Design: Randomized, double-blind clinical trial, Salt Substitute Composition: 85.03% NaCl, 1495 ppm calcium, 2494 ppm potassium, 8190 ppm magnesium, Control Group: 99.8% NaCl, Baseline SBP/DBP: 127.5/74, Duration: 8 weeks.",
+            "score": 0,
+            "reason": "The article's table does not include Baek et al. (2015) or any Korea trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Barros et al. (2015)', Country: Brazil, Design: Single-blind randomized controlled trial, Salt Substitute Composition: 130 mg sodium, 346 mg potassium, 44 µg iodine per gram, Control Group: 390 mg sodium, 25 µg iodine per gram, Baseline SBP/DBP: 134.47/77.95, Duration: 4 weeks.",
+            "score": 0,
+            "reason": "The article's table does not include Barros et al. (2015) or any Brazil trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Bernabe-Ortiz et al. (2020)', Country: Peru, Design: Stepped-wedge cluster randomized trial, Salt Substitute Composition: 75% NaCl, 25% KCl, Control Group: Common salt, Baseline SBP/DBP: Not applicable, Duration: 3 years.",
+            "score": 0,
+            "reason": "A Bernabe-Ortiz Peru stepped-wedge trial is present, but it is dated 2014 (not 2020) and its duration is listed as '5 years (planned)' rather than 3 years, so the study is not correctly listed as specified.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Chang et al. (2006)', Country: Taiwan, Design: Randomized trial, Salt Substitute Composition: 49% NaCl, 49% KCl, 2% other additives, Control Group: 99.6% NaCl, 0.4% other additives, Baseline SBP/DBP: 131.3/71.2, Duration: Average 31 months.",
+            "score": 0,
+            "reason": "The Taiwan trial listed is Pan 2017, not Chang et al. (2006); Chang 2006 does not appear.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Charlton et al. (2008)', Country: South Africa, Design: A double-blind randomized controlled trial, Salt Substitute Composition: SOLOTM (41% less Na, 826% more K), Control Group: Standard commercial composition, Baseline SBP/DBP: 133.9/79.8, Duration: 8 weeks.",
+            "score": 0,
+            "reason": "The article's table does not include Charlton et al. (2008) or any South Africa trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Che et al. (2022)', Country: China, Design: Prospective, multicenter, randomized, double-blind study, Salt Substitute Composition: 43% NaCl, 32% KCl, 25% other ingredients, Control Group: 100% NaCl, Baseline SBP/DBP: 135.32/77.61 (office blood pressure), Duration: 12 months.",
+            "score": 0,
+            "reason": "The article's table does not include Che et al. (2022).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Geleijnse et al. (1994)', Country: Netherlands, Design: Randomized double-blind placebo controlled trial, Salt Substitute Composition: 41% NaCl, 41% KCl, 17% magnesium salts, Control Group: 100% NaCl, Baseline SBP/DBP: 158/89.8, Duration: 24 weeks.",
+            "score": 1,
+            "reason": "The table lists Geleijnse 1994, Netherlands, double-blind RCT, 41% NaCl/41% KCl/17% MgSO4, control 100% NaCl, baseline 158/89.8, 24 weeks, matching the rubric numerical values; the supporting row cites no blocked reference.",
+            "evidence": "| Geleijnse 1994 (Netherlands) | Netherlands | Double-blind RCT | 41% NaCl, 41% KCl, 17% MgSO₄ | 100% NaCl | 158 | 89.8 | 24 weeks |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Gilleran et al. (1996)', Country: United Kingdom, Design: A randomized blind controlled parallel study, Salt Substitute Composition: 50% NaCl, 40% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 163.2/91.2, Duration: 9 months.",
+            "score": 0,
+            "reason": "The article's table does not include Gilleran et al. (1996) or any UK trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Hu et al. (2018)', Country: China, Design: Randomized double-blind controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 139.9/81.9 (hypertensive patients), Duration: 12 months.",
+            "score": 1,
+            "reason": "The table lists Hu 2018, China, 65% NaCl/25% KCl/10% MgSO4, control 100% NaCl, baseline 139.9/81.9, ~12 months, matching the rubric numerical values (baseline BP, composition, duration); the supporting row cites no blocked reference.",
+            "evidence": "| Hu 2018 | China | Cluster RCT, households | 65% NaCl, 25% KCl, 10% MgSO₄ | 100% NaCl | 139.9 | 81.9 | 12+ months |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Kawasaki et al. (1998)', Country: Japan, Design: Parallel controlled clinical trial, Salt Substitute Composition: 22.9 g sodium, 10.11 g potassium per 100 g, Control Group: 39 g sodium, 0.13 g potassium per 100 g, Baseline SBP/DBP: 134.7/77.2, Duration: 5 weeks.",
+            "score": 1,
+            "reason": "The table lists Kawasaki 1998, Japan, controlled trial, K/Mg-enriched mineral salt, baseline 134.7/77.2, 5 weeks, matching the rubric baseline BP and duration; the supporting row cites no blocked reference.",
+            "evidence": "| Kawasaki 1998 (Japan) | Japan | Controlled trial | Mineral salt (K, Mg enriched) | Regular salt | 134.7 | 77.2 | 5 weeks |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Li et al. (2007)', Country: China, Design: Double-blind, randomized, controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 159/93, Duration: 12 months.",
+            "score": 1,
+            "reason": "The table lists Li 2007, China, double-blind RCT, 65% NaCl/25% KCl/10% MgSO4, control 100% NaCl, baseline 159/93, 12 months, matching all rubric values; the supporting row cites no blocked reference.",
+            "evidence": "| Li 2007 | China | Double-blind RCT, 600 participants | 65% NaCl, 25% KCl, 10% MgSO₄ | 100% NaCl | 159 | 93 | 12 months |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Li et al. (2016)', Country: China, Design: A cluster-randomized trial, Salt Substitute Composition: Reduced-sodium, added-potassium, Control Group: Usual salt, Baseline SBP/DBP: Not mentioned, Duration: 18 months.",
+            "score": 0,
+            "reason": "The article's table does not include Li et al. (2016).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Little et al. (2004)', Country: United Kingdom, Design: Randomized controlled factorial trial, Salt Substitute Composition: Low sodium, high potassium salt, Control Group: Normal salt, Baseline SBP/DBP: 154/94, Duration: 6 months.",
+            "score": 0,
+            "reason": "The article's table does not include Little et al. (2004).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Neal et al. (2021)', Country: China, Design: Open-label, cluster-randomized trial, Salt Substitute Composition: 75% NaCl, 25% KCl, Control Group: 100% NaCl, Baseline SBP/DBP: 153.8/89.1, Duration: 5 years.",
+            "score": 1,
+            "reason": "The table lists Neal 2021 (SSaSS), China, cluster RCT, 75% NaCl/25% KCl, control 100% NaCl, baseline 153.8/89.1, ~5 years (4.75), matching the rubric composition, control, and baseline BP; the supporting row cites no blocked reference.",
+            "evidence": "| Neal 2021 (SSaSS) | China | Cluster RCT, 20,995 participants, 600 villages | 75% NaCl, 25% KCl | 100% NaCl (regular salt) | 153.8 | 89.1 | 4.75 years |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Omvik et al. (1995)', Country: Norway, Design: Parallel, comparative, randomized, double-blind trial, Salt Substitute Composition: 57% NaCl, 28% KCl, 12% MgSO4, Control Group: Standard sodium chloride, Baseline SBP/DBP: 164/102, Duration: 6 months.",
+            "score": 1,
+            "reason": "The table lists Omvik 1995, Norway, double-blind RCT, 57% NaCl/28% KCl/12% MgSO4, control standard NaCl, baseline 164/102, 6 months, matching all rubric values; the supporting row cites no blocked reference.",
+            "evidence": "| Omvik 1995 (Norway) | Norway | Double-blind RCT | 57% NaCl, 28% KCl, 12% MgSO₄ | Standard NaCl | 164 | 102 | 6 months |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Sarkkinen et al. (2011)', Country: Finland, Design: Randomized, double-blind, placebo-controlled study, Salt Substitute Composition: 50% NaCl, 25% KCl, 25% magnesium ammonium potassium chloride, Control Group: 100% NaCl, Baseline SBP/DBP: 140/89, Duration: 8 weeks.",
+            "score": 0,
+            "reason": "The article's table does not include Sarkkinen et al. (2011) or any Finland trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Sun et al. (2021)', Country: China, Design: An exploratory follow-up of a randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 154.6/92, Duration: 10 years.",
+            "score": 1,
+            "reason": "The table lists Sun 2021, China, long-term follow-up RCT, 65% NaCl/25% KCl/10% MgSO4, control 100% NaCl, baseline 154.6/92.0, 10 years, matching all rubric values; the supporting row cites no blocked reference.",
+            "evidence": "| Sun 2021 | China | Double-blind RCT, long-term follow-up | 65% NaCl, 25% KCl, 10% MgSO₄ | 100% NaCl | 154.6 | 92.0 | 10 years (3-year intervention + 7-year follow-up) |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Suppa et al. (1988)', Country: Italy, Design: Double-blind randomized controlled trial, Salt Substitute Composition: 25% NaCl, 25% KCl, 15% potassium citrate, Control Group: 100% NaCl, Baseline SBP/DBP: 149.2/93.5, Duration: 4 weeks.",
+            "score": 0,
+            "reason": "The article's table does not include Suppa et al. (1988) or any Italy trial.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Yang et al. (2018)', Country: China, Design: Single blind, randomized, controlled trial, Salt Substitute Composition: 65% NaCl, 30% KCl, 5% calcium salts, Control Group: Normal salt, Baseline SBP/DBP: 161/80.6 (ISH), 159/85 (NISH), Duration: 6 months.",
+            "score": 0,
+            "reason": "The article's table does not include Yang et al. (2018).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Yu et al. (2021)', Country: India, Design: Double-blind randomized controlled trial, Salt Substitute Composition: 70% NaCl, 30% KCl, Control Group: 100% NaCl, Baseline SBP/DBP: 132.8/83.7, Duration: 3 months.",
+            "score": 1,
+            "reason": "The table lists Yu 2021, India, double-blind RCT, 70% NaCl/30% KCl, control 100% NaCl, baseline 132.8/83.7, 3 months, matching all rubric values; the supporting row cites no blocked reference.",
+            "evidence": "| Yu 2021 (India) | India | Double-blind RCT | 70% NaCl, 30% KCl | 100% NaCl | 132.8 | 83.7 | 3 months |"
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhao et al. (2014)', Country: China, Design: A patient-blinded randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 176.1/103.2, Duration: 3 months.",
+            "score": 0,
+            "reason": "The article's table does not include Zhao et al. (2014).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhou et al. (2016)', Country: China, Design: A double-blind, randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 154.02/91.46, Duration: 3 years.",
+            "score": 0,
+            "reason": "The article's table does not include Zhou et al. (2016).",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhou et al. (2009)', Country: China, Design: A single-blind, randomized controlled trial, Salt Substitute Composition: 65% NaCl, 30% KCl, 5% calcium salts, Control Group: Normal salt, Baseline SBP/DBP: 159.7/83.3 (hypertensive patients), Duration: 6 months.",
+            "score": 0,
+            "reason": "The article's table does not include Zhou et al. (2009).",
+            "evidence": ""
+        }
+    ]
+}

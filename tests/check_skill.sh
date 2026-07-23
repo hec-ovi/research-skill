@@ -109,7 +109,12 @@ WEIGHTS = {'info_recall': 0.5, 'analysis': 0.35, 'presentation': 0.15}
 
 readme = open('bench/README.md').read()
 rows = {}  # arm -> list of (recall, analysis, presentation, weighted, blocked)
+# two table shapes: "| arm | r% | a% | p% | w% | blk |" and the run-3
+# shape with a writer column "| arm | writer | r% | a% | p% | w% | blk |"
 for m in re.finditer(r'^\| ([\w.-]+) \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|', readme, re.M):
+    arm = m.group(1)
+    rows.setdefault(arm, []).append(tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
+for m in re.finditer(r'^\| ([\w.-]+) \| [\w. ]+ \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|', readme, re.M):
     arm = m.group(1)
     rows.setdefault(arm, []).append(tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
 

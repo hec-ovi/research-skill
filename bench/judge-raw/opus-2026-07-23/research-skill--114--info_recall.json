@@ -1,0 +1,226 @@
+{
+    "results": [
+        {
+            "rubric_item": "Clearly identify the three main 'hyperscale' providers as Amazon Web Services (AWS), Microsoft Azure, and Google Cloud.",
+            "score": 1,
+            "reason": "The article names the three hyperscale providers explicitly and does not cite the blocked OECD reference for this claim.",
+            "evidence": "The global cloud infrastructure services market is dominated by three hyperscale providers: Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP)."
+        },
+        {
+            "rubric_item": "The market share table must include the row for 'France (2021)'.",
+            "score": 1,
+            "reason": "The table contains a France (2021) row.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | 29% |"
+        },
+        {
+            "rubric_item": "In the table for France (2021), state AWS's market share as 46%.",
+            "score": 1,
+            "reason": "The France (2021) row lists AWS at 46%, not sourced from the blocked reference.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | 29% |"
+        },
+        {
+            "rubric_item": "In the table for France (2021), state Microsoft Azure's market share as 17%.",
+            "score": 1,
+            "reason": "The France (2021) row lists Microsoft Azure at 17%.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | 29% |"
+        },
+        {
+            "rubric_item": "In the table for France (2021), state Google Cloud's market share as less than 10%.",
+            "score": 1,
+            "reason": "The France (2021) row lists Google Cloud at 8%, which is less than 10%.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | 29% |"
+        },
+        {
+            "rubric_item": "The market share table must include the row for 'Netherlands (2020)'.",
+            "score": 1,
+            "reason": "The table contains a Netherlands (2020) row.",
+            "evidence": "| Netherlands (2020) | Not specified | Leading | Not specified | Not specified |"
+        },
+        {
+            "rubric_item": "In the table for Netherlands (2020), state AWS's market share as 45%.",
+            "score": 0,
+            "reason": "The Netherlands (2020) row lists AWS as 'Not specified'; the value 45% is not stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for Netherlands (2020), state Microsoft Azure's market share as 35%.",
+            "score": 0,
+            "reason": "The Netherlands (2020) row lists Azure as 'Leading'; the value 35% is not stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for Netherlands (2020), state Google Cloud's market share as 5%.",
+            "score": 0,
+            "reason": "The Netherlands (2020) row lists Google Cloud as 'Not specified'; the value 5% is not stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "The market share table must include the row for 'United Kingdom (2022)'.",
+            "score": 1,
+            "reason": "The table contains a United Kingdom (2022) row.",
+            "evidence": "| United Kingdom (2022) | 35-40% | 35-40% | 5-10% | 10-20% |"
+        },
+        {
+            "rubric_item": "In the table for United Kingdom (2022), state the combined market share of AWS and Microsoft Azure as 80%.",
+            "score": 1,
+            "reason": "The article states AWS and Azure together controlled approximately 70-80% of the UK market in 2022, and the summary states up to 80% in the UK; not sourced from the blocked reference.",
+            "evidence": "In the United Kingdom, AWS and Microsoft Azure together controlled approximately 70-80% of the market in 2022, according to both Ofcom's market study and the UK Competition and Markets Authority."
+        },
+        {
+            "rubric_item": "In the table for United Kingdom (2022), state Google Cloud's market share as 5-10%.",
+            "score": 1,
+            "reason": "The United Kingdom (2022) row lists Google Cloud at 5-10%.",
+            "evidence": "| United Kingdom (2022) | 35-40% | 35-40% | 5-10% | 10-20% |"
+        },
+        {
+            "rubric_item": "The market share table must include the row for 'South Korea (2021)'.",
+            "score": 1,
+            "reason": "The table contains a South Korea (2021) row.",
+            "evidence": "| South Korea (2021) | AWS, Azure, Google dominant | | | Local players gaining |"
+        },
+        {
+            "rubric_item": "In the table for South Korea (2021), state AWS's market share as 62%.",
+            "score": 0,
+            "reason": "The South Korea (2021) row gives no numeric figure for AWS; 62% is not stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for South Korea (2021), state Microsoft Azure's market share as 12%.",
+            "score": 0,
+            "reason": "The South Korea (2021) row gives no numeric figure for Azure; 12% is not stated.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for South Korea (2021), state Naver's market share as 7%.",
+            "score": 0,
+            "reason": "Naver is not mentioned and no 7% figure is given for South Korea.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "The market share table must include the row for 'Japan (2020)'.",
+            "score": 1,
+            "reason": "The table contains a Japan (2020) row.",
+            "evidence": "| Japan (2020) | 31% | 49% | 20% | — |"
+        },
+        {
+            "rubric_item": "In the table for Japan (2020), state AWS's market share as 40-50%.",
+            "score": 0,
+            "reason": "The Japan (2020) row lists AWS at 31%, which does not match the required 40-50%.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for Japan (2020), state Microsoft Azure's market share as 10-20%.",
+            "score": 0,
+            "reason": "The Japan (2020) row lists Azure at 49%, which does not match the required 10-20%.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "In the table for Japan (2020), state NTT's market share as 5-10%.",
+            "score": 0,
+            "reason": "NTT is not mentioned in the Japan (2020) row and no 5-10% figure is given for it.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain a key network effect involving Independent Software Vendors (ISVs) who develop services on the largest cloud platforms to maximize their audience, which in turn attracts more users to these platforms.",
+            "score": 1,
+            "reason": "The article describes ISVs developing on the platforms with the largest user bases, creating dependency effects; the supporting sentence does not cite the blocked OECD reference.",
+            "evidence": "Independent software vendors (ISVs) develop applications on the platforms controlling the largest user bases, creating dependency effects."
+        },
+        {
+            "rubric_item": "Explain another network effect related to developer familiarity, where developers prefer platforms they have already been trained on, and targeted offers to universities reinforce this.",
+            "score": 1,
+            "reason": "The article describes developer familiarity built through early career stages and educational partnerships; the supporting sentence does not cite the blocked reference.",
+            "evidence": "Developers become familiar with specific cloud platforms during early career stages or through educational partnerships, establishing long-term vendor relationships."
+        },
+        {
+            "rubric_item": "Point out that economies of scope stem from hyperscale providers offering seamless, integrated service suites, thereby driving user adoption of their cloud offerings.",
+            "score": 1,
+            "reason": "The article explains that integration and bundling of cloud with adjacent services creates distribution advantages and adoption; the supporting sentence does not cite the blocked reference.",
+            "evidence": "Integration with adjacent digital services extends market power. The bundling of cloud infrastructure with productivity software, AI services, and developer tools creates distribution advantages that smaller competitors cannot match."
+        },
+        {
+            "rubric_item": "Indicate that high capital investment in data centers and network infrastructure constitutes a major barrier to entry, leading to economies of scale for hyperscale providers.",
+            "score": 1,
+            "reason": "The article states each provider invested over $50 billion in data centre infrastructure, creating capital barriers to entry and economies of scale.",
+            "evidence": "AWS, Azure, and Google have each invested over $50 billion in global data centre infrastructure, creating capital barriers that prevent new entrants from competing at scale."
+        },
+        {
+            "rubric_item": "Mention that hyperscale providers also benefit from economies of scale created by their internal use of their own cloud infrastructure to support other parts of their businesses.",
+            "score": 0,
+            "reason": "The article does not mention hyperscalers' internal use of their own cloud infrastructure to support other parts of their businesses.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Under 'Switching Barriers', explicitly mention technical barriers, such as the need to modify code due to differing Application Programming Interfaces (APIs) between providers.",
+            "score": 1,
+            "reason": "The article describes writing code against proprietary APIs and the need to rewrite integrations when migrating; not sourced from the blocked reference.",
+            "evidence": "When organizations develop applications on specific cloud platforms, they write code against proprietary service APIs, triggers, and integration patterns. Migration requires significant rework and rewriting of integrations across application stacks."
+        },
+        {
+            "rubric_item": "Under 'Switching Barriers', explicitly mention technical barriers, such as the use of proprietary data formats hindering data portability.",
+            "score": 1,
+            "reason": "The article mentions non-standard/proprietary data formats and data portability limitations that impede switching.",
+            "evidence": "Cloud providers employ proprietary APIs and non-standard data formats that create technical dependencies."
+        },
+        {
+            "rubric_item": "Under 'Switching Barriers', explicitly mention contractual/financial barriers, such as opaque and unpredictable pricing structures that make it difficult for customers to estimate total costs.",
+            "score": 1,
+            "reason": "The article cites contractual imbalance from bundled, opaque, and frequently changing cloud offerings; not sourced from the blocked reference.",
+            "evidence": "The Autorite de la concurrence noted \"contractual imbalance between hyperscalers and their customers, resulting from the complexity of cloud offerings, which are often bundled, opaque and subject to frequent changes.\""
+        },
+        {
+            "rubric_item": "Under 'Pricing Issues', explain that egress fees are charges levied when data is moved out of a cloud provider's infrastructure.",
+            "score": 1,
+            "reason": "The article explains egress fees as charges for data delivered out to the public internet from the provider's infrastructure.",
+            "evidence": "Cloud providers pay IP transit fees to backbone carriers and ISPs for every byte delivered to the public internet; hyperscalers set egress prices well above their transit costs, using the margin both as revenue and as a retention mechanism."
+        },
+        {
+            "rubric_item": "Under 'Pricing Issues', explicitly mention that competition authorities have found egress fees to have mark-ups potentially as high as 8000% above actual costs.",
+            "score": 0,
+            "reason": "The article states markups of 'thousands of percent' but does not state the specific figure of 8000%.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Under 'Pricing Issues', clearly describe cloud credit programs targeting startups as offering values up to $100,000 or $150,000.",
+            "score": 1,
+            "reason": "The article states AWS offers up to $100,000 and Microsoft Azure up to $150,000 in startup credits.",
+            "evidence": "AWS provides up to $100,000 in service credits, with AWS Generative AI Accelerator offering up to $1 million; ... Microsoft Azure offers up to $150,000 in credits over two years through the Microsoft for Startups program"
+        },
+        {
+            "rubric_item": "Clearly state that cloud credit programs are often conditional on exclusivity clauses or significant purchase commitments.",
+            "score": 0,
+            "reason": "The article discusses loyalty rebates and lock-in but does not state credits are conditional on exclusivity clauses or significant purchase commitments.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Under 'Exclusive Licensing', identify Microsoft's 2019 changes to its 'Bring Your Own License' (BYOL) policy as a key example.",
+            "score": 1,
+            "reason": "The article identifies Microsoft's October 2019 BYOL policy change as a key exclusive-licensing example.",
+            "evidence": "Microsoft modified its BYOL (Bring Your Own License) policy effective October 1, 2019."
+        },
+        {
+            "rubric_item": "Explain that these BYOL changes restricted customers' ability to use their existing Microsoft software licenses on competitors' third-party cloud infrastructure.",
+            "score": 1,
+            "reason": "The article explains the change eliminated the freedom to deploy existing licenses on rival clouds and designated AWS, Google, and Alibaba as restricted 'listed providers'.",
+            "evidence": "The 2019 changes eliminated this freedom for licenses purchased without Software Assurance mobility rights. Microsoft designated AWS, Google Cloud, and Alibaba as \"listed providers\" subject to restrictions."
+        },
+        {
+            "rubric_item": "Under 'Bundling', explicitly mention the bundling of Microsoft Teams with Office 365 and Microsoft 365 productivity suites.",
+            "score": 1,
+            "reason": "The article explicitly mentions Microsoft's bundling of Teams with Office 365 and Microsoft 365.",
+            "evidence": "The European Commission found Microsoft's bundling of Teams with Office 365 and Microsoft 365 commercial plans to be anticompetitive."
+        },
+        {
+            "rubric_item": "Explain that the European Commission launched a formal investigation into the bundling of Microsoft Teams in July 2023, following a complaint from Slack.",
+            "score": 0,
+            "reason": "The article mentions Slack as a competitor but does not state the European Commission launched a formal investigation in July 2023 following a complaint from Slack.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Mention that in response to regulatory pressure, Microsoft unbundled Teams in the European Economic Area and Switzerland in October 2023, and globally in April 2024.",
+            "score": 0,
+            "reason": "The article notes Microsoft agreed to sell suites without Teams but does not give the October 2023 EEA/Switzerland and April 2024 global unbundling dates.",
+            "evidence": ""
+        }
+    ]
+}

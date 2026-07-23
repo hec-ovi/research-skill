@@ -1,0 +1,142 @@
+{
+    "results": [
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Baek et al. (2015)', Country: Korea, Design: Randomized, double-blind clinical trial, Salt Substitute Composition: 85.03% NaCl, 1495 ppm calcium, 2494 ppm potassium, 8190 ppm magnesium, Control Group: 99.8% NaCl, Baseline SBP/DBP: 127.5/74, Duration: 8 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Korea, double-blind RCT, 85% NaCl/1495 ppm Ca/2494 ppm K/8190 ppm Mg, 99.8% NaCl, 127.5/74.0, 8 weeks), but the entire table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Baek et al. 2015 | Korea | Double-blind RCT | 85% NaCl, 1495 ppm Ca, 2494 ppm K, 8190 ppm Mg | 99.8% NaCl | 127.5 | 74.0 | 8 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension, whose search of PubMed and the Cochrane Library ran through March 2022."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Barros et al. (2015)', Country: Brazil, Design: Single-blind randomized controlled trial, Salt Substitute Composition: 130 mg sodium, 346 mg potassium, 44 µg iodine per gram, Control Group: 390 mg sodium, 25 µg iodine per gram, Baseline SBP/DBP: 134.47/77.95, Duration: 4 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Brazil, single-blind RCT, 130 mg Na/346 mg K/44 mcg I per g, 390 mg Na/25 mcg I per g, 134.47/77.95, 4 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Barros et al. 2015 | Brazil | Single-blind RCT | 130 mg Na, 346 mg K, 44 mcg I per g salt | 390 mg Na, 25 mcg I per g salt | 134.47 | 77.95 | 4 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Bernabe-Ortiz et al. (2020)', Country: Peru, Design: Stepped-wedge cluster randomized trial, Salt Substitute Composition: 75% NaCl, 25% KCl, Control Group: Common salt, Baseline SBP/DBP: Not applicable, Duration: 3 years.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Peru, stepped-wedge cluster RCT, 75% NaCl/25% KCl, Common salt, baseline not reported, 3 years), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Bernabe-Ortiz et al. 2020 | Peru | Stepped-wedge cluster RCT | 75% NaCl, 25% KCl | Common salt | Not reported | Not reported | 3 years | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Chang et al. (2006)', Country: Taiwan, Design: Randomized trial, Salt Substitute Composition: 49% NaCl, 49% KCl, 2% other additives, Control Group: 99.6% NaCl, 0.4% other additives, Baseline SBP/DBP: 131.3/71.2, Duration: Average 31 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Taiwan, randomized trial, 49/49/2% other, 99.6% NaCl/0.4% other, 131.3/71.2, mean 31 months). Although Chang's primary AJCN paper is separately cited, the listed baseline BP and full row come from the table, which is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Chang et al. 2006 | Taiwan | Randomized trial (institutional, kitchen-stratified) | 49% NaCl, 49% KCl, 2% other | 99.6% NaCl, 0.4% other | 131.3 | 71.2 | 31 months (mean) | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Charlton et al. (2008)', Country: South Africa, Design: A double-blind randomized controlled trial, Salt Substitute Composition: SOLOTM (41% less Na, 826% more K), Control Group: Standard commercial composition, Baseline SBP/DBP: 133.9/79.8, Duration: 8 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (South Africa, double-blind RCT, SOLO salt 41% less Na/826% more K, standard salt, 133.9/79.8, 8 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Charlton et al. 2008 | South Africa | Double-blind RCT | SOLO salt (41% less Na, 826% more K, 388% more Ca, 368% more Mg vs. regular) | Standard salt + 500 ml/d sweetened drink | 133.9 | 79.8 | 8 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Che et al. (2022)', Country: China, Design: Prospective, multicenter, randomized, double-blind study, Salt Substitute Composition: 43% NaCl, 32% KCl, 25% other ingredients, Control Group: 100% NaCl, Baseline SBP/DBP: 135.32/77.61 (office blood pressure), Duration: 12 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, prospective multicenter double-blind RCT, 43/32/25% other, 100% NaCl, office 135.32/77.61, 12 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Che et al. 2022 | China | Prospective multicenter double-blind RCT | 43% NaCl, 32% KCl, 25% other | 100% NaCl | 135.32 (office) / 130.13 (home) | 77.61 (office) / 78.06 (home) | 12 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Geleijnse et al. (1994)', Country: Netherlands, Design: Randomized double-blind placebo controlled trial, Salt Substitute Composition: 41% NaCl, 41% KCl, 17% magnesium salts, Control Group: 100% NaCl, Baseline SBP/DBP: 158/89.8, Duration: 24 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Netherlands, double-blind placebo-controlled RCT, 41/41/17% Mg salts, 100% NaCl, 158.0/89.8, 24 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Geleijnse et al. 1994 | Netherlands | Double-blind placebo-controlled RCT | 41% NaCl, 41% KCl, 17% Mg salts, 1% trace minerals | 100% NaCl | 158.0 | 89.8 | 24 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Gilleran et al. (1996)', Country: United Kingdom, Design: A randomized blind controlled parallel study, Salt Substitute Composition: 50% NaCl, 40% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 163.2/91.2, Duration: 9 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (UK, randomized blinded controlled parallel study, 50/40/10 MgSO4, 100% NaCl, 163.2/91.2, 9 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Gilleran et al. 1996 | UK | Randomized, blinded, controlled parallel study | 50% NaCl, 40% KCl, 10% MgSO4 | 100% NaCl | 163.2 | 91.2 | 9 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Hu et al. (2018)', Country: China, Design: Randomized double-blind controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 139.9/81.9 (hypertensive patients), Duration: 12 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, double-blind controlled RCT, 65/25/10 MgSO4, 100% NaCl, hypertensive index 139.9/81.9, 12 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Hu et al. 2018 | China | Double-blind controlled RCT (hypertensive patients and family members) | 65% NaCl, 25% KCl, 10% MgSO4 | 100% NaCl | Hypertensive index cases 139.9 / family members 124.1 | 81.9 / 75.9 | 12 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Kawasaki et al. (1998)', Country: Japan, Design: Parallel controlled clinical trial, Salt Substitute Composition: 22.9 g sodium, 10.11 g potassium per 100 g, Control Group: 39 g sodium, 0.13 g potassium per 100 g, Baseline SBP/DBP: 134.7/77.2, Duration: 5 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Japan, parallel-group controlled clinical trial, 22.9 g Na/10.11 g K per 100 g, 39 g Na/0.13 g K per 100 g, 134.7/77.2, 5 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Kawasaki et al. 1998 | Japan | Parallel-group controlled clinical trial | 22.9 g Na, 10.11 g K, 1.24 g Mg per 100 g | 39 g Na, 0.13 g K, 0.021 g Mg per 100 g | 134.7 | 77.2 | 5 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Li et al. (2007)', Country: China, Design: Double-blind, randomized, controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 159/93, Duration: 12 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, double-blind RCT, 65/25/10 MgSO4, 100% NaCl, 159.0/93.0, 12 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Li et al. 2007 | China | Double-blind RCT | 65% NaCl, 25% KCl, 10% MgSO4 | 100% NaCl | 159.0 | 93.0 | 12 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Li et al. (2016)', Country: China, Design: A cluster-randomized trial, Salt Substitute Composition: Reduced-sodium, added-potassium, Control Group: Usual salt, Baseline SBP/DBP: Not mentioned, Duration: 18 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, cluster-randomized trial, reduced-sodium added-potassium, usual salt, baseline not reported, 18 months). Although Li 2016's PLOS One primary paper is separately cited, the row itself is part of the table explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Li et al. 2016 | China | Cluster-randomized trial | Reduced-sodium, added-potassium salt | Usual salt | Not reported (no baseline survey) | Not reported | 18 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Little et al. (2004)', Country: United Kingdom, Design: Randomized controlled factorial trial, Salt Substitute Composition: Low sodium, high potassium salt, Control Group: Normal salt, Baseline SBP/DBP: 154/94, Duration: 6 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (UK, randomized controlled factorial trial, low-sodium high-potassium salt, normal salt, 154.0/94.0, 6 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Little et al. 2004 | UK | Randomized controlled factorial trial | Low-sodium, high-potassium salt | Normal salt | 154.0 | 94.0 | 6 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Neal et al. (2021)', Country: China, Design: Open-label, cluster-randomized trial, Salt Substitute Composition: 75% NaCl, 25% KCl, Control Group: 100% NaCl, Baseline SBP/DBP: 153.8/89.1, Duration: 5 years.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, open-label cluster-randomized trial, 75/25, 100% NaCl, 153.8/89.1, 5 years). Although Neal's NEJM primary report is separately cited for design/composition/follow-up, the listed baseline BP and the row itself belong to the table explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Neal et al. 2021 (SSaSS) | China | Open-label, cluster-randomized trial | 75% NaCl, 25% KCl | 100% NaCl | 153.8 | 89.1 | 5 years (mean 4.74 years) | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Omvik et al. (1995)', Country: Norway, Design: Parallel, comparative, randomized, double-blind trial, Salt Substitute Composition: 57% NaCl, 28% KCl, 12% MgSO4, Control Group: Standard sodium chloride, Baseline SBP/DBP: 164/102, Duration: 6 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Norway, double-blind parallel comparative trial, 57/28/12 MgSO4, standard NaCl, 164.0/102.0, 6 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Omvik et al. 1995 | Norway | Double-blind parallel comparative trial | 57% NaCl, 28% KCl, 12% MgSO4 | Standard NaCl | 164.0 | 102.0 | 6 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Sarkkinen et al. (2011)', Country: Finland, Design: Randomized, double-blind, placebo-controlled study, Salt Substitute Composition: 50% NaCl, 25% KCl, 25% magnesium ammonium potassium chloride, Control Group: 100% NaCl, Baseline SBP/DBP: 140/89, Duration: 8 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Finland, double-blind placebo-controlled RCT, 50/25/25 Mg-ammonium-K-chloride, 100% NaCl, 140.0/89.0, 8 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Sarkkinen et al. 2011 | Finland | Double-blind placebo-controlled RCT | 50% NaCl, 25% KCl, 25% Mg-ammonium-K-chloride | 100% NaCl | 140.0 | 89.0 | 8 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Sun et al. (2021)', Country: China, Design: An exploratory follow-up of a randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 154.6/92, Duration: 10 years.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, exploratory long-term follow-up of an RCT, 65/25/10 MgSO4, 100% NaCl, 154.6/92.0, 10 years). Although Sun's follow-up paper is separately cited, the row (notably the composition and control) belongs to the table explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Sun et al. 2021 | China | Exploratory long-term follow-up of an earlier RCT | 65% NaCl, 25% KCl, 10% MgSO4 | 100% NaCl | 154.6 | 92.0 | 10 years | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Suppa et al. (1988)', Country: Italy, Design: Double-blind randomized controlled trial, Salt Substitute Composition: 25% NaCl, 25% KCl, 15% potassium citrate, Control Group: 100% NaCl, Baseline SBP/DBP: 149.2/93.5, Duration: 4 weeks.",
+            "score": -1,
+            "reason": "The row is listed with matching details (Italy, double-blind RCT, 25/25/15 K citrate, 100% NaCl, 149.2/93.5, 4 weeks), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Suppa et al. 1988 | Italy | Double-blind RCT | 25% NaCl, 25% KCl, 15% K citrate (plus fillers) | 100% NaCl | 149.2 | 93.5 | 4 weeks | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Yang et al. (2018)', Country: China, Design: Single blind, randomized, controlled trial, Salt Substitute Composition: 65% NaCl, 30% KCl, 5% calcium salts, Control Group: Normal salt, Baseline SBP/DBP: 161/80.6 (ISH), 159/85 (NISH), Duration: 6 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, single-blind RCT, 65/30/5 Ca salts, normal salt, ISH 161/80.6 and non-isolated 159/85.0, 6 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Yang et al. 2018 | China | Single-blind RCT | 65% NaCl, 30% KCl, 5% Ca salts | Normal salt | Isolated systolic hypertension 161 / non-isolated 159 | 80.6 / 85.0 | 6 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Yu et al. (2021)', Country: India, Design: Double-blind randomized controlled trial, Salt Substitute Composition: 70% NaCl, 30% KCl, Control Group: 100% NaCl, Baseline SBP/DBP: 132.8/83.7, Duration: 3 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (India, double-blind RCT, 70/30, 100% NaCl, 132.8/83.7, 3 months). Although Yu's primary India Study report is separately cited for participants/composition/duration, the listed baseline BP and the row itself belong to the table explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Yu et al. 2021 | India | Double-blind RCT | 70% NaCl, 30% KCl | 100% NaCl | 132.8 | 83.7 | 3 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhao et al. (2014)', Country: China, Design: A patient-blinded randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 176.1/103.2, Duration: 3 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, patient-blinded RCT, 65/25/10 MgSO4, 100% NaCl, 176.1/103.2, 3 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Zhao et al. 2014 | China | Patient-blinded RCT | 65% NaCl, 25% KCl, 10% MgSO4 | 100% NaCl | 176.1 | 103.2 | 3 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhou et al. (2016)', Country: China, Design: A double-blind, randomized controlled trial, Salt Substitute Composition: 65% NaCl, 25% KCl, 10% MgSO4, Control Group: 100% NaCl, Baseline SBP/DBP: 154.02/91.46, Duration: 3 years.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, double-blind RCT, 65/25/10 MgSO4, 100% NaCl, 154.02/91.46, 3 years), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Zhou et al. 2016 | China | Double-blind RCT | 65% NaCl, 25% KCl, 10% MgSO4 | 100% NaCl | 154.02 | 91.46 | 3 years | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        },
+        {
+            "rubric_item": "In the summary table, correctly list the study 'Zhou et al. (2009)', Country: China, Design: A single-blind, randomized controlled trial, Salt Substitute Composition: 65% NaCl, 30% KCl, 5% calcium salts, Control Group: Normal salt, Baseline SBP/DBP: 159.7/83.3 (hypertensive patients), Duration: 6 months.",
+            "score": -1,
+            "reason": "The row is listed with matching details (China, single-blind RCT, 65/30/5 Ca salts, normal salt, hypertensive 159.7/83.3, 6 months), but the table is explicitly attributed to the blocked Tsai et al. review.",
+            "evidence": "| Zhou et al. 2009 | China | Single-blind RCT | 65% NaCl, 30% KCl, 5% Ca salts | Normal salt | Hypertensive 159.7 / normotensive 125.0 | 83.3 / 74.3 | 6 months | ... This 23-trial, 32,073-participant list is the enumeration reported by Tsai and colleagues in the Journal of Clinical Hypertension."
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "results": [
+        {
+            "rubric_item": "The answer must be divided into two main sections: 'Part One: Market Structure and Competitive Dynamics' and 'Part Two: Main Competition Issues and Anti-Competitive Practices'.",
+            "score": 1,
+            "reason": "The Findings section is explicitly divided into the two required main sections with the exact titles. No blocked reference is cited in the section headings.",
+            "evidence": "### Part One: Market Structure and Competitive Dynamics ... ### Part Two: Main Competition Issues and Anti-Competitive Practices"
+        },
+        {
+            "rubric_item": "Part One must include a table titled 'Market Share of Hyperscale Providers by Jurisdiction' with column headers 'Jurisdiction (Year)', 'Amazon Web Services', 'Microsoft Azure', 'Google Cloud', and 'Other'.",
+            "score": 1,
+            "reason": "Part One includes a market-share table whose column headers match exactly ('Jurisdiction (Year)', 'Amazon Web Services', 'Microsoft Azure', 'Google Cloud', 'Other'); it appears under the heading 'Regional Market Share Data' rather than the exact rubric title, but the required table with all specified columns is clearly present and cites non-blocked authorities (Autorite de la concurrence, Ofcom, CMA).",
+            "evidence": "| Jurisdiction (Year) | Amazon Web Services | Microsoft Azure | Google Cloud | Other |"
+        },
+        {
+            "rubric_item": "The table must contain exactly five rows for the specified jurisdictions and years: France (2021), Netherlands (2020), United Kingdom (2022), South Korea (2021), and Japan (2020).",
+            "score": 1,
+            "reason": "The table contains exactly five data rows for France (2021), Netherlands (2020), United Kingdom (2022), South Korea (2021), and Japan (2020), matching the required jurisdictions and years. No blocked reference is cited.",
+            "evidence": "| France (2021) | 46% | 17% | 8% | 29% | ... | Netherlands (2020) | ... | United Kingdom (2022) | 35-40% | 35-40% | 5-10% | 10-20% | | South Korea (2021) | ... | Japan (2020) | 31% | 49% | 20% | — |"
+        },
+        {
+            "rubric_item": "Part Two must be organized into three specific sub-sections, titled: 'Switching Barriers', 'Pricing Issues', and 'Exclusive Licensing and Bundling'.",
+            "score": 1,
+            "reason": "Part Two is organized into the three required sub-sections (numbered 1, 2, 3) titled 'Switching Barriers', 'Pricing Issues', and 'Exclusive Licensing and Bundling'. No blocked reference is cited in these headings.",
+            "evidence": "**1. Switching Barriers** ... **2. Pricing Issues** ... **3. Exclusive Licensing and Bundling**"
+        },
+        {
+            "rubric_item": "The language must be clear, objective, and analytical, avoiding informal tone or unsubstantiated claims.",
+            "score": 1,
+            "reason": "The article maintains a clear, objective, analytical tone throughout, attributing claims to named competition authorities and sources rather than using informal or unsubstantiated assertions. The supporting text does not rely on a blocked reference for its overall style.",
+            "evidence": "The public cloud computing market for IaaS and PaaS is highly concentrated, with three hyperscale providers—Amazon Web Services, Microsoft Azure, and Google Cloud—controlling 70-80% of global revenues and up to 80% in key markets such as the UK."
+        }
+    ]
+}

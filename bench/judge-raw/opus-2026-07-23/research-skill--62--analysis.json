@@ -1,0 +1,76 @@
+{
+    "results": [
+        {
+            "rubric_item": "Conclude that salt substitutes significantly reduce systolic and diastolic blood pressure.",
+            "score": 1,
+            "reason": "The article explicitly states significant reductions in both systolic and diastolic blood pressure. No supporting sentence cites a blocked reference inline.",
+            "evidence": "Across 23 RCTs (32,073 participants), the mean systolic blood pressure reduction was 4.80 mmHg (95% CI −6.12 to −3.48), and diastolic blood pressure reduction was 1.48 mmHg. These reductions achieved statistical significance and were described as clinically meaningful."
+        },
+        {
+            "rubric_item": "Conclude that salt substitutes significantly reduce all-cause mortality by approximately 12%.",
+            "score": 1,
+            "reason": "The article reports total/all-cause mortality reduction of about 12% (and ~11% meta-analytically). No inline citation to a blocked reference.",
+            "evidence": "total mortality 39.27 versus 44.61 per 1,000 person-years (12% reduction) ... a risk ratio of 0.89 (95% CI 0.85–0.94) for all-cause mortality (approximately 11% reduction)"
+        },
+        {
+            "rubric_item": "Conclude that salt substitutes lead to a significant reduction in 24-hour urinary sodium excretion and a significant increase in 24-hour urinary potassium excretion.",
+            "score": 0,
+            "reason": "The article does not mention 24-hour urinary sodium or potassium excretion at all.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Point out that although there was a trend towards reduced cardiovascular mortality with salt substitutes, the results were not statistically significant (P=0.05).",
+            "score": 0,
+            "reason": "The article reports cardiovascular mortality reduction as statistically significant (RR 0.87, 95% CI 0.81–0.94), the opposite of the rubric claim, and does not note non-significance or a P=0.05 borderline result.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Note that the use of salt substitutes resulted in a small, non-statistically significant increase in serum potassium levels.",
+            "score": 0,
+            "reason": "The article discusses no increased hyperkalemia-related serious adverse events but does not report a small, non-significant increase in serum potassium levels.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain that the effect on SBP is more pronounced in the elderly population (age >= 60 years) than in younger populations.",
+            "score": 1,
+            "reason": "The article states elderly participants (≥60 years) showed numerically greater systolic reductions (~5.94 mmHg), addressing the direction requested. No inline blocked citation.",
+            "evidence": "However, elderly participants in nutrition education interventions (which overlap with salt reduction studies in some contexts) showed slightly numerically greater systolic reductions (approximately 5.94 mmHg in those ≥60 years)."
+        },
+        {
+            "rubric_item": "Explain that in studies with smaller sample sizes (<300 participants), the effect of lowering SBP is more significant than in studies with larger sample sizes.",
+            "score": 0,
+            "reason": "The article concludes the opposite: no different effect by sample size, with consistent reductions in both smaller and larger trials. It does not support that smaller studies show a more significant SBP effect.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain that in short-term studies (<12 months), the blood pressure-lowering effect (SBP and DBP) is more pronounced than in long-term studies.",
+            "score": 0,
+            "reason": "The article states longer-duration trials demonstrated greater benefits, the opposite of the rubric, and does not claim a more pronounced BP-lowering effect in short-term studies.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Point out that a 5 mmHg reduction in SBP can reduce the risk of major cardiovascular events by approximately 10%.",
+            "score": 1,
+            "reason": "The article explicitly states the 5-mmHg SBP reduction to ~10% cardiovascular event risk relationship. No inline blocked citation.",
+            "evidence": "each 5-mmHg reduction in systolic blood pressure reduces cardiovascular event risk by approximately 10%, and each 10-mmHg reduction in systolic blood pressure reduces stroke risk by approximately 27%."
+        },
+        {
+            "rubric_item": "Based on the observed SBP reduction of 4.8 mmHg, estimate that salt substitutes can reduce cardiovascular risk by approximately 9.6%.",
+            "score": 1,
+            "reason": "The article performs exactly this estimate, deriving ~9.6% from the 4.8 mmHg SBP reduction. No inline blocked citation.",
+            "evidence": "Estimated cardiovascular event risk reduction: 4.8 mmHg × 2% per mmHg = approximately 9.6% relative risk reduction in major cardiovascular events"
+        },
+        {
+            "rubric_item": "Analyze that the study findings strongly support the use of salt substitutes as a non-pharmacological intervention for blood pressure control and primary prevention of cardiovascular diseases.",
+            "score": 1,
+            "reason": "The article synthesizes the findings as supporting salt substitutes for blood pressure control, cardiovascular event/mortality reduction, and public health implementation. No inline blocked citation.",
+            "evidence": "Multiple trials across different populations and follow-up durations reported no significant increase in serious adverse events from hyperkalemia, despite the potassium content of substitutes. This supports feasibility for public health implementation."
+        },
+        {
+            "rubric_item": "Synthesize that a key benefit of salt substitutes is providing similar health benefits to salt reduction without significantly altering food taste, which may improve adherence.",
+            "score": 0,
+            "reason": "The article does not mention food taste or adherence benefits of salt substitutes relative to salt reduction.",
+            "evidence": ""
+        }
+    ]
+}

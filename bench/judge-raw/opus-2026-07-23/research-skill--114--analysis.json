@@ -1,0 +1,52 @@
+{
+    "results": [
+        {
+            "rubric_item": "Explain the causal relationship between high fixed costs (data centers, hardware) and economies of scale, noting that this allows hyperscale providers to lower marginal costs and makes it difficult for new entrants to compete on price.",
+            "score": 1,
+            "reason": "The article ties high fixed costs (data centre infrastructure investment) to economies of scale that create capital barriers preventing new entrants from competing at scale, citing the Autorite de la concurrence rather than the blocked OECD report.",
+            "evidence": "Economies of scale play a central role in market concentration. AWS, Azure, and Google have each invested over $50 billion in global data centre infrastructure, creating capital barriers that prevent new entrants from competing at scale. The Autorite de la concurrence identified that \"the likelihood of a new operator being able to gain market share rapidly appears limited\" due to these structural advantages."
+        },
+        {
+            "rubric_item": "Explain the 'virtuous cycle' of network effects: how having the most users attracts the most ISVs, which makes the platform more valuable and attracts even more users, thereby entrenching the market position of hyperscale providers.",
+            "score": -1,
+            "reason": "The article addresses network effects via ISVs and user bases, but the supporting statement for the ecosystem entrenchment/lock-in conclusion cites the blocked OECD May 2025 report.",
+            "evidence": "Independent software vendors (ISVs) develop applications on the platforms controlling the largest user bases, creating dependency effects... According to the OECD's May 2025 report on cloud competition, these ecosystem effects mean that \"competing for the market is of more importance than competing in the market,\" allowing hyperscalers to offer broad service suites that lock customers into single platforms."
+        },
+        {
+            "rubric_item": "Analyze why IaaS and PaaS are the focus of competition authorities, explaining that they are foundational layers with more standardized use cases and the highest concentration of supply compared to the highly diversified SaaS market.",
+            "score": 0,
+            "reason": "The article names IaaS and PaaS as the market of focus but never analyzes why they are the focus, nor contrasts them as foundational, standardized, and more concentrated relative to a diversified SaaS market.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain how technical barriers like non-standard APIs and proprietary formats functionally increase the cost and complexity of migration, creating a 'lock-in' effect that reduces customers' ability to switch to competitors even when offered better prices or services.",
+            "score": 1,
+            "reason": "The article explains that proprietary APIs and non-standard data formats create technical dependencies requiring costly rework, producing lock-in that impedes switching, citing competition authority research and the Dutch ACM rather than the blocked OECD report.",
+            "evidence": "Cloud providers employ proprietary APIs and non-standard data formats that create technical dependencies... Migration requires significant rework and rewriting of integrations across application stacks... The ACM (Dutch Authority for Consumers and Markets) identified that \"technical incompatibilities, data portability limitations, and contractual restrictions make it difficult for customers to adopt multi-cloud strategies or change providers.\""
+        },
+        {
+            "rubric_item": "Analyze how high egress fees act as a 'de facto penalty', disproportionately increasing switching costs and thereby weakening competition among providers.",
+            "score": 1,
+            "reason": "The article frames egress fees as direct financial penalties for switching that raise migration costs and serve as a retention mechanism, citing Ofcom and cloud cost researchers rather than the blocked OECD report.",
+            "evidence": "Data egress fees act as direct financial penalties for switching. According to Ofcom's UK market study, egress fees were identified as one of three key areas of regulatory concern... hyperscalers set egress prices well above their transit costs, using the margin both as revenue and as a retention mechanism."
+        },
+        {
+            "rubric_item": "Explain the competitive risks of large-scale cloud credit programs, analyzing them as a 'loyalty rebate' that may disadvantage smaller, equally or more efficient competitors who cannot afford to offer similar incentives.",
+            "score": 1,
+            "reason": "The article analyzes large startup credit programs as resembling anticompetitive loyalty rebates that create lock-in, citing the Autorite de la concurrence and regulatory analysis rather than the blocked OECD report.",
+            "evidence": "The Autorite de la concurrence flagged these programs as creating \"lock-in risks.\"... Regulatory analysis notes these resemble anticompetitive \"loyalty rebates,\" with cloud credits functioning as part of an overall \"lock-in strategy.\""
+        },
+        {
+            "rubric_item": "Analyze how exclusive licensing practices (such as Microsoft's BYOL changes) act as a 'raising rivals' costs' strategy, making competitor services more expensive for customers relying on that software, thereby protecting incumbents' market share.",
+            "score": 1,
+            "reason": "The article explains Microsoft's BYOL changes raise the effective cost to competitors by increasing total cost of ownership for Microsoft workloads on rival clouds, locking customers into Azure, citing licensing sources and Google's FTC accusation rather than the blocked OECD report.",
+            "evidence": "This policy change raises the effective cost to competitors by increasing the total cost of ownership for enterprise customers migrating Microsoft-licensed workloads to non-Microsoft clouds. Google accused Microsoft in FTC proceedings of using \"licensing restrictions that prevent customers, particularly existing on-premises enterprise clients, from choosing any other cloud provider at the time of migration into the cloud and ultimately locks those customers into its Azure ecosystem.\""
+        },
+        {
+            "rubric_item": "Explain how bundling practices (e.g., Teams with Office 365) leverage market dominance in one market (productivity software) to gain a competitive advantage in an adjacent market (collaboration tools), thereby disadvantaging competitors like Slack.",
+            "score": 1,
+            "reason": "The article explains that bundling Teams with Office 365/Microsoft 365 gave Teams a distribution advantage and prevented rivals like Slack and Zoom from competing fairly, citing the European Commission rather than the blocked OECD report.",
+            "evidence": "The European Commission found Microsoft's bundling of Teams with Office 365 and Microsoft 365 commercial plans to be anticompetitive. The Commission concluded that bundling granted Teams a distribution advantage... The Commission noted that the way Microsoft bundled Teams \"may have prevented Teams' alternatives such as Slack and Zoom from competing on a fair ground.\""
+        }
+    ]
+}

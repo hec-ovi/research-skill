@@ -1,0 +1,22 @@
+{
+    "results": [
+        {
+            "rubric_item": "The output must be structured into two main parts: 'Part One: The Case of Boris Takk (as studied by Ene Kõresaar)' and 'Part Two: The Perspectives of Svetlana Aleksievich and Jasmina Husanović.'",
+            "score": 0,
+            "reason": "The article is organized under generic headers (Summary, Findings, Insights, Strongest objection, Sources) with topical subsections. It never uses the required two-part structure with the explicit 'Part One: The Case of Boris Takk (as studied by Ene Kõresaar)' and 'Part Two: The Perspectives of Svetlana Aleksievich and Jasmina Husanović' labels.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Part One must provide clear, distinct answers to the five points requested in the task.",
+            "score": 1,
+            "reason": "The article clearly and distinctly addresses all five points: (1) Takk's life trajectory as a Waffen-SS volunteer, (2) his role as memory entrepreneur after independence, (3) his core narrative of 'continuous struggle for Estonian freedom', 'prolonged rupture', colonization, and serving 'from inside the system', (4) his stance on the Holocaust, and (5) Kõresaar's analysis of the dominant postcolonial dual-colonization framing. The supporting sentences attribute the analysis to Kõresaar's 'Soldiers of Memory', not to the blocked Budryte reference.",
+            "evidence": "Takk volunteered to serve in the German Army during World War II, specifically in the Waffen-SS. After Estonia regained independence in the early 1990s, Takk became active as a \"memory entrepreneur\". Takk's narrative centers on the concept of a \"continuous struggle for Estonian freedom\"... presenting World War II and Soviet occupation as an abnormal historical period representing \"prolonged rupture\". Takk justified his later decision to join the Communist Party of Estonia in the early 1970s as an attempt to \"serve the Estonian cause from inside the system\". Kõresaar's analysis reveals that Takk dealt with the problem of guilt... by attributing responsibility to the colonizing powers... made acknowledgment of complicity in Holocaust crimes and acceptance of collective guilt \"next to impossible\". This perspective frames World War II as a dual colonization—simultaneous occupation and destruction by Nazi Germany followed by Soviet occupation from 1944 to 1991."
+        },
+        {
+            "rubric_item": "Part Two must clearly differentiate between the perspectives of Svetlana Aleksievich and Jasmina Husanović.",
+            "score": 1,
+            "reason": "The article devotes separate, clearly distinct sections to each scholar: Aleksievich's polyphonic oral-history 'history of emotions' approach in War's Unwomanly Face, and Husanović's 'politics of witnessing and hope' and 'radical relationality'. The two perspectives are cleanly differentiated, and the supporting sentences do not cite any blocked reference.",
+            "evidence": "Aleksievich created what she terms a \"history of emotions\"—a carefully composed collage of human voices presented as extended monologues... The work documents approximately one million Soviet women who served in World War II. Jasmina Husanović is a Full Professor of Cultural Studies and Gender Studies at the University of Tuzla... She examines the politics of witnessing through what she calls a \"creative approach to losses and the potential politics of hope.\" Central to Husanović's framework is the concept of \"radical relationality\"—a belief that it is possible to transcend ethnic and national divisions and find connections between different traumatic experiences."
+        }
+    ]
+}

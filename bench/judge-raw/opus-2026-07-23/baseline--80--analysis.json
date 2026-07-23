@@ -1,0 +1,70 @@
+{
+    "results": [
+        {
+            "rubric_item": "Analyze how Takk's personal narrative (as constructed by Kõresaar) serves as an example of a 'problematic postcolonial narrative' that can lead to 'competing victimhoods.'",
+            "score": 1,
+            "reason": "The article analyzes Takk's narrative as an example of the dominant postcolonial perspective and critiques it as politically motivated and selective, explicitly noting how it marginalizes other victim groups (victims of Nazi crimes, minorities), which is the substance of a problematic postcolonial narrative producing competing victimhoods, without any inline citation to the blocked reference.",
+            "evidence": "By analyzing Takk's story through postcolonialist concepts, Kõresaar demonstrates how national memory narratives are constructed, politically motivated, and selective. The dominance of this particular postcolonial perspective has consequences for how other experiences and voices—including those of Soviet-era Estonians, minorities, and victims of Nazi crimes—are marginalized in public remembrance."
+        },
+        {
+            "rubric_item": "Explain how Kõresaar uses Takk's story to illustrate the complexity of memory in post-Soviet states, where divided loyalties (e.g., to German and Soviet forces) created deep social tensions.",
+            "score": 0,
+            "reason": "The article shows Takk's divided loyalties (Waffen-SS service, then Communist Party membership) and the complexity of the narrative, but frames these as smoothly reconciled within the memory narrative and does not explain that divided loyalties created deep social tensions in post-Soviet society.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain the significance of Takk's mention of the Holocaust in 1993, analyzing it within the context of post-Soviet Estonia, noting that it was 'unusual' at the time as such topics were generally avoided.",
+            "score": 0,
+            "reason": "The article states there is no documentation of Takk's specific Holocaust stance and never mentions a 1993 reference to the Holocaust or that such a mention was unusual for the time.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Analyze Kõresaar's argument that while Takk's memory politics were popular locally, they failed to gain international recognition because the glorification of the Waffen SS was unacceptable to the European Union.",
+            "score": 0,
+            "reason": "The article notes the narrative became dominant in post-Soviet Estonian memory culture but never discusses a failure to gain international recognition or the European Union's rejection of Waffen-SS glorification.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain how Aleksievich's approach, focusing on 'mundane' details and personal emotions, 'decolonizes' trauma by moving away from state-sanctioned grand histories of victory and heroism.",
+            "score": 1,
+            "reason": "The article clearly explains that Aleksievich prioritizes personal experience and emotion over official accounts and functions as a counternarrative to state-sanctioned grand histories that lionized heroism, capturing the substance of decolonizing trauma, with no inline citation to the blocked reference.",
+            "evidence": "Aleksievich pioneered what she calls \"a history of emotions...a history of the soul\"—prioritizing personal experience, affect, and the subjective dimensions of war over official historical accounts. ... Aleksievich's approach thus exposes how state-sanctioned memory erases the emotional and psychological costs of war, subordinating individual suffering to nationalist narratives. Her oral-history methodology serves as a counternarrative to both Soviet propaganda and revisionist postcolonial frameworks."
+        },
+        {
+            "rubric_item": "Explain the connection between Aleksievich's work and feminist scholarship (e.g., Christine Sylvester's theory of 'touching war'), which centralizes bodily and emotional experiences.",
+            "score": 0,
+            "reason": "The article makes a brief general link between Aleksievich and feminist attention to women's war experiences but never references Christine Sylvester, the theory of 'touching war,' or feminist scholarship centralizing bodily experiences.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Analyze how Aleksievich's portrayal of women as both combatants and victims complicates the simplistic 'warrior/victim' myth, challenging gender stereotypes in war narratives.",
+            "score": 1,
+            "reason": "The article portrays women as active combatants (snipers, tank drivers, machine gunners) and as trauma-marked victims, and contrasts the official heroic/unfeminine image with the demand that they become 'carefree girls,' which challenges gender stereotypes in war narratives, without inline citation to the blocked reference.",
+            "evidence": "She traveled thousands of miles across the Soviet Union, conducting interviews with over 200 Soviet women who had served during the war—pilots, tank drivers, snipers, doctors, nurses, and machine gunners. ... The book reveals a profound gap between official Soviet memory (which lionized women soldiers as heroic and unfeminine) and the actual experiences of these women, who returned from war to find that post-war Soviet society demanded they become \"carefree girls\" rather than women marked by combat trauma."
+        },
+        {
+            "rubric_item": "Analyze Husanović's critique of 'transitional justice' as an inadequate, 'white-gloved' approach that fails to address deeper power structures that commodify trauma.",
+            "score": 0,
+            "reason": "The article does not mention transitional justice, a 'white-gloved' approach, or the commodification of trauma anywhere in its treatment of Husanović.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain how Husanović's 'third way' distinguishes itself from state politics and international intervention, advocating for art-based grassroots activism within civil society as a space for healing.",
+            "score": 0,
+            "reason": "The article describes art-based cultural and feminist organizing in public spaces but does not frame this as a 'third way' explicitly distinguished from state politics and international intervention, which is the operative claim of the rubric item.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Synthesize these three perspectives to demonstrate different strategies for dealing with traumatic pasts: Takk/Kõresaar (ethno-nationalist memory construction), Aleksievich (humanistic deconstruction of myths), and Husanović (activist intervention).",
+            "score": 1,
+            "reason": "The article's synthesis section explicitly contrasts the three approaches: Kõresaar/Takk as postcolonial nationalism organizing memory around ethnic identity, Aleksievich as an emotional/humanistic counter to official narratives, and Husanović as feminist-postcolonial activist practice, matching the rubric's three strategies without inline citation to the blocked reference.",
+            "evidence": "Kõresaar's analytical work reveals how postcolonial nationalism organizes memory around state narratives and ethnic identity, using the case of Boris Takk to show how individual life stories become vehicles for dominant political frameworks. Aleksievich's oral-history methodology prioritizes the emotional and subjective dimensions of war, giving voice to those—particularly women—whose experiences are marginalized by official narratives. Husanović synthesizes feminist and postcolonial theory with activist practice, arguing for a politics of witnessing that transcends ethnic and national boundaries in pursuit of solidarity, equality, and hope."
+        },
+        {
+            "rubric_item": "Conclude by explaining how these three examples from Eastern Europe collectively illustrate the core challenges of 'decolonizing trauma theory': acknowledging 'non-Western' traumas on their own terms without creating new divisions, and the need to focus on real bodies and lived experiences to transcend 'competing victimhoods.'",
+            "score": 0,
+            "reason": "The conclusion offers a generic statement about competing claims to historical truth but does not explain the core challenges of 'decolonizing trauma theory,' acknowledging non-Western traumas on their own terms without creating new divisions, or focusing on real bodies and lived experiences to transcend competing victimhoods.",
+            "evidence": ""
+        }
+    ]
+}

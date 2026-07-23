@@ -1,0 +1,52 @@
+{
+    "results": [
+        {
+            "rubric_item": "Explain the causal relationship between high fixed costs (data centers, hardware) and economies of scale, noting that this allows hyperscale providers to lower marginal costs and makes it difficult for new entrants to compete on price.",
+            "score": 1,
+            "reason": "The article links high fixed costs and economies of scale to efficiency/savings and to the difficulty of new entrants gaining share, citing the French Autorite and Dutch ACM (not the blocked OECD source).",
+            "evidence": "Economies of scale anchor the concentration these studies describe. The French Autorite identifies \"high fixed costs\" and \"economies of scale\" as structural features of the sector, noting that \"hyperscalers enjoy considerable financial muscle, enabling them to make extremely substantial investments\" and concluding that \"the likelihood of a new operator being able to gain market share rapidly appears limited, apart from operators who are already powerful in other digital markets.\" The Dutch ACM reaches the same conclusion through infrastructure sharing: \"by sharing physical hardware, organizations found it easier to scale up and scale down in terms of server capacity and these servers could be used more efficiently, leading to considerable savings,\" adding that \"other cloud providers cannot keep up with the growth and investment pace of the major cloud providers.\""
+        },
+        {
+            "rubric_item": "Explain the 'virtuous cycle' of network effects: how having the most users attracts the most ISVs, which makes the platform more valuable and attracts even more users, thereby entrenching the market position of hyperscale providers.",
+            "score": 1,
+            "reason": "The article describes the self-reinforcing loop where the most customers attract the most ISVs, creating entrenched ecosystems around the largest providers, citing CERRE (not the blocked OECD source).",
+            "evidence": "The Centre on Regulation in Europe (CERRE), in its February 2024 economic assessment of EU cloud policy, describes a self-reinforcing loop: because \"the technology, software, and APIs of the cloud providers can differ,\" ISVs find it costly to support more than one platform and so \"typically develop services for one or a few cloud providers, notably the bigger ones,\" while \"cloud providers with the most customers attract the most ISVs, creating ecosystems around a few cloud providers.\""
+        },
+        {
+            "rubric_item": "Analyze why IaaS and PaaS are the focus of competition authorities, explaining that they are foundational layers with more standardized use cases and the highest concentration of supply compared to the highly diversified SaaS market.",
+            "score": 0,
+            "reason": "The article focuses on IaaS/PaaS shares and concerns but never explains why authorities focus on these layers versus SaaS, and does not mention SaaS diversification or the foundational/standardized-use-case rationale.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain how technical barriers like non-standard APIs and proprietary formats functionally increase the cost and complexity of migration, creating a 'lock-in' effect that reduces customers' ability to switch to competitors even when offered better prices or services.",
+            "score": 1,
+            "reason": "The article ties non-standard/closed APIs and proprietary formats to impaired portability and migration cost, and to lock-in that reduces switching ability, citing the Dutch ACM, French Autorite and UK CMA (not the blocked OECD source).",
+            "evidence": "Technical barriers to switching center on non-standard APIs and proprietary data formats. The Dutch ACM's market study is explicit on this mechanism: \"if the cloud provider of a specific service has not disclosed the APIs and standards, the service that wishes to connect will not know how this service works,\" so that \"data cannot always be transferred (properly or at all) due to the use of different, closed APIs and standards; data portability is therefore not always possible.\" ... The French Autorite, in the same opinion, describes \"technological barriers to migration\" arising from \"the variety of products and services, especially PaaS services,\" where \"lack of portability of data and applications can lead to significant migration costs.\" ... concluding that technical and commercial barriers \"lock customers into their initial choice of provider, which may not reflect their evolving needs\""
+        },
+        {
+            "rubric_item": "Analyze how high egress fees act as a 'de facto penalty', disproportionately increasing switching costs and thereby weakening competition among providers.",
+            "score": 1,
+            "reason": "The article frames egress fees as a direct financial penalty for switching that creates lock-in and reduces the ability/incentive to switch, disproportionately for smaller customers, citing the French Autorite, Dutch ACM and UK CMA (not the blocked OECD source).",
+            "evidence": "Egress fees are identified across every jurisdiction studied as a direct financial penalty for switching, distinct from the technical barriers above. The French Autorite found that \"egress fees are potentially disconnected from the costs directly incurred by suppliers regarding data transfers\" and that, \"as they are currently structured, these fees could create a risk of customer lock-in on a fast-growing market, by making it more difficult for cloud users to leave their primary provider.\" ... The UK CMA's final decision similarly treats egress fees as \"a key commercial barrier,\" finding that their \"presence and magnitude...reduce the ability and incentives for customers to switch or multi-cloud, particularly smaller customers and those with large proportions of stored data for whom fees are highest relative to their total cloud spending\""
+        },
+        {
+            "rubric_item": "Explain the competitive risks of large-scale cloud credit programs, analyzing them as a 'loyalty rebate' that may disadvantage smaller, equally or more efficient competitors who cannot afford to offer similar incentives.",
+            "score": 1,
+            "reason": "The article analyzes large-scale credit programs as a lock-in mechanism only the largest providers can sustain, structurally disadvantaging smaller rivals who cannot match them, citing the French Autorite and Dutch ACM (not the blocked OECD source).",
+            "evidence": "Cloud credit programs raise a parallel concern about disadvantaging smaller competitors rather than customers directly. ... it notes pointedly that the scale of these programs raises \"doubts about the ability of all cloud providers to offer them profitably\" - i.e., that only the largest, best-capitalized hyperscalers can sustain credit programs at this scale, which structurally disadvantages smaller rivals trying to compete for the same early-stage customers."
+        },
+        {
+            "rubric_item": "Analyze how exclusive licensing practices (such as Microsoft's BYOL changes) act as a 'raising rivals' costs' strategy, making competitor services more expensive for customers relying on that software, thereby protecting incumbents' market share.",
+            "score": 1,
+            "reason": "The article details Microsoft's 2019 BYOL changes and the CMA finding of a genuine cost-raising effect on AWS and Google, plus the reported roughly-4x cost to run Windows Server on rival clouds, citing the CMA and FTC/Register reporting (not the blocked OECD source).",
+            "evidence": "The CMA's own price analysis goes further, finding a genuine cost-raising effect on rivals rather than merely an inconvenience: \"the input price paid to Microsoft by AWS and Google for some of these products can be higher than Microsoft's customer-facing price for some cloud customers,\" and concluding that these practices are \"adversely impacting the competitiveness of AWS and Google in the supply of cloud services.\" The scale of the resulting price gap has been reported concretely in connection with the FTC's parallel 2026 investigation, which examined claims that it can cost roughly four times as much to run Windows Server on AWS, Alibaba, or Google Cloud as on Azure itself."
+        },
+        {
+            "rubric_item": "Explain how bundling practices (e.g., Teams with Office 365) leverage market dominance in one market (productivity software) to gain a competitive advantage in an adjacent market (collaboration tools), thereby disadvantaging competitors like Slack.",
+            "score": 1,
+            "reason": "The article explains the EC finding that bundling Teams with Office 365/Microsoft 365 leveraged productivity-software dominance to gain a distribution advantage in workplace communications, foreclosing Slack and Zoom, citing the European Commission (not the blocked OECD source).",
+            "evidence": "The European Commission, in case AT.40873 under Article 102 TFEU, found that bundling Microsoft Teams with Office 365 and Microsoft 365 commercial subscriptions gave Teams a \"distribution advantage\" that foreclosed rivals, specifically Slack and Zoom, from competing for the same customers on equal terms ... bundling a dominant productivity suite with a communications tool leverages market power built in one market (productivity software) to gain a distribution advantage in an adjacent one (workplace communications), independent of Teams' standalone merits"
+        }
+    ]
+}

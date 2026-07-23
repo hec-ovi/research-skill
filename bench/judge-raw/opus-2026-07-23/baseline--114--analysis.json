@@ -1,0 +1,52 @@
+{
+    "results": [
+        {
+            "rubric_item": "Explain the causal relationship between high fixed costs (data centers, hardware) and economies of scale, noting that this allows hyperscale providers to lower marginal costs and makes it difficult for new entrants to compete on price.",
+            "score": 1,
+            "reason": "The article explicitly ties high capital/fixed costs of data centers to economies of scale that lower marginal costs and limit competition to well-capitalized incumbents. The supporting sentences carry no citation to the blocked OECD reference.",
+            "evidence": "Capital Requirements: Establishing a single hyperscale data center campus requires $1–5 billion in capital investment and 18–36 months of construction time. These requirements effectively limit competition to well-capitalized incumbents. Cost Advantages: The ability to invest at such scale allows hyperscalers to realize substantial economies of scale, reducing the marginal costs of operating large-scale cloud services. This advantage compounds over time as larger players can spread infrastructure costs across a wider customer base."
+        },
+        {
+            "rubric_item": "Explain the 'virtuous cycle' of network effects: how having the most users attracts the most ISVs, which makes the platform more valuable and attracts even more users, thereby entrenching the market position of hyperscale providers.",
+            "score": 1,
+            "reason": "The article describes the self-reinforcing cycle in which popular platforms attract more developers/ISVs, which increases platform value and locks in more customers, entrenching dominant providers. No blocked reference is cited in the supporting sentences.",
+            "evidence": "This developer experience advantage creates a self-reinforcing cycle where popular platforms attract more developers, which in turn attracts more customers seeking to hire developers familiar with those platforms. The more applications that can run on a cloud platform, the greater value it generates for platform providers... The concentration of ISV activity on the largest platforms creates a moat against competing providers that lack equivalent ecosystem support."
+        },
+        {
+            "rubric_item": "Analyze why IaaS and PaaS are the focus of competition authorities, explaining that they are foundational layers with more standardized use cases and the highest concentration of supply compared to the highly diversified SaaS market.",
+            "score": 0,
+            "reason": "The article discusses IaaS and PaaS as critical infrastructure but never explains why they are the specific focus versus SaaS, nor does it mention foundational layers, more standardized use cases, or a comparison to the diversified SaaS market.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Explain how technical barriers like non-standard APIs and proprietary formats functionally increase the cost and complexity of migration, creating a 'lock-in' effect that reduces customers' ability to switch to competitors even when offered better prices or services.",
+            "score": 1,
+            "reason": "The article explains that proprietary APIs and non-standard data formats require substantial code rewriting to migrate, increasing cost and complexity and locking customers in regardless of pricing or feature differences. Supporting sentences cite no blocked reference.",
+            "evidence": "Cloud providers use proprietary application programming interfaces (APIs) and data formats that lack standardization across platforms. Applications built to use a specific cloud provider's API require substantial code modifications to migrate to a competing platform. Moving from one cloud provider to another often requires customers to rewrite significant portions of application code, re-architect infrastructure, and retrain internal teams on new tools and platforms... effectively locking them into their initial provider regardless of service quality, pricing, or feature differences."
+        },
+        {
+            "rubric_item": "Analyze how high egress fees act as a 'de facto penalty', disproportionately increasing switching costs and thereby weakening competition among providers.",
+            "score": 1,
+            "reason": "The article frames egress fees as a 'penalty for switching services' that disproportionately raises switching costs and locks customers in. The supporting sentences attribute this to the UK CMA report and 'competition authorities' generally, not to the blocked OECD reference.",
+            "evidence": "According to the UK Competition and Markets Authority (CMA) final report (July 2025), egress fees create a \"penalty for switching services.\" ... Mark-up: Egress fees frequently exceed the actual cost of data transfer. Competition authorities have found these fees to be disproportionate to underlying costs. Impact: Customers with large data volumes face prohibitively high switching costs, effectively locking them into their initial provider regardless of service quality, pricing, or feature differences."
+        },
+        {
+            "rubric_item": "Explain the competitive risks of large-scale cloud credit programs, analyzing them as a 'loyalty rebate' that may disadvantage smaller, equally or more efficient competitors who cannot afford to offer similar incentives.",
+            "score": 1,
+            "reason": "The article explicitly labels cloud credit programs as loyalty rebates that lock in customers and disadvantage smaller competitors who cannot match the subsidies. No blocked reference is cited in the supporting sentences.",
+            "evidence": "Loyalty Rebates: Cloud credit programs function as conditional discounts that lock in early-stage customer relationships... Disadvantage to Smaller Competitors: Smaller cloud providers and new entrants cannot match the capital availability to offer equivalent credit programs, creating unequal competitive conditions. Foreclosure Potential: By offering substantial credits to startups and other customer categories, hyperscalers effectively foreclose market opportunities for smaller competitors who cannot match these subsidies."
+        },
+        {
+            "rubric_item": "Analyze how exclusive licensing practices (such as Microsoft's BYOL changes) act as a 'raising rivals' costs' strategy, making competitor services more expensive for customers relying on that software, thereby protecting incumbents' market share.",
+            "score": 1,
+            "reason": "The article explicitly states Microsoft's BYOL changes raised competitor costs by making non-Microsoft cloud platforms more expensive and steering customers toward Azure, leveraging its enterprise-software dominance. Supporting sentences cite no blocked reference.",
+            "evidence": "Raised Competitor Costs: The change raised the effective cost of using non-Microsoft cloud platforms by preventing customers from deploying existing Microsoft software licenses on competing providers' infrastructure without purchasing additional licensing. Leverage into Azure: The policy created an incentive for customers to migrate to Microsoft Azure, where on-premises licenses with Software Assurance could be used without restriction. This practice leveraged Microsoft's dominant market position in enterprise software into the competitive cloud services market."
+        },
+        {
+            "rubric_item": "Explain how bundling practices (e.g., Teams with Office 365) leverage market dominance in one market (productivity software) to gain a competitive advantage in an adjacent market (collaboration tools), thereby disadvantaging competitors like Slack.",
+            "score": 1,
+            "reason": "The article explains that bundling Teams with Office 365 leverages Microsoft's productivity-software dominance into the communications/collaboration market, creating distribution advantages that disadvantage standalone competitors like Slack. No blocked reference is cited.",
+            "evidence": "Distribution Leverage: Bundling leverages Microsoft's dominant position in productivity software (Office 365 has established market penetration in enterprises and consumer markets) into the communications and collaboration software market. Barrier to Competitors: Bundling creates distribution advantages for Teams relative to standalone competitors like Slack, which must compete without the benefit of automatic inclusion in productivity suites."
+        }
+    ]
+}

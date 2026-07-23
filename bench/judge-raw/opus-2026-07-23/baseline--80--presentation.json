@@ -1,0 +1,22 @@
+{
+    "results": [
+        {
+            "rubric_item": "The output must be structured into two main parts: 'Part One: The Case of Boris Takk (as studied by Ene Kõresaar)' and 'Part Two: The Perspectives of Svetlana Aleksievich and Jasmina Husanović.'",
+            "score": 1,
+            "reason": "The article is explicitly divided into the two required main parts with headings matching the requested structure, and the headings cite no blocked reference.",
+            "evidence": "### PART ONE: THE CASE OF BORIS TAKK (As Studied by Ene Kõresaar) [...] ### PART TWO: The Perspectives of Svetlana Aleksievich and Jasmina Husanović"
+        },
+        {
+            "rubric_item": "Part One must provide clear, distinct answers to the five points requested in the task.",
+            "score": 1,
+            "reason": "Part One contains five clearly separated numbered subsections covering life trajectory, memory entrepreneur activities, core narrative including 'serving the Estonian cause from inside the system', stance on the Holocaust, and Kõresaar's dominant postcolonial analysis; no blocked reference is cited in the supporting text.",
+            "evidence": "#### 1. Boris Takk's Life Trajectory [...] #### 2. Activities as a 'Memory Entrepreneur' [...] #### 3. Takk's Core Narrative and His Perspective on \"Serving the Estonian Cause from Inside the System\" [...] #### 4. Takk's Stance on the Holocaust [...] #### 5. Kõresaar's Analysis: The Dominant Postcolonial Perspective"
+        },
+        {
+            "rubric_item": "Part Two must clearly differentiate between the perspectives of Svetlana Aleksievich and Jasmina Husanović.",
+            "score": 1,
+            "reason": "Part Two dedicates distinct subsections to each scholar, contrasting Aleksievich's oral-history 'history of emotions' approach with Husanović's 'politics of witnessing and hope', and cites no blocked reference in the supporting sentences.",
+            "evidence": "#### 1. Svetlana Aleksievich and Her Approach to World War II Memory [...] #### 2. Jasmina Husanović's Politics of Witnessing and Hope"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "results": [
+        {
+            "rubric_item": "The output must begin with a table titled 'Characteristics of Included Clinical Trials'.",
+            "score": 1,
+            "reason": "The review opens with the section 'Part 1: Characteristics of Included Clinical Trials', which is immediately followed by the summary table. The table is the first substantive content and is correctly titled. The supporting content carries no inline citation to a blocked reference.",
+            "evidence": "## Part 1: Characteristics of Included Clinical Trials\n\nThe following table summarizes the key characteristics of major randomized controlled trials examining salt substitutes and cardiovascular outcomes, as identified in systematic reviews published through March 2022:\n\n| Study (First Author, Year) | Country | Design | Salt Substitute Composition | Control Group Salt Type | Baseline SBP (mmHg) | Baseline DBP (mmHg) | Follow-up Duration |"
+        },
+        {
+            "rubric_item": "The table must sequentially include the following columns: Study (First Author and Year), Country, Design, Salt Substitute Composition, Control Group Salt Type, Baseline Systolic Blood Pressure (mmHg), Baseline Diastolic Blood Pressure (mmHg), and Follow-up Duration.",
+            "score": 1,
+            "reason": "The table header lists all required columns in the exact required order: Study (First Author, Year), Country, Design, Salt Substitute Composition, Control Group Salt Type, Baseline SBP (mmHg), Baseline DBP (mmHg), and Follow-up Duration. No blocked reference is cited in the supporting content.",
+            "evidence": "| Study (First Author, Year) | Country | Design | Salt Substitute Composition | Control Group Salt Type | Baseline SBP (mmHg) | Baseline DBP (mmHg) | Follow-up Duration |"
+        },
+        {
+            "rubric_item": "The final section must present the analysis, including subgroup findings and the estimation of cardiovascular risk reduction.",
+            "score": 1,
+            "reason": "The analysis is presented in Part 2 (overall significance for blood pressure and mortality plus subgroup analyses by age, sample size, and study duration) and Part 3 (cardiovascular risk reduction estimates based on SBP lowering). Both subgroup findings and the risk-reduction estimation are included, with no inline citation to a blocked reference.",
+            "evidence": "## Part 2: Analysis of Study Findings ... #### By Age Group (<60 years vs. ≥60 years) ... #### By Sample Size (<300 vs. ≥300 participants) ... #### By Study Duration (<12 months vs. ≥12 months) ... ## Part 3: Cardiovascular Risk Reduction Estimates Based on SBP Lowering ... #### Short-term Studies (<12 months) With an average SBP reduction of −4.80 mmHg: - Estimated stroke risk reduction: 6.7% (95% CI: 5.6-8.0%)"
+        },
+        {
+            "rubric_item": "The entire output must be well-structured, with clear headings for each section.",
+            "score": 1,
+            "reason": "The output is organized with a top-level review title and clear section headings (Part 1, Part 2, Part 3, Conclusions, Sources) plus descriptive subheadings for the subgroup analyses and risk-reduction estimates. No blocked reference is cited in this structural content.",
+            "evidence": "# Comprehensive Review: Effectiveness of Salt Substitutes on Cardiovascular Outcomes ... ## Part 1: Characteristics of Included Clinical Trials ... ## Part 2: Analysis of Study Findings ... ### Subgroup Analyses ... ## Part 3: Cardiovascular Risk Reduction Estimates Based on SBP Lowering ... ## Conclusions"
+        }
+    ]
+}

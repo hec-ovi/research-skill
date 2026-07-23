@@ -1,0 +1,22 @@
+{
+    "results": [
+        {
+            "rubric_item": "The output must be structured into two main parts: 'Part One: The Case of Boris Takk (as studied by Ene Kõresaar)' and 'Part Two: The Perspectives of Svetlana Aleksievich and Jasmina Husanović.'",
+            "score": 1,
+            "reason": "The article contains both required headings verbatim, explicitly dividing the findings into the two named parts. This structural framing does not rely on any blocked reference.",
+            "evidence": "**Part One: The Case of Boris Takk (as studied by Ene Kõresaar)** ... **Part Two: The Perspectives of Svetlana Aleksievich and Jasmina Husanović**"
+        },
+        {
+            "rubric_item": "Part One must provide clear, distinct answers to the five points requested in the task.",
+            "score": -1,
+            "reason": "Part One does address all five points (life trajectory, memory-entrepreneur activities, the 'prolonged rupture'/'serving from inside the system' narrative, Holocaust stance, and Kõresaar's dual-colonization analysis). However, the required fourth point (Takk's stance on the Holocaust) is explicitly supported by a citation to the blocked reference, since the article attributes the Klooga camp / disappearance-of-Jews detail solely to 'Kõresaar's chapter as reported by Dovilė Budrytė.'",
+            "evidence": "he spoke of the \"disappearance\" of Estonian Jews and described the Klooga camp, where German forces and local collaborators murdered roughly 2,000 Jews in September 1944, as \"a dismal site.\" This specific detail traces to a single identifiable analytic source in this research (Kõresaar's chapter as reported by Dovilė Budrytė) and could not be independently corroborated from a second unrelated origin, so it should be read as well-attested but single-sourced rather than doubly confirmed."
+        },
+        {
+            "rubric_item": "Part Two must clearly differentiate between the perspectives of Svetlana Aleksievich and Jasmina Husanović.",
+            "score": 1,
+            "reason": "Part Two devotes a separate paragraph to each figure and further contrasts them in the comparison table, clearly distinguishing Aleksievich's oral-testimony 'history of feelings' from Husanović's civil-society 'politics of witnessing and hope.' The supporting sentences draw on non-blocked sources, not the blocked Budrytė reference.",
+            "evidence": "In *War's Unwomanly Face* (1985), Svetlana Aleksievich set out to write, in her words, \"not the history of war, but the history of feelings\" ... Jasmina Husanović, a Bosnian feminist scholar-activist at the University of Tuzla, develops what she terms a \"politics of witnessing and hope\" ... Against both, she looks for \"openings in civil society,\" informal, state-independent spaces where art and cultural production let trauma be processed and witnessed rather than administered or instrumentalized."
+        }
+    ]
+}

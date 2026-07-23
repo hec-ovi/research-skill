@@ -1,0 +1,142 @@
+{
+    "results": [
+        {
+            "rubric_item": "Clearly state that Boris Takk was an Estonian who, as a teenager in 1943, was mobilized by the Germans to join the Waffen SS.",
+            "score": 1,
+            "reason": "The article states all three elements: Estonian, teenager in 1943, mobilized by the Germans into the Waffen-SS. No blocked reference is cited by the supporting sentences.",
+            "evidence": "Boris Takk was an Estonian whose life spanned one of the most turbulent periods in European history. In 1943, as a teenager, Takk was mobilized by the Germans to join the Waffen-SS during World War II."
+        },
+        {
+            "rubric_item": "Clearly state that Takk decided to stay in Estonia in 1944 instead of retreating with the German military.",
+            "score": 1,
+            "reason": "The article explicitly states he chose to remain in Estonia in 1944 rather than retreat with German forces.",
+            "evidence": "Rather than retreating with German forces in 1944, Takk made the consequential decision to remain in Estonia, choosing to live under Soviet rule for the following 47 years until the Soviet Union's collapse in 1991."
+        },
+        {
+            "rubric_item": "Clearly state that Takk joined the Communist Party of Estonia in the early 1970s.",
+            "score": 1,
+            "reason": "The article states he joined the Communist Party of Estonia in the early 1970s.",
+            "evidence": "In the early 1970s, during the Soviet period, Takk joined the Communist Party of Estonia—a strategic move that would become central to his post-Soviet narrative."
+        },
+        {
+            "rubric_item": "Clearly state that Takk became a 'memory entrepreneur' after Estonia regained independence in the late 1980s and early 1990s.",
+            "score": 1,
+            "reason": "The article states he took on the memory-entrepreneur role following Estonia's regained independence in 1991.",
+            "evidence": "Following Estonia's independence in 1991, Takk assumed the roles of witness to history and spokesperson for his generation. As a memory entrepreneur, Takk worked to shape and articulate historical narratives about the Estonian experience during World War II and the Soviet period."
+        },
+        {
+            "rubric_item": "Clearly state that Takk organized gatherings of Estonian veterans who had served in the German military.",
+            "score": 0,
+            "reason": "The article does not mention Takk organizing gatherings of Estonian veterans who served in the German military.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Takk claimed his decision to join the Waffen SS was part of a 'continuous fight for Estonian freedom' against communism.",
+            "score": 1,
+            "reason": "The article states his actions were framed as a 'continuous struggle for Estonian freedom'; the anti-communist freedom-struggle framing of his wartime/life choices is conveyed, though 'against communism' is not stated verbatim.",
+            "evidence": "The core of Takk's story frames his actions as part of a \"continuous struggle for Estonian freedom,\" even within the constraints of Soviet institutional structures."
+        },
+        {
+            "rubric_item": "Clearly state that Takk claimed his joining the Communist Party was a way of 'serving the Estonian cause from inside the system.'",
+            "score": 1,
+            "reason": "The article states he justified his Communist Party membership as serving the Estonian cause from inside the system.",
+            "evidence": "during the Soviet years, Takk joined the Communist Party of Estonia, which he later justified by claiming he \"wanted to serve the Estonian cause from inside the system.\""
+        },
+        {
+            "rubric_item": "Clearly state that Takk's core metaphor for the Soviet period was a 'prolonged rupture' of Estonian national sovereignty.",
+            "score": 1,
+            "reason": "The article states his narrative centers on the concept of 'prolonged rupture' of Estonian national continuity under Soviet rule.",
+            "evidence": "Takk's narrative centers on what Kõresaar identifies as the concept of \"prolonged rupture\"—the idea that Soviet rule (1940-1941 and 1944-1991) represented an abnormal, foreign intrusion that fragmented Estonian national continuity."
+        },
+        {
+            "rubric_item": "Clearly state that Takk's narrative framed that period as a dual colonization by Nazi Germany and the Soviet Union.",
+            "score": 1,
+            "reason": "The article explicitly describes the dual-colonization framing by Nazi Germany and the Soviet Union.",
+            "evidence": "According to Kõresaar, this perspective frames the entire 20th-century history of Estonia through a dual-colonization lens: World War II is understood as colonization by Nazi Germany, and the Soviet period (1940-1941 and 1944-1991) is understood as colonization by the Soviet Union."
+        },
+        {
+            "rubric_item": "Clearly state that Takk's public discussion of the Holocaust in 1993 was unusual.",
+            "score": 0,
+            "reason": "The article does not mention any 1993 public discussion of the Holocaust or characterize it as unusual; it says the literature does not document his specific Holocaust stance.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Takk mentioned the 'disappearance' of Jews.",
+            "score": 0,
+            "reason": "The article does not mention Takk referring to the 'disappearance' of Jews.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Takk described the Klooga concentration camp as a 'dismal site.'",
+            "score": 0,
+            "reason": "The article does not mention the Klooga concentration camp or describe it as a 'dismal site.'",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Svetlana Aleksievich's book is titled *War's Unwomanly Face*.",
+            "score": 1,
+            "reason": "The article clearly identifies the book (given in the text as 'The Unwomanly Face of War,' an alternate translation of the same title, and listed in the sources as 'War's Unwomanly Face').",
+            "evidence": "Between 1978 and 1985, Aleksievich conducted fieldwork for her groundbreaking book *The Unwomanly Face of War: An Oral History of Women in World War II*."
+        },
+        {
+            "rubric_item": "Clearly state that Aleksievich's goal was not to write a history of war, but an 'emotional history' or a history of 'small (ordinary) human being.'",
+            "score": 1,
+            "reason": "The article states her goal was a history of emotions/the soul, prioritizing personal experience over official historical accounts.",
+            "evidence": "Aleksievich pioneered what she calls \"a history of emotions...a history of the soul\"—prioritizing personal experience, affect, and the subjective dimensions of war over official historical accounts."
+        },
+        {
+            "rubric_item": "Clearly state that Aleksievich focused on women's personal experiences, which should have 'its own colors, its own smells, its own space and its own language.'",
+            "score": 0,
+            "reason": "The article discusses her focus on women's experiences generally but does not include the distinctive characterization that this experience should have 'its own colors, its own smells, its own space and its own language.'",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Aleksievich aimed to deconstruct the grand narrative of the 'Great Patriotic War.'",
+            "score": 1,
+            "reason": "The article states her work is a counternarrative to Soviet propaganda and exposes the gap with official Soviet memory of the war, conveying deconstruction of the grand official war narrative, though the term 'Great Patriotic War' is not named.",
+            "evidence": "Her oral-history methodology serves as a counternarrative to both Soviet propaganda and revisionist postcolonial frameworks that might subsume women's experiences into larger historical abstractions."
+        },
+        {
+            "rubric_item": "Clearly state that Aleksievich's work included stories of mundane acts of kindness, such as Soviet women giving bread to German prisoners of war, or nurses treating wounded SS soldiers.",
+            "score": 0,
+            "reason": "The article does not include these specific anecdotes of bread given to German POWs or nurses treating wounded SS soldiers.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that a Soviet censor criticized Aleksievich for focusing on 'biology' and 'primitive naturalism,' reducing women from heroes to ordinary people.",
+            "score": 0,
+            "reason": "The article does not mention any Soviet censor's criticism about 'biology' or 'primitive naturalism.'",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Jasmina Husanović is a feminist philosopher and activist from Tuzla, Bosnia.",
+            "score": 1,
+            "reason": "The article identifies her as a feminist scholar and activist at the Faculty of Philosophy, University of Tuzla, Bosnia and Herzegovina.",
+            "evidence": "Jasmina Husanović, an Associate Professor at the Faculty of Philosophy, University of Tuzla in Bosnia and Herzegovina, develops a framework of \"politics of witnessing and hope\" that offers a postcolonial and feminist response to trauma in the aftermath of war and imperialism."
+        },
+        {
+            "rubric_item": "Clearly state that Husanović criticized liberal attempts to handle traumatic memory with 'white gloves,' referring to international transitional justice tools.",
+            "score": 0,
+            "reason": "The article does not mention the 'white gloves' critique of liberal or international transitional justice approaches.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Husanović also criticized nationalists' attempts to monopolize memory.",
+            "score": 1,
+            "reason": "The article states her work challenges and offers a counterpoint to nationalist memory politics that organize trauma around ethnic/national identity, conveying criticism of nationalist control over memory.",
+            "evidence": "In essence, Husanović's \"politics of witnessing and hope\" offers a counterpoint to both nationalist memory politics (exemplified by the postcolonial Estonian framework) and to trauma studies approaches that risk aestheticizing suffering."
+        },
+        {
+            "rubric_item": "Clearly state that Husanović proposed a 'third way' of dealing with trauma, focusing on civil society and art.",
+            "score": 0,
+            "reason": "The article mentions art and cultural/knowledge production in her approach but does not frame it as a 'third way' between liberal and nationalist approaches; the distinctive 'third way' claim is absent.",
+            "evidence": ""
+        },
+        {
+            "rubric_item": "Clearly state that Husanović's goal is a 'politics of witnessing and hope,' aimed at restoring dignity to bodies that have been 'defaced, erased and/or violently made non-relevant.'",
+            "score": 1,
+            "reason": "The article clearly states her goal is a 'politics of witnessing and hope' and conveys its emancipatory/dignity aim, though the specific phrasing about restoring dignity to bodies 'defaced, erased and/or violently made non-relevant' is not quoted.",
+            "evidence": "Jasmina Husanović... develops a framework of \"politics of witnessing and hope\"... Her work insists that witnessing to trauma can be transformative—creating possibilities for solidarity, equality, and emancipatory politics across the fractures of postcoloniality, ethnic division, and gendered violence."
+        }
+    ]
+}
