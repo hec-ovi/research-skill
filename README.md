@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
-  <img src="https://img.shields.io/badge/Version-0.3.5-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.3.6-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
 </p>
@@ -62,7 +62,7 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
 - **Small-model tested.** The retrieval stop rule, the return-only output contract, the ambiguous-question rule, and the storage rule all exist because Haiku-class agents actually broke without them. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
-- **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics. Copying one aggregator's table cost every point in that table, 0 of 23; rebuilding the same table from the individual trials scored 23 of 23 on identical research. The harness and per-arm numbers are in `bench/`.
+- **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics. Copying one aggregator's table cost every point in that table, 0 of 23; rebuilding the same table from the individual trials scored 23 of 23 on identical research. A second run with Haiku writing the reports and Haiku judging reproduces the attribution gap and is vendored in full. The harness, reports, and per-arm numbers are in `bench/`.
 
 ---
 

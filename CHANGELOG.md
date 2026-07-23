@@ -5,6 +5,21 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.6] - 2026-07-23
+
+### Added
+
+- **Ambiguous-question rule.** A subjective "best X" question is a comparison across current options, not a casual lookup: pick the most common reading, state it in one line, proceed, and record alternative readings in `## Open questions`. In an end-to-end run, a Haiku-class agent classified "find me the best fps game" as out of scope, answered from training priors, and asked the user to choose an approach; this rule removes that out.
+- **Inline fallback when no subagent is available.** If the host has no Agent tool or the spawn is denied, the agent runs the same six cognitive phases inline, produces the same output format, and continues to Storage. Previously only the Codex copy had an inline path.
+- **Fourth core rule: Investigation always ends in Storage.** The same run that punted on triage also answered a research question from live web results without writing any entry or index row. The rule set now states that research that never reaches `.research/` is a failed run, with the write verified before reporting done.
+- **Small-model end-to-end harness.** `tests/e2e/` documents the dummy-prompt protocol (smallest agent tier, ambiguous prompt, no extra instructions, disk state graded rather than the chat answer) and logs the failing v0.3.5 run and the passing v0.3.6 runs: cold store, warm-store retrieval that stopped at the Summary tier with zero web searches, and a second cold topic appended to the same index.
+- **Second benchmark run, fully vendored.** DRB2 tasks 62, 114, 80 rerun with Haiku report writers and Haiku judges: the brief beats the bare prompt on the weighted score (44.3% vs 36.2%), with the gap concentrated in attribution (task 114 analysis: 6 of 8 baseline items blocked vs 1). Reports and per-rubric scores are committed under `bench/`.
+
+### Changed
+
+- **Bench harness runs from the repo.** `aggregate_pilot.py` now reads the vendored `scores/*.json` files, and `tests/check_skill.sh` recomputes every vendored table row in `bench/README.md`, failing on drift. The bench README states which rows are recomputable and which are a recorded result whose raw scores were never committed.
+- **README accuracy pass.** Install route count matches the four documented routes, model wording is version-neutral (Opus-class), the Agent Skills spec section names which frontmatter fields are spec-defined and which are Claude Code extensions, and the roadmap section is compressed to its current facts.
+
 ## [0.3.5] - 2026-07-22
 
 ### Changed
