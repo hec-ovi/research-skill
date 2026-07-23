@@ -143,7 +143,7 @@ The mode (new entry vs merge) and the depth (quick vs deep) were decided in Retr
 - Effort line: "This is a quick lookup: 3-6 searches, minutes not tens of minutes. Answer the one question asked; do not expand scope."
 - Phases: Decompose in one line, Gather and Validate merged (2 independent sources on the load-bearing claim, one source acceptable on the rest), Contrarian pass is one focused search, Insights may be a single bullet or empty.
 - Quick may run inline even when subagents are available: a separate agent is overhead a 3-6 search lookup does not need. Deep keeps the subagent isolation.
-- A quick run follows this order, strictly: (1) gather, 3-6 searches or fetches; (2) write the entry (`depth: quick` in frontmatter) and the index row; (3) run the write verification; (4) only then answer the user. The answer comes last so the write cannot be skipped; a quick answer with no stored entry is a failed run (rule 4). A later session upgrades a quick entry with a deep merge.
+- A quick run follows this order, strictly: (1) gather, 3-6 searches or fetches; (2) contrarian check, one search for "X wrong / criticized / deprecated", recorded in `## Strongest objection`; (3) write the entry (`depth: quick` in frontmatter) and the index row; (4) run the write verification; (5) only then answer the user. The answer comes last so the write cannot be skipped; a quick answer with no stored entry is a failed run (rule 4). A later session upgrades a quick entry with a deep merge.
 
 #### Brief checklist
 
