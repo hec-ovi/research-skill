@@ -198,7 +198,7 @@ The folder layout and the `name` and `description` frontmatter fields follow the
 
 ### Grok deep-research multi-agent pattern (xAI)
 
-The Investigation phase walks a 6-step cognitive workflow (Decompose, Gather, Validate, Contrarian pass, Insight extraction, Synthesize) adapted from xAI's published [Multi-Agent architecture](https://docs.x.ai/developers/model-capabilities/text/multi-agent) and the [DeepSearch announcement](https://x.ai/news/grok-3). xAI ships 4 specialized agents (Captain, Harper, Benjamin, Lucas) on a shared backbone; this skill condenses those into cognitive phases a single subagent walks from one self-contained brief.
+The Investigation phase walks a 6-step cognitive workflow (Decompose, Gather, Validate, Contrarian pass, Insight extraction, Synthesize) adapted from xAI's published [Multi-Agent architecture](https://docs.x.ai/developers/model-capabilities/text/multi-agent) and the [DeepSearch announcement](https://x.ai/news/grok-3). xAI's setup launches a leader agent that coordinates several collaborating agents (a 4-agent configuration for focused research, 16 for deep analysis) across search, cross-reference, and synthesis; this skill condenses that pattern into cognitive phases a single subagent walks from one self-contained brief.
 
 The Contrarian pass (phase 4) is the standout borrowed element: actively searching for "why this is wrong" rather than confirming. In an A/B test on a celebrity-fronted AI tool legitimacy question, the contrarian pass surfaced significant controversy that a minimal-brief baseline missed.
 
