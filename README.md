@@ -63,7 +63,22 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
 - **Two depths: research and deep research.** Fresh questions are triaged at retrieval: **quick** (3 to 6 searches, minutes) for narrow lookups, **deep** (the full 6-phase walk) for comparisons and anything costly to get wrong. Your wording overrides the triage in both directions; a quick entry is stored with `depth: quick` and upgrades through a deep merge later.
 - **Small-model tested.** The retrieval stop rule, the return-only output contract, the ambiguous-question rule, and the storage rule all exist because Haiku-class agents actually broke without them. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
-- **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics. Copying one aggregator's table cost every point in that table, 0 of 23; rebuilding the same table from the individual trials scored 23 of 23 on identical research. A second run with Haiku writing the reports and Haiku judging reproduces the attribution gap and is vendored in full. The harness, reports, and per-arm numbers are in `bench/`.
+- **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics, not from taste. See the Benchmarks section below for the numbers.
+
+---
+
+## Benchmarks
+
+The skill is scored against [DeepResearch Bench II](https://agentresearchlab.com/benchmarks/deepresearch-bench-ii/index.html), the same public benchmark whose leaderboard ranks commercial deep-research systems. The most complete run (2026-07-23) has Haiku 4.5 and Sonnet 5 agents writing reports on three DRB2 tasks, all graded by an Opus 4.8 judge using the benchmark's own three-way rubric prompt (a rubric item scores +1 satisfied, 0 absent, -1 satisfied but attributed to the task's blocked source article). Weighting is 0.5 recall / 0.35 analysis / 0.15 presentation.
+
+| Arm | Writer | Info recall | Analysis | Presentation | Weighted | Blocked |
+|---|---|---|---|---|---|---|
+| research-skill | Haiku 4.5 | 55.5% | 65.9% | 88.9% | **64.2%** | 1 |
+| baseline (bare prompt) | Haiku 4.5 | 41.9% | 58.0% | 100.0% | 56.2% | 0 |
+
+The skill brief beats the bare-prompt baseline by 8 weighted points on the same model and the same judge, driven by attribution: on the cloud-market task the baseline lost analysis items for sourcing to the blocked OECD study while the skill arm traced the same figures to national competition authorities.
+
+For context, not a placement: the public leaderboard's top system scores 64.38% weighted and its median sits near 45%. This run is 3 of 132 tasks under an Opus judge rather than the leaderboard's own scorer, so it is a directional signal that the brief lands a small Haiku agent's report in the top band, not a leaderboard rank. The sharpest finding is that a Sonnet writer scored *lower* (57.5%) because one opening sentence credited a rebuilt table to its blocked source, voiding 30 otherwise-correct rubric items, which is exactly the failure the skill's own source rules target. Full settings, all three arms, every report, and the judge's per-item reasoning are in [`bench/`](bench/).
 
 ---
 
