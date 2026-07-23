@@ -50,4 +50,4 @@ Goal: run the skill end to end under noob-cli 0.5.0 with its bundled websearch-s
 
 Progress:
 - 2026-07-23: P1 done. Versions verified from the artifacts, not the docs. Side task landed in the llama-vulkan-strix repo (its own commits): the stack is single-service again, laguna default, qwen the documented swap.
-- 2026-07-23: P2 run 1 in flight on Qwen3.6-35B-A3B.
+- 2026-07-23: P2 run 1 done, 287 s wall, and it produced the phase's first fix. The host indexes skills as one clipped 200-char description line; ours opened with store mechanics and kept every trigger phrase in `when_to_use`, a field spec-only hosts never read. The model researched (detached child, live 2026 data) but never loaded the skill, so nothing was stored. Description rewritten to lead with the trigger questions inside the 200-char window; re-running cold as run 2.
