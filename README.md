@@ -62,7 +62,7 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
 - **Two depths: research and deep research.** Fresh questions are triaged at retrieval: **quick** (3 to 6 searches, minutes) for narrow lookups, **deep** (the full 6-phase walk) for comparisons and anything costly to get wrong. Your wording overrides the triage in both directions; a quick entry is stored with `depth: quick` and upgrades through a deep merge later.
-- **Small-model tested.** The retrieval stop rule, the return-only output contract, the ambiguous-question rule, and the storage rule all exist because Haiku-class agents actually broke without them. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
+- **Small-model tested.** The ambiguous-question rule and the storage rule exist because Haiku-class agents actually broke without them; the retrieval stop rule was then verified holding on the same tier. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
 - **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics, not from taste. See the Benchmarks section below for the numbers.
 
 ---
@@ -88,7 +88,7 @@ When a Claude Code Investigation subagent finishes, its full structured return (
 
 Why this matters:
 
-- **No raw web-search dump pollution.** The main agent only sees the agent's clean synthesized output, never the raw web search results or fetch responses. Those live in a separate transcript file the main agent is forbidden to read.
+- **No raw web-search dump pollution.** The main agent only sees the agent's clean synthesized output, never the raw web search results or fetch responses. Those stay in the subagent's own context and never reach the main agent.
 - **Storage is deterministic.** The required output format maps 1:1 to the FINDINGS.md schema. Parsing is mechanical, not interpretive.
 - **Conversation stays interactive.** Claude Code uses background mode (`run_in_background: true`) for subagent investigation. Codex defaults to inline investigation unless the user explicitly asks for subagents.
 
@@ -210,7 +210,7 @@ The Contrarian pass (phase 4) is the standout borrowed element: actively searchi
 
 ## Schema
 
-Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `last_verified`, `status`, `related`, `sources`, `raw`) and a body with `## Summary`, `## Findings`, `## Insights`, `## Strongest objection`, `## Discarded approaches`, `## Open questions`, `## Timeline`. See [`SKILL.md`](SKILL.md) for the full schema and rules.
+Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `last_verified`, `status`, `depth`, `related`, `sources`, `raw`) and a body with `## Summary`, `## Findings`, `## Insights`, `## Strongest objection`, `## Discarded approaches`, `## Open questions`, `## Timeline`. See [`SKILL.md`](SKILL.md) for the full schema and rules.
 
 ## Tests
 
@@ -252,11 +252,11 @@ The Codex plugin uses a separate Codex-specific skill file at `plugins/research-
 
 ## Roadmap
 
-Activation loads the full `SKILL.md` body, roughly 5,000 to 6,000 tokens. That is heavy for a skill (typical reference skills run 500 to 3,000), and most of the weight is the Investigation procedure, which Retrieval-only calls never use.
+Activation loads the full `SKILL.md` body, roughly 7,000 to 8,000 tokens (the 32 KB file at about 4 characters per token). That is heavy for a skill (typical reference skills run 500 to 3,000), and most of the weight is the Investigation procedure, which Retrieval-only calls never use.
 
 The planned fix is a thin-dispatcher refactor: split `SKILL.md` into a small dispatcher plus `procedures/retrieval.md`, `procedures/investigation.md`, and `procedures/storage.md`, loaded only when their phase runs. Same "thin harness, fat skills" pattern GBrain applies with `RESOLVER.md`, and the same progressive disclosure this skill already applies to research data. A Retrieval-only call would drop to roughly half the current activation cost.
 
-Deferred until the cost shows up as real friction: a user reporting context pressure, `SKILL.md` growing past ~6,500 tokens, or an issue or PR proposing the split. Feedback welcome at [github.com/hec-ovi/research-skill/issues](https://github.com/hec-ovi/research-skill/issues).
+Deferred until the cost shows up as real friction: a user reporting context pressure, or an issue or PR proposing the split. Feedback welcome at [github.com/hec-ovi/research-skill/issues](https://github.com/hec-ovi/research-skill/issues).
 
 ---
 
