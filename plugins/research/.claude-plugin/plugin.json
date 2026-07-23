@@ -1,5 +1,5 @@
 {
   "name": "research",
   "description": "Persistent project-scoped store for deep research on large topics. Progressive disclosure via INDEX.md dispatcher, async investigation subagents (Opus-class), conflict-handling history.",
-  "version": "0.3.6"
+  "version": "0.4.0"
 }

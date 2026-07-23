@@ -5,6 +5,17 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-07-23
+
+### Added
+
+- **Two research depths.** Fresh questions are triaged at retrieval: **quick** (3 to 6 searches, minutes; narrow lookups or an explicit speed signal) and **deep** (the full 6-phase walk; comparisons and anything costly to get wrong, the default when in doubt). The user's wording overrides the triage in both directions. Quick keeps the pipeline, not just the search: a strict order of gather, one contrarian check recorded in `## Strongest objection`, write the entry with `depth: quick` in frontmatter, verify the write, and only then answer, so the write cannot be skipped by reaching "answered". Quick may run inline even when subagents are available; deep keeps subagent isolation. A quick entry upgrades later through a deep merge. New optional schema key: `depth: deep | quick`.
+- **Local-host benchmark under noob-cli.** The skill was run headless under noob-cli 0.5.0 with its bundled websearch-skill 0.2.3 against llama.cpp b10103 serving Qwen3.6-35B-A3B Q4_K_M (5 slots of 131,072 ctx), on purpose the smallest practical stack. Measured: deep cold 839 s with 48 sources and a zero-error 11-call pipeline, warm retrieval 33 s (25x), quick 29 to 42 s (~29x), explicit invocation 1 of 1 versus model-initiated activation 2 of 5 on ambiguous prompts. Parent context economy: ~3,900 tokens emitted across a full deep run, 60% of it the single findings write; search mechanics, format rules, and the contrarian pass reach only the investigation child. Full traces in `tests/e2e/README.md`.
+
+### Changed
+
+- **Description carries the activation triggers.** Spec-only hosts index a skill by its (often clipped) `description` alone; the trigger questions and the tie-break against plain web-search skills now sit in the first 200 characters. The old description led with store mechanics and kept triggers in `when_to_use`, which such hosts never read.
+
 ## [0.3.6] - 2026-07-23
 
 ### Added
