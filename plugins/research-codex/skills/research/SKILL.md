@@ -57,7 +57,7 @@ On first activation in a project, do this once:
    ```
 4. Add `.research/` to `<root>/.gitignore`. If `.gitignore` doesn't exist, create it. Research data may contain proprietary insights, default private.
 
-The data lives at `<root>/.research/` (sibling of `.claude/`, not nested inside it). It is a top-level project directory chosen so research data is colocated with the project, gitignored by default, and easy to find by name. Auditing remains intact: every read and write goes through the host's normal permission system.
+The data lives at `<root>/.research/`, a top-level project directory (not nested inside the agent's config directory). It is a top-level project directory chosen so research data is colocated with the project, gitignored by default, and easy to find by name. Auditing remains intact: every read and write goes through the host's normal permission system.
 
 ## Workflow
 
@@ -141,7 +141,7 @@ The mode (new entry vs merge) and the depth (quick vs deep) were decided in Retr
 **Quick depth** changes only the effort line and the phase weights; everything else in the brief, the output shape, and Storage stays identical:
 
 - Effort line: "This is a quick lookup: 3-6 searches, minutes not tens of minutes. Answer the one question asked; do not expand scope."
-- Phases: Decompose in one line, Gather and Validate merged (2 independent sources on the load-bearing claim, one source acceptable on the rest), Contrarian pass is one focused search, Insights may be a single bullet or empty.
+- Phases: Decompose in one line, Gather and Validate merged (2 independent sources on the load-bearing claim, one source acceptable on trivial supporting facts), Contrarian pass is one focused search, Insights may be a single bullet or empty.
 - Quick keeps deep's structure: run the quick investigation as its own pass (subagent where authorized, inline otherwise) and apply Storage when its return is complete. The return is what makes Storage happen; collapsing quick into a bare lookup is how quick runs lose their write.
 - The quick brief's 3-6 searches include one contrarian check ("X wrong / criticized / deprecated"), returned in `## Strongest objection`; quick is a smaller investigation, never a bare lookup.
 - On return, the same order as deep, strictly: write the entry (`depth: quick` in frontmatter), append the index row, run the write verification, and only then answer the user. The answer comes last so the write cannot be skipped; a quick answer with no stored entry is a failed run (rule 4). A later session upgrades a quick entry with a deep merge.
@@ -163,7 +163,7 @@ Keep the brief's overhead low: everything beyond the objective, boundaries, and 
 
 #### Cognitive phases (include verbatim in the subagent brief or inline notes)
 
-The investigation walks these as discrete phases. Phases 1 and 5 are judgment calls; phases 2-4 and the output format are followed exactly. Phases 4 and 5 are load-bearing:
+The investigation walks these as discrete phases. Phases 1 and 5, and phase 6's verdict, are judgment calls; phases 2-4, phase 6's completeness pass, and the output format are followed exactly. Phases 4 and 5 are load-bearing:
 
 1. **Decompose** - list sub-claims that would resolve the question; identify what evidence settles each. Err toward breadth: enumerate the facts a domain expert would expect the answer to cover, not just the headline question. If the question names or points at one obvious source (a single survey, report, or article), note it, then decompose so each sub-claim can be settled from independent evidence rather than that one source.
 2. **Gather** - for each sub-claim, find >=2 independent sources (year-pinned web search, then fetch/open the top relevant primary pages). Independent means different origins, not one document and its mirrors or reposts. Trace a claim to its own primary source (the trial, filing, dataset, or release note) rather than the review or article that aggregates it; the aggregator is a lead to follow, not the evidence. When the answer needs an enumeration - every trial in a review, every jurisdiction in a market study, every release in a changelog - open the enumerated items themselves and rebuild the list from them; a table lifted whole out of one aggregator is one source, not one per row. Quote verbatim and keep exact figures: numbers, dates, version strings, benchmark scores, prices, trend direction. Synthesis comes later.
@@ -205,11 +205,11 @@ Bulleted list. Causal, comparative, or trajectory claims that go beyond any sing
 - url - fetched YYYY-MM-DD
 - url - fetched YYYY-MM-DD
 
-## (Merge mode only) Supersedes
+## Supersedes
 - claim from existing entry that is now wrong + reason
 ```
 
-If a subagent is used, it does not write any files. You parse this return and apply Storage rules. If investigating inline, produce the same shape internally before Storage.
+If a subagent is used, it does not write any files. You parse this return and apply Storage rules. The `## Supersedes` section appears only in merge mode; a new-entry investigation omits it. If investigating inline, produce the same shape internally before Storage.
 
 **End the brief with the return-only rule as its literal last line** - e.g. *"Your final message is the sections above and nothing else; anything before `## Summary` is discarded."* Models weight the final line heavily, and smaller models leak phase-by-phase working notes into the return when the brief ends on anything else.
 
@@ -241,13 +241,13 @@ After Investigation returns its synthesis (or the user pastes findings), you (ma
 **New entry path:**
 
 1. Create `<root>/.research/<topic-slug>/`.
-2. Write `FINDINGS.md` using the schema in File schemas. The return maps 1:1: `## Summary`, `## Findings`, `## Insights`, `## Strongest objection` copy over; `## Discarded approaches` starts as the empty table; `## Open questions` gets any gaps flagged during review; `## Timeline` gets the initial-entry line. Include every schema section even when empty. Frontmatter: `created` and `last_verified` = today; `status: active`; `sources` from the investigation return; `raw:` omitted (no raw yet); `related: []` unless cross-links apply.
+2. Write `FINDINGS.md` using the schema in File schemas. The return maps 1:1: `## Summary`, `## Findings`, `## Insights`, `## Strongest objection` copy over; `## Discarded approaches` starts as the empty table; `## Open questions` gets any gaps flagged during review; `## Timeline` gets the initial-entry line. Include every schema section even when empty. Frontmatter: `created` and `last_verified` = today; `status: active`; `depth: deep` (or `quick` for a quick run); `sources` from the investigation return; `raw:` omitted (no raw yet); `related: []` unless cross-links apply.
 3. Read `INDEX.md`, append a row: topic, path, today's date, a specific one-liner.
 
 **Merge path:**
 
 1. Read the existing `FINDINGS.md`.
-2. Update frontmatter: `last_verified` = today; append new sources.
+2. Update frontmatter: `last_verified` = today; append new sources. If a `depth: quick` entry is being refreshed by a deep merge, set `depth: deep` (the quick entry is now promoted).
 3. **Apply the investigation's `## Supersedes` list:** move each named claim from `## Findings` to `## Discarded approaches` with date + reason. See Conflict handling.
 4. Update / extend `## Findings` with new claims.
 5. Append a `## Timeline` entry summarizing the change.

@@ -95,6 +95,15 @@ for f in "${ALL[@]}"; do
 done
 ok "depth mode scan done"
 
+# 5e. Output-contract and depth-promotion fixes (audit pass) survive edits in every copy
+for f in "${ALL[@]}"; do
+  grep -qF '## Supersedes' "$f" || err "$f lost the clean Supersedes header"
+  grep -qF '## (Merge mode only) Supersedes' "$f" && err "$f still carries the parenthetical Supersedes header"
+  grep -qF 'the quick entry is now promoted' "$f" || err "$f lost the merge-path depth promotion"
+  grep -qF 'appears only in merge mode' "$f" || err "$f lost the merge-only Supersedes note"
+done
+ok "output-contract scan done"
+
 # 6. Claude copies keep WebSearch/WebFetch wording; Codex copy must not use them
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"
