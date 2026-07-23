@@ -61,7 +61,7 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: an Opus-class model in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean. Hosts without subagents run the same phases inline; the skill states the fallback explicitly.
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
 - **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
-- **Small-model tested.** The retrieval stop rule and the return-only output contract exist because Haiku-class agents actually broke without them (loaded the full entry after the summary already answered; leaked phase notes into the return).
+- **Small-model tested.** The retrieval stop rule, the return-only output contract, the ambiguous-question rule, and the storage rule all exist because Haiku-class agents actually broke without them. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
 - **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics. Copying one aggregator's table cost every point in that table, 0 of 23; rebuilding the same table from the individual trials scored 23 of 23 on identical research. The harness and per-arm numbers are in `bench/`.
 
 ---
@@ -202,7 +202,7 @@ Every entry's `FINDINGS.md` has structured frontmatter (`topic`, `created`, `las
 bash tests/check_skill.sh
 ```
 
-Checks that the three Claude skill copies are byte-identical, all four skill files keep the required sections and schema invariants, and the version is consistent across plugin manifests, README, and CHANGELOG.
+Checks that the three Claude skill copies are byte-identical, all four skill files keep the required sections, rules, and schema invariants, the version is consistent across plugin manifests, README, and CHANGELOG, and the bench table in `bench/README.md` matches the vendored scores. `tests/e2e/` documents the manual small-model end-to-end harness and its run log.
 
 ---
 
