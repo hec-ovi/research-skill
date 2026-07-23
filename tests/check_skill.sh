@@ -108,44 +108,82 @@ ok "output-contract scan done"
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"
 
-# 7. Bench table matches the vendored scores: every arm in a scores JSON must have
-# a README table row whose five numbers equal the recomputed values
-python3 - <<'EOF' || err "bench README table drifted from vendored scores (see output above)"
-import glob, json, re, sys
+# 7. Bench tables match the vendored scores. Each row is bound to the run that
+# owns it (bench/README.md rows anchor to their "## Run" section; the section is
+# matched to a scores file by the filename its prose names), so swapping two runs'
+# rows for a shared arm can no longer pass. The README.md headline table (run 3)
+# is guarded too: its weighted cell is bold and its arm labels are shortened.
+python3 - <<'EOF' || err "a bench table drifted from vendored scores (see output above)"
+import glob, json, os, re, sys
 
 DIMS = ['info_recall', 'analysis', 'presentation']
 WEIGHTS = {'info_recall': 0.5, 'analysis': 0.35, 'presentation': 0.15}
 
-readme = open('bench/README.md').read()
-rows = {}  # arm -> list of (recall, analysis, presentation, weighted, blocked)
-# two table shapes: "| arm | r% | a% | p% | w% | blk |" and the run-3
-# shape with a writer column "| arm | writer | r% | a% | p% | w% | blk |"
-for m in re.finditer(r'^\| ([\w.-]+) \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|', readme, re.M):
-    arm = m.group(1)
-    rows.setdefault(arm, []).append(tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
-for m in re.finditer(r'^\| ([\w.-]+) \| [\w. ]+ \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|', readme, re.M):
-    arm = m.group(1)
-    rows.setdefault(arm, []).append(tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
-
-fail = False
-for path in sorted(glob.glob('bench/scores/*.json')):
+def recompute(path):
     data = json.load(open(path))
     arms = {}
     for key, dims in data.items():
-        arm, task = key.rsplit('/', 1)
+        arm, _task = key.rsplit('/', 1)
         arms.setdefault(arm, []).append(dims)
+    out = {}
     for arm, tasks in arms.items():
         means = {d: sum(100.0 * sum(1 for s in t.get(d, []) if s == 1) / len(t[d]) for t in tasks) / len(tasks) for d in DIMS}
         blocked = sum(1 for t in tasks for d in DIMS for s in t.get(d, []) if s == -1)
         weighted = sum(means[d] * WEIGHTS[d] for d in DIMS)
-        want = (round(means['info_recall'], 1), round(means['analysis'], 1),
-                round(means['presentation'], 1), round(weighted, 1), blocked)
-        if want not in rows.get(arm, []):
-            print(f'{path}: arm {arm} recomputes to {want}, README rows: {rows.get(arm)}')
+        out[arm] = (round(means['info_recall'], 1), round(means['analysis'], 1),
+                    round(means['presentation'], 1), round(weighted, 1), blocked)
+    return out
+
+SCORES = {os.path.basename(p): recompute(p) for p in sorted(glob.glob('bench/scores/*.json'))}
+fail = False
+
+# bench/README.md: rows anchored to their "## Run" section.
+five = re.compile(r'^\| ([\w.-]+) \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|')
+seven = re.compile(r'^\| ([\w.-]+) \| [\w. ]+ \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| (\d+) \|')
+section = None
+sec_text = {}                     # heading -> lines
+sec_rows = {}                     # (heading, arm) -> [tuples]
+for ln in open('bench/README.md').read().splitlines():
+    if ln.startswith('## '):
+        section = ln.strip()
+    sec_text.setdefault(section, []).append(ln)
+    if section and section.startswith('## Run'):
+        for rx in (five, seven):
+            m = rx.match(ln)
+            if m:
+                sec_rows.setdefault((section, m.group(1)), []).append(
+                    tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
+for fname, arms in SCORES.items():
+    owners = [h for h, txt in sec_text.items() if h and h.startswith('## Run') and fname in '\n'.join(txt)]
+    if len(owners) != 1:
+        print(f'bench/README.md: {fname} maps to {len(owners)} run sections {owners}, expected 1')
+        fail = True
+        continue
+    for arm, want in arms.items():
+        if want not in sec_rows.get((owners[0], arm), []):
+            print(f'bench/README.md [{owners[0]}]: arm {arm} recomputes to {want}, rows: {sec_rows.get((owners[0], arm))}')
             fail = True
+
+# README.md headline table: run 3, bold weighted cell, shortened arm labels.
+readme = open('README.md').read()
+run3 = SCORES.get('opus-2026-07-23.json', {})
+label_map = {'research-skill': 'research-skill-haiku', 'baseline': 'baseline-haiku'}
+readme_rows = {}
+rx3 = re.compile(r'^\| ([^|]+?) \| [^|]+ \| ([\d.]+)% \| ([\d.]+)% \| ([\d.]+)% \| \*{0,2}([\d.]+)%\*{0,2} \| (\d+) \|', re.M)
+for m in rx3.finditer(readme):
+    arm = label_map.get(m.group(1).split('(')[0].strip())
+    if arm:
+        readme_rows.setdefault(arm, []).append(
+            tuple(float(x) for x in m.groups()[1:5]) + (int(m.group(6)),))
+for arm in ('research-skill-haiku', 'baseline-haiku'):
+    want = run3.get(arm)
+    if want and want not in readme_rows.get(arm, []):
+        print(f'README.md headline table: arm {arm} recomputes to {want}, rows: {readme_rows.get(arm)}')
+        fail = True
+
 sys.exit(1 if fail else 0)
 EOF
-ok "bench table matches vendored scores"
+ok "bench tables match vendored scores (bench/README.md + README.md)"
 
 # 8. Store schema invariants: INDEX dispatcher table + FINDINGS schema keys survive edits
 for f in "${ALL[@]}"; do
