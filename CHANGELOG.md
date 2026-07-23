@@ -5,6 +5,18 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2026-07-23
+
+### Changed
+
+- **Benchmark narrative matches the vendored scores.** The run-3 explanation in the README and `bench/README.md` credited the 8-point margin to an attribution win on the cloud-market task; under the run-3 Opus judge that arm runs the other way (baseline 7/8 analysis with nothing blocked, the skill arm 6/8 holding the run's single blocked item). The margin is recall-driven, with the analysis gap on the memory-politics task (8/11 vs 4/11). The Sonnet-arm blocked count is corrected (30 of the 36 on task 62, the other 6 on task 80), the opening-sentence quote now matches the report verbatim, and the leaderboard median is stated as near 50% (49.95% across the 16 listed systems) rather than 45%.
+- **Skill contract tightened.** The merge path promotes a `depth: quick` entry to `depth: deep` when a deep merge refreshes it; the new-entry frontmatter step writes `depth`; the required output shape's header reads `## Supersedes` with the merge-only condition moved to prose; and quick-depth source counting aligns with the citation block's trivial-facts exemption. The Codex copy drops a `.claude/` path reference that does not apply to Codex.
+- **Doc accuracy pass.** The schema field list in the README includes `depth`, the roadmap states the current `SKILL.md` size, the small-model provenance line matches what `tests/e2e/` logs, the xAI citation matches the source (a leader agent plus a configurable 4 or 16-agent collaboration; the previously named agents are not in the source), and the CHANGELOG's agentskills.io line separates spec fields from Claude Code extensions.
+
+### Added
+
+- **Bench drift check binds each row to its run and guards the README table.** `tests/check_skill.sh` anchors every `bench/README.md` table row to its `## Run` section and matches sections to scores files by the filename their prose names, so swapping two runs' rows for a shared arm no longer passes. The README headline table is recomputed from the vendored scores as well.
+
 ## [0.4.1] - 2026-07-23
 
 ### Changed
