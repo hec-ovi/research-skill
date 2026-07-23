@@ -83,6 +83,15 @@ for f in "$ROOT_SKILL" "${COPIES[@]}"; do
 done
 ok "small-model rule scan done"
 
+# 5d. Depth triage (quick vs deep) survives edits in every copy
+for f in "${ALL[@]}"; do
+  grep -qF '**Also pick the depth:**' "$f" || err "$f lost the depth triage"
+  grep -qF 'This is a quick lookup: 3-6 searches' "$f" || err "$f lost the quick effort line"
+  grep -qF 'depth: quick' "$f" || err "$f lost the quick frontmatter marker"
+  grep -qF 'depth: deep' "$f" || err "$f lost the depth schema key"
+done
+ok "depth mode scan done"
+
 # 6. Claude copies keep WebSearch/WebFetch wording; Codex copy must not use them
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"

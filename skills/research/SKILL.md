@@ -101,6 +101,11 @@ The whole point of this system is **progressive disclosure**: load only what the
    - **Existing entry doesn't actually resolve the question** (problem still unsolved) → Investigation in **merge mode** (pass existing entry content to the subagent).
    - **Existing entry is stale** on a fast-moving topic → Investigation in **merge mode** (refresh, don't quote).
 
+   **Also pick the depth:**
+   - **quick** - the question is narrow (one fact, one version, one yes/no), or the user signaled speed ("quick", "fast", "just check"). Minutes, not tens of minutes.
+   - **deep** - comparisons, "best X", multi-part questions, anything where a wrong answer is costly. This is the default when in doubt.
+   - The user's wording always wins over this heuristic, in both directions ("quick" forces quick, "deep dive" forces deep). A quick entry stored today can be upgraded by a deep merge later; that is cheaper than making every question pay the deep cost up front.
+
 #### Loading discipline
 
 - **Load exactly what the current tier needs.** The schema exists so you can be selective; escalate one tier only after the current one fails to answer.
@@ -128,10 +133,16 @@ Spawn a `general-purpose` subagent with `model: "opus"` and **`run_in_background
 
 **Subagents have zero prior context.** They don't see this skill, CLAUDE.md, or our conversation. Brief them completely and treat them as one-shot workers: if gaps remain, re-spawn with a refined brief.
 
-The mode (new entry vs merge) was decided in Retrieval phase 5. Brief the subagent accordingly:
+The mode (new entry vs merge) and the depth (quick vs deep) were decided in Retrieval phase 5. Brief the subagent accordingly:
 
 - **New entry mode** - standard brief, no existing context to feed.
 - **Merge mode** - paste the existing entry's `## Summary` and any relevant `## Findings` sections into the brief, marked clearly as *"current state of the entry - verify, update, or supersede"*. Tell the subagent to flag claims that are now wrong.
+
+**Quick depth** changes only the effort line and the phase weights; everything else in the brief, the output shape, and Storage stays identical:
+
+- Effort line: "This is a quick lookup: 3-6 searches, minutes not tens of minutes. Answer the one question asked; do not expand scope."
+- Phases: Decompose in one line, Gather and Validate merged (2 independent sources on the load-bearing claim, one source acceptable on the rest), Contrarian pass is one focused search, Insights may be a single bullet or empty.
+- The return uses the same required output shape. Storage still runs in full: write the entry with `depth: quick` in frontmatter so a later session knows it can upgrade it with a deep merge.
 
 #### Brief checklist
 
@@ -340,6 +351,7 @@ topic: <slug>
 created: YYYY-MM-DD
 last_verified: YYYY-MM-DD
 status: active                 # active | superseded
+depth: deep                    # deep | quick; a quick entry is an upgrade candidate for a later deep merge
 related: []                    # other entry slugs for cross-reference
 sources:
   - url: https://...
