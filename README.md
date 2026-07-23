@@ -76,9 +76,9 @@ The skill is scored against [DeepResearch Bench II](https://agentresearchlab.com
 | research-skill | Haiku 4.5 | 55.5% | 65.9% | 88.9% | **64.2%** | 1 |
 | baseline (bare prompt) | Haiku 4.5 | 41.9% | 58.0% | 100.0% | 56.2% | 0 |
 
-The skill brief beats the bare-prompt baseline by 8 weighted points on the same model and the same judge, driven by attribution: on the cloud-market task the baseline lost analysis items for sourcing to the blocked OECD study while the skill arm traced the same figures to national competition authorities.
+The skill brief beats the bare-prompt baseline by 8 weighted points on the same model and the same judge, carried by information recall (55.5% vs 41.9%) and analysis (65.9% vs 58.0%). The analysis gap concentrates on the memory-politics task, where the skill arm scored 8 of 11 rubric items to the baseline's 4 of 11.
 
-For context, not a placement: the public leaderboard's top system scores 64.38% weighted and its median sits near 45%. This run is 3 of 132 tasks under an Opus judge rather than the leaderboard's own scorer, so it is a directional signal that the brief lands a small Haiku agent's report in the top band, not a leaderboard rank. The sharpest finding is that a Sonnet writer scored *lower* (57.5%) because one opening sentence credited a rebuilt table to its blocked source, voiding 30 otherwise-correct rubric items, which is exactly the failure the skill's own source rules target. Full settings, all three arms, every report, and the judge's per-item reasoning are in [`bench/`](bench/).
+For context, not a placement: the public leaderboard's top system scores 64.38% weighted and its median sits near 50%. This run is 3 of 132 tasks under an Opus judge rather than the leaderboard's own scorer, so it is a directional signal that the brief lands a small Haiku agent's report in the top band, not a leaderboard rank. The sharpest finding is that a Sonnet writer scored *lower* (57.5%) because one opening sentence credited a rebuilt table to its blocked source, voiding 30 otherwise-correct rubric items, which is exactly the failure the skill's own source rules target. Full settings, all three arms, every report, and the judge's per-item reasoning are in [`bench/`](bench/).
 
 ---
 
