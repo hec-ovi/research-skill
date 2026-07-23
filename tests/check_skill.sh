@@ -46,7 +46,7 @@ done
 ok "frontmatter scan done"
 
 # 4. No em/en dashes in docs
-for f in "${ALL[@]}" README.md CHANGELOG.md; do
+for f in "${ALL[@]}" README.md CHANGELOG.md bench/README.md docs/PLAN.md tests/e2e/README.md; do
   if grep -qP '[\x{2013}\x{2014}]' "$f"; then err "$f contains em/en dash"; fi
 done
 ok "dash scan done"

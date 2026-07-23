@@ -37,3 +37,9 @@ The three v0.3.6 rules account for the difference; the model and prompt were ide
 
 - Retrieval-only, 5 tool calls, 22 seconds: read the skill, resolved the project root, read `INDEX.md`, `sed`-extracted the matched entry's `## Summary`, answered from it, stopped.
 - Zero web searches, and the full `FINDINGS.md` body was never opened. The tier-2 stop rule holds on the smallest model tier.
+
+### 2026-07-23, run C, cold store, prompt "whats the best coding language for 3d games today" (skill v0.3.6, Haiku, same sandbox)
+
+- Full pipeline unprompted: 28 tool calls, 9 sources fetched same-day, entry stored with all 7 schema sections and a comparison across C++, C#, GDScript, and Rust.
+- INDEX.md row appended correctly next to the existing entry; nothing clobbered.
+- One cosmetic slip: the final chat message cited a wrong absolute path for the entry while the actual write, and the skill's write verification, used the correct project. Disk state is what the harness grades, and it passed.
