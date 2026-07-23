@@ -32,3 +32,8 @@ Diagnosis: v0.3.5 gave a small model two outs, and it took both. Nothing legitim
 - Chat answer stayed brief and pointed at the stored path, as the skill specifies.
 
 The three v0.3.6 rules account for the difference; the model and prompt were identical to run A.
+
+### 2026-07-23, run B, warm store, same prompt re-asked by a fresh agent (skill v0.3.6, Haiku)
+
+- Retrieval-only, 5 tool calls, 22 seconds: read the skill, resolved the project root, read `INDEX.md`, `sed`-extracted the matched entry's `## Summary`, answered from it, stopped.
+- Zero web searches, and the full `FINDINGS.md` body was never opened. The tier-2 stop rule holds on the smallest model tier.
