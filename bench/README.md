@@ -26,6 +26,8 @@ Grading uses Sonnet 5 with the benchmark's own judge prompt, the same judge and 
 
 Coverage, which counts blocked items as content-present, sits between 91% and 94% for all four arms. Every arm found the required facts, so the spread between them comes from attribution alone.
 
+What is vendored: the raw per-rubric scores for the `research-skill` and `baseline` rows live in `scores/pilot-2026-07-22.json`, and `python3 bench/aggregate_pilot.py` recomputes those two rows from them (the consistency test fails if the table drifts). The `research-skill-v031` and `research-skill-v034` rows come from the same 2026-07-22 run, but their raw score files were never committed and no longer exist, so those two rows are a recorded result, not a recomputable one. Re-verification with a fresh run is planned in `docs/PLAN.md`.
+
 The first two skill arms scored below a plain research prompt. The judges' reasons say why: on task 80 all 11 analysis items came back -1 with wording like "explicitly attributed to Budryte's framing rather than presented independently", and on task 62 all 23 recall items were -1 because "the table is explicitly introduced as coming from the blocked Tsai et al. meta-analysis". The judge confirms the content is correct, then blocks it. The skill names its sources in prose and lists every URL, which makes its use of the origin article easy for a judge to spot.
 
 v0.3.1 changed how sources were credited. On task 114 that was enough: best of the three arms on recall, 27 of 37 against baseline's 25 and the old brief's 19, with blocked items halved from 18 to 9, because the report traced market shares to national competition authorities instead of the blocked OECD paper. On task 62 it scored 0 of 23 again, since the harmonized trial-characteristics table exists only inside the blocked meta-analysis and the run never opened the individual trials. Presentation slipped to 47.8%, where that arm spent its effort on sourcing and let each task's requested structure drift.
@@ -42,7 +44,8 @@ These numbers measure arms against each other on one harness. The public DRB2 le
 
 ## Files
 
-- `aggregate_pilot.py` reads per-report score files and prints the comparison.
-- `scores/pilot-2026-07-22.json` holds the raw per-rubric scores.
+- `aggregate_pilot.py` recomputes the comparison from every JSON under `scores/`.
+- `scores/pilot-2026-07-22.json` holds the raw per-rubric scores for the vendored arms.
+- `tests/check_skill.sh` (repo root) recomputes the table above and fails on drift.
 
 Reproducing a run needs the benchmark repo (tasks and rubrics are CC BY 4.0 there, not vendored here) and a judge model. The evaluator ships pointed at an internal gateway; targeting Google's public API means building the URL per model, sending `x-goog-api-key`, and dropping the `model` field from the payload.

@@ -20,7 +20,7 @@ Verified externally where the claim is external; recomputed locally where the cl
 
 - [x] S1. Commit this plan.
 - [x] S2. Bench harness: rewrite `aggregate_pilot.py` to read the vendored scores JSON and print the full table (recall, analysis, presentation, weighted, blocked). Extend `tests/check_skill.sh` to recompute the table and fail on drift against `bench/README.md`.
-- [ ] S3. Bench docs: state exactly which arms are vendored; label the non-vendored rows as pending re-verification.
+- [x] S3. Bench docs: state exactly which arms are vendored; label the non-vendored rows as pending re-verification.
 - [ ] S4. Haiku end-to-end dummy test, run A (cold store): sandbox project, Haiku agent given only the skill file and the prompt "find me the best fps game". Observe setup, WebSearch usage, storage, index row. No extra instructions; the point is minimal-briefing survival.
 - [ ] S5. Haiku end-to-end dummy test, run B (warm store): same sandbox, prompt "whats the best coding language for 3d games today" investigated and stored first, then re-asked to check the retrieval stop rule (must answer from Summary without reopening the full entry).
 - [ ] S6. SKILL.md fixes from whatever A and B break (expected: inline-investigation fallback when no subagent tool is available). All three Claude copies plus Codex copy, plus test assertions for the new lines.
@@ -32,3 +32,4 @@ Verified externally where the claim is external; recomputed locally where the cl
 
 - 2026-07-23: Audit complete, findings 1 to 9 above. Plan committed (S1).
 - 2026-07-23: S2 done. `aggregate_pilot.py` reads `bench/scores/*.json` directly (any arms present in the file); recomputed values for the two vendored arms reproduce the README table exactly. `tests/check_skill.sh` now recomputes every vendored arm and fails if the README table row drifts.
+- 2026-07-23: S3 done. `bench/README.md` now states which rows are recomputable from vendored scores and which two are a recorded result only, with re-verification pointed at this plan.
