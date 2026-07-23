@@ -5,6 +5,12 @@ All notable changes to this skill will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this skill adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-07-23
+
+### Changed
+
+- **Quick depth keeps the subagent structure.** 0.4.0 allowed quick runs to execute inline when subagents were available; measured on the local 35B stack, the inline path answered and stopped without storing or running the contrarian check, three runs out of three, while the subagent path stored every time because the child's return leads into Storage. Quick now uses the same spawn-return-store skeleton as deep with a smaller brief (3 to 6 searches, one of them the contrarian check); inline remains only as the no-subagent fallback. Re-measured: 444 s on the same stack, entry stored with `depth: quick`, contrarian objection populated, write verified. The depths differ in effort, never in whether the store and the contrarian happen.
+
 ## [0.4.0] - 2026-07-23
 
 ### Added
