@@ -73,6 +73,16 @@ for f in "${ALL[@]}"; do
 done
 ok "source-independence scan done"
 
+# 5c. Small-model rules earned on the e2e dummy runs survive edits
+for f in "${ALL[@]}"; do
+  grep -qF 'Do not stall by asking the user which variant they meant' "$f" || err "$f lost the ambiguous-question rule"
+  grep -qF 'Investigation always ends in Storage.' "$f" || err "$f lost the storage rule"
+done
+for f in "$ROOT_SKILL" "${COPIES[@]}"; do
+  grep -qF 'run the same cognitive phases inline yourself' "$f" || err "$f lost the no-subagent inline fallback"
+done
+ok "small-model rule scan done"
+
 # 6. Claude copies keep WebSearch/WebFetch wording; Codex copy must not use them
 grep -q 'WebSearch' "$ROOT_SKILL" || err "root SKILL.md lost WebSearch wording"
 grep -q 'WebSearch\|WebFetch' "$CODEX" && err "Codex SKILL.md contains Claude-specific tool names"

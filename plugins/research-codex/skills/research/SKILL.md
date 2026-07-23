@@ -12,11 +12,12 @@ Persistent project-scoped store for deep research findings in Codex. You activat
 
 If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the seed for Retrieval - start by looking up that topic in `INDEX.md`. Don't research blindly; the lookup may answer immediately.
 
-**Three rules carry this skill.** They are stated here first because they matter most, and restated at the end:
+**Four rules carry this skill.** They are stated here first because they matter most, and restated at the end:
 
 1. **Investigations start from zero context.** Everything they need goes in one self-contained brief, whether run inline or by a subagent.
 2. **The contrarian pass is mandatory.** An investigation without it is incomplete; re-run or fill it yourself.
 3. **The main agent owns all file writes.** Investigations return text; only you touch `.research/`.
+4. **Investigation always ends in Storage.** Fresh research that never reaches `.research/` is a failed run; verify the write before reporting done.
 
 ## When to use
 
@@ -37,6 +38,8 @@ If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the s
 - As a substitute for a single focused web search or page fetch
 
 If a single web search + 1-2 sentences answers the question, you don't need this skill.
+
+A subjective or ambiguous question ("best X", "which is better") is not automatically casual: "best" means a comparison across current options, which is exactly what this skill does. Pick the most common reading of the question, state it in one line, and proceed; put alternative readings in `## Open questions`. Do not stall by asking the user which variant they meant.
 
 ## Setup (first use only)
 
@@ -392,6 +395,6 @@ Notes on the schema:
 - **Auto-delete on paste handler**: always offer, never act.
 - **Silent supersede**: any change to a prior conclusion goes through `## Discarded approaches` + `## Timeline`. Never overwrite.
 
-## The three rules, restated
+## The four rules, restated
 
-Brief investigations completely (they start from zero context). Keep the contrarian pass (fill it yourself if the return skipped it). Write all `.research/` files yourself (investigations return text only).
+Brief investigations completely (they start from zero context). Keep the contrarian pass (fill it yourself if the return skipped it). Write all `.research/` files yourself (investigations return text only). Land every investigation in `.research/` with the write verified; an answer without a stored entry is not done.

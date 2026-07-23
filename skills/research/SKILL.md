@@ -12,11 +12,12 @@ Persistent project-scoped store for deep research findings. You activated this s
 
 If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the seed for Retrieval - start by looking up that topic in `INDEX.md`. Don't research blindly; the lookup may answer immediately.
 
-**Three rules carry this skill.** They are stated here first because they matter most, and restated at the end:
+**Four rules carry this skill.** They are stated here first because they matter most, and restated at the end:
 
 1. **Investigation subagents have zero context.** Everything they need goes in one self-contained brief.
 2. **The contrarian pass is mandatory.** An investigation without it is incomplete; re-run or fill it yourself.
 3. **The main agent owns all file writes.** Subagents return text; only you touch `.research/`.
+4. **Investigation always ends in Storage.** Fresh research that never reaches `.research/` is a failed run; verify the write before reporting done.
 
 ## When to use
 
@@ -37,6 +38,8 @@ If invoked with a topic argument (e.g. `/research tailwind-v5`), use it as the s
 - As a substitute for a single WebSearch or WebFetch
 
 If a single WebSearch + 1-2 sentences answers the question, you don't need this skill.
+
+A subjective or ambiguous question ("best X", "which is better") is not automatically casual: "best" means a comparison across current options, which is exactly what this skill does. Pick the most common reading of the question, state it in one line, and proceed; put alternative readings in `## Open questions`. Do not stall by asking the user which variant they meant.
 
 ## Setup (first use only)
 
@@ -114,6 +117,8 @@ Keep `INDEX.md` tight: under ~100 rows. If it grows beyond that, prune or archiv
 ### 2. Investigation (when fresh research is needed)
 
 Spawn a `general-purpose` subagent with `model: "opus"` and **`run_in_background: true`**. The Investigation phase needs a strong model: the contrarian pass and synthesis steps depend on reasoning depth that smaller models won't deliver. Background mode keeps the conversation interactive: the user can keep working while research runs. Storage runs asynchronously when the agent's completion notification arrives.
+
+**No subagent available?** If the host has no Agent tool, the spawn is denied, or subagents cannot run for any reason, do not skip Investigation: run the same cognitive phases inline yourself, produce the same required output format, then continue to Storage as normal. The phases and rules below apply unchanged; the only difference is who walks them.
 
 **The subagent does research and returns its synthesis as structured text. It does NOT write any files.** You (main agent) handle all file writes in Storage. This split keeps responsibility clean: the subagent has zero context and doesn't need to know your schema or `INDEX.md` layout.
 
@@ -390,6 +395,6 @@ Notes on the schema:
 - **Auto-delete on paste handler**: always offer, never act.
 - **Silent supersede**: any change to a prior conclusion goes through `## Discarded approaches` + `## Timeline`. Never overwrite.
 
-## The three rules, restated
+## The four rules, restated
 
-Brief subagents completely (they have zero context). Keep the contrarian pass (fill it yourself if the return skipped it). Write all `.research/` files yourself (subagents return text only).
+Brief subagents completely (they have zero context). Keep the contrarian pass (fill it yourself if the return skipped it). Write all `.research/` files yourself (subagents return text only). Land every investigation in `.research/` with the write verified; an answer without a stored entry is not done.
