@@ -184,7 +184,7 @@ These changes are wording-only. The on-disk layout, setup steps, and runtime beh
 
 - **README**: install routes reordered. `npx skills add` (cross-tool, generic) is now route 1, Claude Code plugin marketplace is route 2, git clone is route 3.
 - **README**: route 2 renamed from "Anthropic plugin marketplace" to "Claude Code plugin marketplace". The marketplace mechanism is Claude Code's; the marketplace itself is hosted on the maintainer's GitHub, not Anthropic's first-party catalog. Old wording risked implying official Anthropic distribution.
-- **README**: new "Built for compaction and large-research recall" section added near the top, framing the skill's killer use case (research that survives `/compact` and recalls progressively via INDEX, then Summary, then full body).
+- **README**: new "Built for compaction and large-research recall" section added near the top, framing the skill's primary use case (research that survives `/compact` and recalls progressively via INDEX, then Summary, then full body).
 - **CHANGELOG**: removed unqualified GitHub issue numbers from the 0.2.0 entry. They were ambiguous about which repo they referenced and added confusion without value.
 
 ## [0.2.0] - 2026-04-25
@@ -211,7 +211,7 @@ These changes are wording-only. The on-disk layout, setup steps, and runtime beh
 ### Added
 
 - Initial release of the `research` skill.
-- Frontmatter conforming to [agentskills.io](https://agentskills.io/specification): `name`, `description`, `when_to_use`, `user-invocable`, `argument-hint`.
+- Frontmatter: `name` and `description` per the [agentskills.io](https://agentskills.io/specification) spec, plus `when_to_use`, `user-invocable`, `argument-hint` as Claude Code extensions.
 - Project-scoped data layout: `<project>/.claude/research/{INDEX.md, <topic-slug>/FINDINGS.md, <topic-slug>/raw/}`.
 - Auto-create on first use, with `.gitignore` entry for privacy by default.
 - Progressive disclosure loading hierarchy: 5 tiers from `INDEX.md` (always) down to raw documents (on demand).
