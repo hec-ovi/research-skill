@@ -5,7 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Live-brightgreen" alt="Status" />
   <img src="https://img.shields.io/badge/Version-0.4.1-blue" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
   <img src="https://img.shields.io/badge/Spec-agentskills.io-7B3FA0" alt="Spec" />
@@ -15,14 +14,6 @@
   <img src="https://img.shields.io/badge/Claude_Code-Native-D97757?logo=anthropic&logoColor=white" alt="Claude Code" />
   <img src="https://img.shields.io/badge/Codex-Plugin_Native-2496ED" alt="Codex plugin native" />
   <img src="https://img.shields.io/badge/SKILL.md_format-Compatible-7B3FA0" alt="SKILL.md compatible" />
-  <img src="https://img.shields.io/badge/Code_CLIs-Cross--tool-2496ED" alt="Cross-tool" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Investigation-Async_Opus_subagents-9A48A6" alt="Async investigation" />
-  <img src="https://img.shields.io/badge/Disclosure-Progressive-FF6B6B" alt="Progressive disclosure" />
-  <img src="https://img.shields.io/badge/Inspired_by-Grok_+_GBrain-E63946" alt="Inspirations" />
-  <img src="https://img.shields.io/badge/Install-4_routes-2496ED" alt="Install routes" />
 </p>
 
 ---
@@ -60,10 +51,10 @@ Heavy research artifacts become cheap to recall: you only pay for the tier you n
 - **Conflict-handling history.** When findings change, old claims move to a `## Discarded approaches` table with reasons; never silently overwritten. Prevents re-trying refuted approaches.
 - **Subagent-isolated investigation.** Heavy web research can run in a separate subagent: an Opus-class model in Claude Code, or GPT-5.5 xhigh in Codex when subagents are explicitly authorized. Your main context stays clean. Hosts without subagents run the same phases inline; the skill states the fallback explicitly.
 - **Async where supported.** In Claude Code, the investigation subagent runs in background mode (`run_in_background: true`) so the conversation stays interactive while research happens. In Codex, the plugin investigates inline unless the user explicitly authorizes subagents.
-- **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts. Both earn their keep.
+- **Cognitive phases.** Decompose, Gather, Validate, **Contrarian pass**, **Insight extraction**, Synthesize. The contrarian pass actively searches for "why this is wrong" rather than confirming; the insight pass forces causal and comparative claims that go beyond restating facts.
 - **Two depths: research and deep research.** Fresh questions are triaged at retrieval: **quick** (3 to 6 searches, minutes) for narrow lookups, **deep** (the full 6-phase walk) for comparisons and anything costly to get wrong. Your wording overrides the triage in both directions; a quick entry is stored with `depth: quick` and upgrades through a deep merge later.
 - **Small-model tested.** The ambiguous-question rule and the storage rule exist because Haiku-class agents actually broke without them; the retrieval stop rule was then verified holding on the same tier. The failing runs and the passing re-runs on the patched skill are logged in [tests/e2e/](tests/e2e/).
-- **Source rules earned on a benchmark, not guessed.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics, not from taste. See the Benchmarks section below for the numbers.
+- **Source rules from a benchmark.** Tracing claims to primaries and rebuilding a required list from the items themselves came out of scored runs against [DeepResearch Bench II](bench/) rubrics. See the Benchmarks section below for the numbers.
 
 ---
 
@@ -200,7 +191,7 @@ The folder layout and the `name` and `description` frontmatter fields follow the
 
 The Investigation phase walks a 6-step cognitive workflow (Decompose, Gather, Validate, Contrarian pass, Insight extraction, Synthesize) adapted from xAI's published [Multi-Agent architecture](https://docs.x.ai/developers/model-capabilities/text/multi-agent) and the [DeepSearch announcement](https://x.ai/news/grok-3). xAI's setup launches a leader agent that coordinates several collaborating agents (a 4-agent configuration for focused research, 16 for deep analysis) across search, cross-reference, and synthesis; this skill condenses that pattern into cognitive phases a single subagent walks from one self-contained brief.
 
-The Contrarian pass (phase 4) is the standout borrowed element: actively searching for "why this is wrong" rather than confirming. In an A/B test on a celebrity-fronted AI tool legitimacy question, the contrarian pass surfaced significant controversy that a minimal-brief baseline missed.
+The Contrarian pass (phase 4): actively searching for "why this is wrong" rather than confirming. In an A/B test on a celebrity-fronted AI tool legitimacy question, the contrarian pass surfaced significant controversy that a minimal-brief baseline missed.
 
 ### GBrain RESOLVER pattern (Garry Tan)
 
