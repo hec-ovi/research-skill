@@ -23,3 +23,12 @@ Pass requires the disk state, not a good-sounding chat answer.
 - Storage: FAIL. No `FINDINGS.md`, no index row, no write verification. The data layer received nothing; the whole persistent-store purpose of the skill was skipped.
 
 Diagnosis: v0.3.5 gave a small model two outs, and it took both. Nothing legitimized inline investigation when it could not or did not spawn a subagent, and nothing said an ambiguous "best X" question is a comparison to research rather than a casual lookup to wave at. Fixed in v0.3.6: ambiguous-question rule in triage, inline fallback for hosts without subagents, and Storage promoted into the core rules (research that never reaches `.research/` is a failed run).
+
+### 2026-07-23, run A2, cold store, same prompt (skill v0.3.6, Haiku, fresh sandbox)
+
+- Full pipeline unprompted: no question back to the user, no priors-only answer. 28 tool calls, 15+ sources all fetched 2026-07-23.
+- Storage: PASS. `best-fps-games-2026/FINDINGS.md` with all 7 schema sections and correct frontmatter, INDEX.md row with a specific one-liner, `.gitignore` correct.
+- Contrarian pass produced real content (hacker problems, paywall cosmetics, balance complaints) instead of "none found".
+- Chat answer stayed brief and pointed at the stored path, as the skill specifies.
+
+The three v0.3.6 rules account for the difference; the model and prompt were identical to run A.
