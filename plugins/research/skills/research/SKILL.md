@@ -1,6 +1,6 @@
 ---
 name: research
-description: Maintains a persistent project-scoped research store (.research/ with an INDEX.md dispatcher and per-topic FINDINGS.md entries). Recalls saved findings before searching the web, then runs sourced multi-phase investigations for substantive questions - library and framework comparisons, tool evaluations, version and release surveys, "how does X work" deep dives.
+description: Answers research questions - best X, compare A vs B vs C, what's the latest Y, evaluate this tool, how does Z work. Recalls prior findings from the project's persistent .research/ store before searching the web, runs a sourced multi-phase investigation when the store can't answer, and saves the synthesis (.research/ with an INDEX.md dispatcher and per-topic FINDINGS.md entries) so the next session skips the re-research.
 when_to_use: User asks a research question that warrants investigation across multiple sources ("what's the latest npm for X", "which 2D engines clone fastest", "compare ORMs for 2026"). Skip for quick lookups, plan-stage notes, small facts, code-level decisions, personal ideas, or anything that fits in conversation.
 user-invocable: true
 argument-hint: "<topic>"
